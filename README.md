@@ -60,6 +60,7 @@ What comes next:
 - [Memory Promotion Policy v0.1](spec/memory-promotion-policy.md)
 - [Security Policy](SECURITY.md)
 - [Contributing Guide](CONTRIBUTING.md)
+- [License](LICENSE)
 
 ## Repository Layout
 

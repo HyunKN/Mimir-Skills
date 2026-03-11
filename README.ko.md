@@ -60,6 +60,7 @@ AI 코딩 에이전트는 이미 코드를 수정하고, 테스트를 실행하�
 - [Memory Promotion Policy v0.1](spec/memory-promotion-policy.ko.md)
 - [Security Policy](SECURITY.ko.md)
 - [Contributing Guide](CONTRIBUTING.ko.md)
+- [License](LICENSE)
 
 ## 저장소 구조
 
