@@ -1,0 +1,5 @@
+.workspace/
+.ai/
+**/.ai/
+!examples/**/.ai/
+!examples/**/.ai/**

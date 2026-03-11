@@ -1,0 +1,79 @@
+{
+  "id": "dec-20260312-cache-client-pin-001",
+  "timestamp": "2026-03-12T09:12:00Z",
+  "task_ref": {
+    "source": "pr",
+    "id": "pr-231",
+    "title": "Stabilize cache client dependency before release cut"
+  },
+  "decision": "Pin the synthetic acme-cache-client dependency to 4.2.7 and defer the v4.3 config migration.",
+  "problem_context": "A minor upgrade to the synthetic acme-cache-client dependency introduced a required tls.ca_bundle setting. The current service config does not provide it, which caused startup failure in staging and blocked the release branch.",
+  "alternatives_considered": [
+    {
+      "name": "Complete the v4.3 config migration immediately",
+      "status": "deferred",
+      "reason": "Would require a wider deployment and secret-distribution change late in the release window."
+    },
+    {
+      "name": "Pin acme-cache-client to 4.2.7",
+      "status": "selected",
+      "reason": "Restores the previous config contract with the smallest safe patch."
+    },
+    {
+      "name": "Disable TLS verification temporarily",
+      "status": "rejected",
+      "reason": "Would weaken transport safety and conflict with the repository security baseline."
+    }
+  ],
+  "selected_option": {
+    "name": "Pin acme-cache-client to 4.2.7",
+    "summary": "Replace the caret dependency range with an exact pin and keep the current cache TLS configuration unchanged for this release."
+  },
+  "rationale": "Pinning the dependency removes the immediate regression with the smallest bounded change, while keeping the eventual config migration visible as explicit follow-up work.",
+  "evidence_refs": [
+    {
+      "kind": "doc",
+      "ref": "docs/upgrade-notes/acme-cache-client-v4.3.md",
+      "summary": "Synthetic upgrade note states that verified TLS connections now require tls.ca_bundle.",
+      "captured_at": "2026-03-12T08:40:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": "config/cache.yaml",
+      "summary": "Current synthetic cache config defines tls.enabled and server_name but not ca_bundle.",
+      "captured_at": "2026-03-12T08:44:00Z"
+    },
+    {
+      "kind": "test",
+      "ref": "tests/cache/client-config.test.ts",
+      "summary": "The compatibility test failed on v4.3 and passed again after pinning 4.2.7.",
+      "captured_at": "2026-03-12T09:05:00Z"
+    }
+  ],
+  "affected_paths": [
+    "package.json",
+    "pnpm-lock.yaml"
+  ],
+  "validation_run": [
+    {
+      "type": "test",
+      "command": "pnpm test:cache-client",
+      "result": "passed",
+      "summary": "Synthetic cache client compatibility tests passed with the pinned dependency."
+    },
+    {
+      "type": "build",
+      "command": "pnpm build",
+      "result": "passed",
+      "summary": "The service build completed without requiring additional config changes."
+    }
+  ],
+  "remaining_risks": [
+    "The eventual v4.3 migration is still pending and must add explicit tls.ca_bundle handling."
+  ],
+  "confidence": 0.79,
+  "follow_up": [
+    "Add the new TLS config fields in a later change and retry the v4.3 upgrade in staging."
+  ],
+  "supersedes": []
+}

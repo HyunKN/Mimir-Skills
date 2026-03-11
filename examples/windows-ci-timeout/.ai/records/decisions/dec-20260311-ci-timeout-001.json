@@ -1,0 +1,61 @@
+{
+  "id": "dec-20260311-ci-timeout-001",
+  "timestamp": "2026-03-11T10:30:00Z",
+  "task_ref": {
+    "source": "ci",
+    "id": "build-1824",
+    "title": "Fix failing Windows test job"
+  },
+  "decision": "Increase the Windows integration test timeout and keep the retry count unchanged.",
+  "problem_context": "The Windows integration suite started failing after asset extraction time increased by about 40 seconds.",
+  "alternatives_considered": [
+    {
+      "name": "Raise retries",
+      "status": "rejected",
+      "reason": "Would hide the timeout root cause and lengthen successful runs."
+    },
+    {
+      "name": "Increase timeout threshold",
+      "status": "selected",
+      "reason": "Matches observed extraction time and preserves failure visibility."
+    }
+  ],
+  "selected_option": {
+    "name": "Increase timeout threshold",
+    "summary": "Extend the timeout from 120s to 180s without changing retry behavior."
+  },
+  "rationale": "The failures were caused by slower setup time rather than flakiness in the tests themselves.",
+  "evidence_refs": [
+    {
+      "kind": "ci",
+      "ref": "build-1824/windows-integration",
+      "summary": "Three consecutive failures timed out during the setup stage.",
+      "captured_at": "2026-03-11T10:08:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": ".github/workflows/test.yml",
+      "summary": "Timeout was configured at 120 seconds for the integration step.",
+      "captured_at": "2026-03-11T10:12:00Z"
+    }
+  ],
+  "affected_paths": [
+    ".github/workflows/test.yml"
+  ],
+  "validation_run": [
+    {
+      "type": "test",
+      "command": "pnpm test:integration:windows",
+      "result": "passed",
+      "summary": "The workflow completed once with the new timeout."
+    }
+  ],
+  "remaining_risks": [
+    "If setup time continues to grow, the timeout may need to be revisited."
+  ],
+  "confidence": 0.82,
+  "follow_up": [
+    "Track setup duration for the next five CI runs."
+  ],
+  "supersedes": []
+}
