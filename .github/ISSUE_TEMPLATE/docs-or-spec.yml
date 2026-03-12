@@ -1,0 +1,51 @@
+name: Docs or spec proposal / 문서 또는 스펙 제안
+description: Propose a documentation, schema, or policy change. / 문서, 스키마, 정책 변경을 제안합니다.
+title: "[Docs/Spec] "
+labels: ["documentation", "spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for README, docs, spec, glossary, policy, or evaluation guidance changes.
+        
+        README, docs, spec, glossary, policy, evaluation 안내 변경은 이 양식을 사용해주세요.
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target area / 대상 영역
+      description: Which public area should change? / 어떤 공개 영역을 바꾸려는지 선택해주세요.
+      options:
+        - README or repository guidance / README 또는 저장소 안내
+        - Docs or glossary / docs 또는 glossary
+        - Spec or schema / spec 또는 schema
+        - Security or contribution guidance / 보안 또는 기여 안내
+        - Evaluation docs / evaluation 문서
+        - Other / 기타
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or gap / 문제 또는 빈틈
+      description: What is unclear, missing, or incorrect? / 무엇이 불명확하거나 빠져 있거나 잘못되었나요?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change / 제안하는 변경
+      description: Describe the specific change you want. / 원하는 구체적 변경을 설명해주세요.
+    validations:
+      required: true
+  - type: checkboxes
+    id: translation
+    attributes:
+      label: Translation impact / 번역 영향
+      options:
+        - label: This change should update the Korean companion document too. / 이 변경은 한국어 동반 문서도 함께 갱신해야 합니다.
+        - label: This proposal affects canonical JSON keys, schema identifiers, or file paths. / 이 제안은 canonical JSON key, schema identifier, file path에 영향을 줍니다.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Extra context / 추가 맥락
+      description: Link related files, issues, or examples if helpful. / 관련 파일, issue, example이 있으면 적어주세요.

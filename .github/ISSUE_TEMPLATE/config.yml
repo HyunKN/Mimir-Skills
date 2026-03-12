@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security issues / 보안 문제
+    url: https://github.com/HyunKN/decision-skills/blob/main/SECURITY.md
+    about: Please follow the security policy instead of opening a public issue with sensitive details. / 민감한 내용을 포함한 공개 issue 대신 보안 정책을 따라주세요.

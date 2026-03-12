@@ -1,0 +1,63 @@
+name: Bug report / 버그 제보
+description: Report a bug in scripts, examples, docs, specs, or CI. / 스크립트, example, 문서, 스펙, CI의 문제를 제보합니다.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please keep example data public-safe and do not include secrets, private URLs, or sensitive logs.
+        
+        버그를 제보해주셔서 감사합니다. example 데이터는 공개 가능한 범위로 유지하고, secret, 비공개 URL, 민감한 로그는 넣지 말아주세요.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area / 영역
+      description: Where did you see the problem? / 문제가 발생한 영역을 선택해주세요.
+      options:
+        - Scripts or CI / 스크립트 또는 CI
+        - Examples or derived summaries / example 또는 파생 summary
+        - Docs or specs / 문서 또는 스펙
+        - Skills or references / skill 또는 reference
+        - Other / 기타
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened? / 어떤 문제가 있었나요?
+      description: Briefly describe the bug. / 버그를 짧게 설명해주세요.
+      placeholder: Describe the failure or incorrect behavior. / 실패 또는 잘못된 동작을 설명해주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 기대한 동작
+      description: What did you expect instead? / 원래 어떤 동작을 기대했나요?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps / 재현 방법
+      description: Include commands, file paths, or steps if relevant. / 필요하면 명령어, 파일 경로, 단계도 함께 적어주세요.
+      placeholder: |
+        1. Run ...
+        2. Open ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation output / 검증 출력
+      description: Paste relevant output from `python scripts/verify_examples.py` or another check if available. / 가능하다면 `python scripts/verify_examples.py` 또는 관련 검사 출력을 붙여주세요.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check / 안전 확인
+      options:
+        - label: I did not include secrets, private URLs, or raw sensitive logs. / secret, 비공개 URL, raw 민감 로그를 포함하지 않았습니다.
+          required: true

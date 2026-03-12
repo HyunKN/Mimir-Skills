@@ -1,0 +1,51 @@
+name: Workflow-specific skill proposal / 워크플로별 skill 제안
+description: Suggest a new workflow-specific skill or expansion. / 새 워크플로별 skill 또는 확장을 제안합니다.
+title: "[Skill Proposal] "
+labels: ["skill", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to propose a new workflow-specific skill, such as a focused capture, handoff, or review flow.
+        
+        특정 capture, handoff, review 흐름 같은 새 워크플로별 skill을 제안할 때 이 양식을 사용해주세요.
+  - type: input
+    id: skill_name
+    attributes:
+      label: Proposed skill name / 제안하는 skill 이름
+      placeholder: handoff-summary, dependency-upgrade-decision, ...
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow to support / 지원하려는 워크플로
+      description: Describe when the skill should trigger. / skill이 언제 트리거되어야 하는지 설명해주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Why this skill is needed / 왜 이 skill이 필요한가
+      description: What gap would it close? / 어떤 빈틈을 메우는지 적어주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: expected_assets
+    attributes:
+      label: Expected assets / 예상 산출물
+      description: Mention likely scripts, references, examples, or evaluations. / 필요한 script, reference, example, evaluation이 있다면 적어주세요.
+      placeholder: |
+        - SKILL.md
+        - references/...
+        - example under examples/...
+        - evaluation update
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Safety and scope / 안전과 범위
+      options:
+        - label: This proposal can stay local-first and should not require default network access. / 이 제안은 local-first로 유지할 수 있고 기본 network access가 필요하지 않아야 합니다.
+          required: true
+        - label: This proposal should fit the project as a decision-recording tool, not a generic execution framework. / 이 제안은 generic 실행 프레임워크가 아니라 decision-recording tool이라는 프로젝트 성격에 맞아야 합니다.
+          required: true
