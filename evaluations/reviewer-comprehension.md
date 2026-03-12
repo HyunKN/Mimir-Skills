@@ -1,5 +1,3 @@
-English | [한국어](reviewer-comprehension.ko.md)
-
 # Reviewer Comprehension Evaluation
 
 ## Purpose

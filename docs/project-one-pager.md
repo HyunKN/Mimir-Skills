@@ -34,7 +34,7 @@ The project is built on five claims:
 
 ## What Ships in Public v0.1
 
-- bilingual README and project docs
+- bilingual root README and `docs/` guides
 - a glossary for shared terminology
 - a trigger taxonomy for deciding what to record
 - a canonical decision record schema
@@ -58,8 +58,8 @@ The project is built on five claims:
 ## Why the Repository Is Bilingual
 
 - GitHub needs a clear default entry point for global readers.
-- Korean documentation is a first-class companion, not an afterthought.
-- English remains the source of truth so specs, schemas, and future packaging can stay consistent.
+- Korean companions are kept for the root README and `docs/` guides.
+- English remains the source of truth so specs, schemas, skills, and future packaging can stay consistent.
 
 ## Near-Term Roadmap
 

@@ -1,5 +1,3 @@
-English | [한국어](README.ko.md)
-
 # Evaluations Directory
 
 This directory will hold evaluation prompts and scenarios for checking whether the documentation and records are actually useful.
@@ -19,3 +17,5 @@ These evaluations currently use the public-safe synthetic examples under:
 
 - `../examples/windows-ci-timeout/`
 - `../examples/cache-client-pin/`
+
+`reviewer-comprehension.md` also serves as the evaluation anchor for the `pr-rationale` workflow-specific skill.

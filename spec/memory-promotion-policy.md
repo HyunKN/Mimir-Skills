@@ -1,5 +1,3 @@
-English | [한국어](memory-promotion-policy.ko.md)
-
 # Memory Promotion Policy v0.1
 
 ## Purpose

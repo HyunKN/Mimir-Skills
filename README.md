@@ -38,17 +38,16 @@ What is available now:
 - a public project one-pager
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion
-- starter skill templates plus `decision-core` and `decision-capture`
+- starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, and `pr-rationale`
 - public-safe end-to-end examples for CI and dependency/config triggers
 - evaluation prompts for replay and reviewer comprehension
 - minimal CI for example validation and derived-summary drift checks
-- bilingual manuals and development docs for English and Korean readers
+- Korean companion docs for the root README and `docs/`, plus mirrored local workspace notes outside the published repository surface
 
 What comes next:
 
-- contribution guidance for outside collaborators
 - narrower hook or guardrail decisions after more usage feedback
-- workflow-specific skill expansions
+- additional workflow-specific skill expansions beyond dependency, CI, handoff, and PR workflows
 - future evaluation automation and memory-promotion examples
 
 ## Documentation
@@ -93,7 +92,9 @@ The intended runtime artifact layout inside a user repository is:
 
 - `README.md` is the default GitHub entry point.
 - English files are the source of truth for meaning.
-- Korean files are maintained only for public manuals and development docs, alongside the English source as `*.ko.md`.
+- Korean files are maintained only for the root README and files under `docs/`, alongside the English source as `*.ko.md`.
+- Local `.workspace/` notes may also be mirrored in Korean, but they are gitignored and not part of the public repository surface.
+- Public technical specs, skills, examples, evaluations, and contributor workflow files stay English-only.
 - JSON keys, schema names, and file paths stay in English across both languages.
 
 ## Starter Assets

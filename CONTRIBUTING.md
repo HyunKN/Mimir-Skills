@@ -1,5 +1,3 @@
-English | [한국어](CONTRIBUTING.ko.md)
-
 # Contributing
 
 Thanks for helping build `decision-skills`.

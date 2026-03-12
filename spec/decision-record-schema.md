@@ -1,5 +1,3 @@
-English | [한국어](decision-record-schema.ko.md)
-
 # Decision Record Schema v0.1
 
 ## Purpose

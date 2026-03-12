@@ -1,5 +1,3 @@
-English | [한국어](replay-evaluation.ko.md)
-
 # Replay Evaluation
 
 ## Purpose

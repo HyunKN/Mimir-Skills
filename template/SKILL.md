@@ -1,5 +1,3 @@
-English | [한국어](SKILL.ko.md)
-
 # Skill Template
 
 Use this file as the starting point for a public `decision-skills` skill.

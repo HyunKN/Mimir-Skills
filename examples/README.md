@@ -1,5 +1,3 @@
-English | [한국어](README.ko.md)
-
 # Examples Directory
 
 This directory will hold end-to-end examples that show:
@@ -20,5 +18,7 @@ Each example should focus on a high-impact change with clear evidence and valida
 
 Current examples:
 
-- `windows-ci-timeout/` shows a runtime-style `.ai/records/` layout with one canonical decision record and one rendered Markdown summary.
-- `cache-client-pin/` shows a dependency-and-config trigger with one canonical decision record and one rendered Markdown summary derived from the JSON source.
+- `windows-ci-timeout/` shows a runtime-style `.ai/records/` layout with one canonical decision record and one rendered Markdown summary. It is the anchor example for the `ci-rationale` workflow-specific skill.
+- `cache-client-pin/` shows a dependency-and-config trigger with one canonical decision record and one rendered Markdown summary derived from the JSON source. It is the anchor example for the `dependency-upgrade-decision` workflow-specific skill.
+
+The rendered summaries in both published examples also serve as reference shapes for the `handoff-context` and `pr-rationale` workflow-specific skills.

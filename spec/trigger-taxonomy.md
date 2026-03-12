@@ -1,5 +1,3 @@
-English | [한국어](trigger-taxonomy.ko.md)
-
 # Trigger Taxonomy v0.1
 
 ## Purpose
