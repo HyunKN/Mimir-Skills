@@ -40,15 +40,15 @@ What is available now:
 - v0.1 specs for triggers, decision records, and memory promotion
 - starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, and `memory-promote`
 - public-safe end-to-end examples for CI, dependency/config, and memory-promotion flows
-- evaluation prompts for replay and reviewer comprehension
+- evaluation prompts for replay, reviewer comprehension, and memory promotion
 - minimal CI for example validation, public memory artifact validation, and derived-summary drift checks
 - Korean companion docs for the root README and `docs/`, plus mirrored local workspace notes outside the published repository surface
 
 What comes next:
 
 - narrower hook or guardrail decisions after more usage feedback
-- bounded CI coverage for public memory artifacts
 - future evaluation automation and any additional workflow-specific skills that prove useful
+- decide whether public memory artifacts should also get a machine-readable schema
 
 ## Documentation
 
