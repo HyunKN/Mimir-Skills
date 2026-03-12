@@ -5,6 +5,10 @@
 This policy defines how reusable lessons move from decision records into bounded project memory.
 Memory is a derived layer. It should never be treated as raw truth without validation.
 
+Machine-readable companion schema:
+
+- `memory-artifact-schema.json`
+
 ## Artifact Flow
 
 ```text

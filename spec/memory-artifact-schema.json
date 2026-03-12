@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "decision-skills Memory Artifact v0.1",
+  "description": "Machine-readable companion schema for public candidate and validated memory JSON artifacts. Structural validation lives here; helper validators may enforce stricter semantic checks such as calendar-valid IDs, UTC-only timestamps, and candidate-to-validated pairing.",
+  "type": "object",
+  "required": [
+    "id",
+    "statement",
+    "scope",
+    "source_decision_ids",
+    "evidence_refs",
+    "confidence",
+    "created_at",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^mem-\\d{8}-[a-z0-9-]+-\\d{3}$",
+      "description": "Stable memory artifact identifier. Helper validators should additionally require YYYYMMDD to be a valid calendar date."
+    },
+    "statement": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "scope": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "source_decision_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^dec-\\d{8}-[a-z0-9-]+-\\d{3}$"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "ref",
+          "summary",
+          "captured_at"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "file",
+              "diff",
+              "test",
+              "ci",
+              "doc",
+              "issue",
+              "command",
+              "discussion",
+              "other"
+            ]
+          },
+          "ref": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "summary": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "captured_at": {
+            "$ref": "#/$defs/utcTimestamp"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "created_at": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "validated"
+      ]
+    },
+    "validated_at": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "validation_basis": {
+      "type": "object",
+      "required": [
+        "summary"
+      ],
+      "properties": {
+        "branch": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "summary": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      },
+      "additionalProperties": true
+    },
+    "last_validated_at": {
+      "$ref": "#/$defs/utcTimestamp"
+    },
+    "freshness": {
+      "type": "object",
+      "properties": {
+        "expires_at": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "revalidate_after_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      },
+      "additionalProperties": true,
+      "anyOf": [
+        {
+          "required": [
+            "expires_at"
+          ]
+        },
+        {
+          "required": [
+            "revalidate_after_days"
+          ]
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "validated"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "validated_at",
+          "validation_basis",
+          "last_validated_at",
+          "freshness"
+        ]
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "utcTimestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|\\+00:00)$",
+      "description": "UTC timestamp string ending in Z or +00:00."
+    }
+  }
+}

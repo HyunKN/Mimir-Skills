@@ -13,7 +13,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES_ROOT = REPO_ROOT / "examples"
-SCHEMA_PATH = REPO_ROOT / "spec" / "decision-record-schema.json"
+DECISION_SCHEMA_PATH = REPO_ROOT / "spec" / "decision-record-schema.json"
+MEMORY_SCHEMA_PATH = REPO_ROOT / "spec" / "memory-artifact-schema.json"
 VALIDATOR_PATH = REPO_ROOT / "skills" / "decision-core" / "scripts" / "validate_decision_record.py"
 MEMORY_VALIDATOR_PATH = (
     REPO_ROOT / "skills" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
@@ -48,21 +49,26 @@ def main() -> int:
 
 
 def check_schema_json() -> bool:
-    try:
-        json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
-    except FileNotFoundError:
-        print(f"FAIL missing machine-readable schema: {SCHEMA_PATH}", file=sys.stderr)
-        return False
-    except json.JSONDecodeError as exc:
-        print(
-            f"FAIL invalid machine-readable schema: {SCHEMA_PATH} "
-            f"({exc.msg} at line {exc.lineno}, column {exc.colno})",
-            file=sys.stderr,
-        )
-        return False
+    success = True
+    for schema_path in (DECISION_SCHEMA_PATH, MEMORY_SCHEMA_PATH):
+        try:
+            json.loads(schema_path.read_text(encoding="utf-8"))
+        except FileNotFoundError:
+            print(f"FAIL missing machine-readable schema: {schema_path}", file=sys.stderr)
+            success = False
+            continue
+        except json.JSONDecodeError as exc:
+            print(
+                f"FAIL invalid machine-readable schema: {schema_path} "
+                f"({exc.msg} at line {exc.lineno}, column {exc.colno})",
+                file=sys.stderr,
+            )
+            success = False
+            continue
 
-    print(f"PASS machine-readable schema parses: {SCHEMA_PATH.relative_to(REPO_ROOT)}")
-    return True
+        print(f"PASS machine-readable schema parses: {schema_path.relative_to(REPO_ROOT)}")
+
+    return success
 
 
 def run_validator(records: list[Path]) -> bool:

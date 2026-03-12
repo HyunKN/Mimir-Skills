@@ -37,7 +37,7 @@ What is available now:
 
 - a public project one-pager
 - a shared glossary
-- v0.1 specs for triggers, decision records, and memory promotion
+- v0.1 specs for triggers, decision records, and memory promotion, plus machine-readable companion schemas for decision records and memory artifacts
 - starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, and `memory-promote`
 - public-safe end-to-end examples for CI, dependency/config, and memory-promotion flows
 - evaluation prompts for replay, reviewer comprehension, and memory promotion
@@ -48,7 +48,7 @@ What comes next:
 
 - narrower hook or guardrail decisions after more usage feedback
 - future evaluation automation and any additional workflow-specific skills that prove useful
-- decide whether public memory artifacts should also get a machine-readable schema
+- decide whether to add stricter schema-driven validation or keep the current helper-validator split
 
 ## Documentation
 

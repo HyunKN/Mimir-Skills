@@ -40,5 +40,6 @@ Use this skill when reusable lessons should be evaluated for candidate or valida
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when checking shared validation, safety, and redaction constraints.
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when the source decision record is missing or incomplete.
 - Read [`../../spec/memory-promotion-policy.md`](../../spec/memory-promotion-policy.md) when checking candidate and validated memory requirements.
+- Read [`../../spec/memory-artifact-schema.json`](../../spec/memory-artifact-schema.json) when a tool or editor needs the machine-readable companion contract for candidate or validated memory artifacts.
 - Read [`../../spec/decision-record-schema.md`](../../spec/decision-record-schema.md) when tracing the lesson back to the source decision records.
 - Inspect the public example under [`../../examples/cache-client-tls-memory/`](../../examples/cache-client-tls-memory/) when you need a concrete candidate-to-validated memory flow.
