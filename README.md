@@ -38,7 +38,7 @@ What is available now:
 - a public project one-pager
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion
-- starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, and `pr-rationale`
+- starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, and `memory-promote`
 - public-safe end-to-end examples for CI and dependency/config triggers
 - evaluation prompts for replay and reviewer comprehension
 - minimal CI for example validation and derived-summary drift checks
@@ -47,8 +47,8 @@ What is available now:
 What comes next:
 
 - narrower hook or guardrail decisions after more usage feedback
-- additional workflow-specific skill expansions beyond dependency, CI, handoff, and PR workflows
-- future evaluation automation and memory-promotion examples
+- first public candidate-to-validated memory-promotion example
+- future evaluation automation and any additional workflow-specific skills that prove useful
 
 ## Documentation
 
