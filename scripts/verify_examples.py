@@ -15,6 +15,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES_ROOT = REPO_ROOT / "examples"
 SCHEMA_PATH = REPO_ROOT / "spec" / "decision-record-schema.json"
 VALIDATOR_PATH = REPO_ROOT / "skills" / "decision-core" / "scripts" / "validate_decision_record.py"
+MEMORY_VALIDATOR_PATH = (
+    REPO_ROOT / "skills" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
+)
 RENDERER_PATH = REPO_ROOT / "skills" / "decision-capture" / "scripts" / "render_summary.py"
 
 
@@ -32,6 +35,9 @@ def main() -> int:
         return 1
 
     if not run_validator(records):
+        return 2
+
+    if not check_memory_artifacts():
         return 2
 
     if not check_rendered_summaries(records):
@@ -69,6 +75,46 @@ def run_validator(records: list[Path]) -> bool:
         print(result.stderr, file=sys.stderr, end="")
 
     return result.returncode == 0
+
+
+def check_memory_artifacts() -> bool:
+    candidate_paths = sorted(EXAMPLES_ROOT.glob("* /.ai/records/memories/candidates/*.json".replace(" ", "")))
+    validated_paths = sorted(EXAMPLES_ROOT.glob("* /.ai/records/memories/validated/*.json".replace(" ", "")))
+
+    if not candidate_paths and not validated_paths:
+        return True
+
+    artifact_paths = [*candidate_paths, *validated_paths]
+    command = [sys.executable, str(MEMORY_VALIDATOR_PATH), *[str(path) for path in artifact_paths]]
+    result = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+
+    if result.stdout:
+        print(result.stdout, end="")
+    if result.stderr:
+        print(result.stderr, file=sys.stderr, end="")
+
+    if result.returncode != 0:
+        return False
+
+    success = True
+    candidate_map = {(path.parents[3], path.stem): path for path in candidate_paths}
+
+    for validated_path in validated_paths:
+        key = (validated_path.parents[3], validated_path.stem)
+        if key not in candidate_map:
+            print(
+                "FAIL missing matching candidate for validated memory: "
+                f"{validated_path.relative_to(REPO_ROOT)}",
+                file=sys.stderr,
+            )
+            success = False
+        else:
+            print(
+                "PASS matching candidate exists for validated memory: "
+                f"{validated_path.relative_to(REPO_ROOT)}"
+            )
+
+    return success
 
 
 def check_rendered_summaries(records: list[Path]) -> bool:

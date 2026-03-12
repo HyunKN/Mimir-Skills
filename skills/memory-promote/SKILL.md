@@ -14,8 +14,9 @@ Use this skill when reusable lessons should be evaluated for candidate or valida
 3. Gather the minimum promotion evidence: `source_decision_ids`, `evidence_refs`, current-state validation, safety review, and freshness or revalidation guidance.
 4. Decide whether the lesson should stay a candidate, be promoted to validated memory, or be rejected or demoted.
 5. Write only the minimal candidate or validated artifact needed for the chosen state.
-6. Re-check the lesson against the current repository or branch state before promotion.
-7. Keep promotion explicit and conservative; do not infer long-term memory by default.
+6. Run `scripts/validate_memory_artifact.py <path>` when a concrete candidate or validated memory JSON file needs contract validation.
+7. Re-check the lesson against the current repository or branch state before promotion.
+8. Keep promotion explicit and conservative; do not infer long-term memory by default.
 
 ## Promotion Focus
 
@@ -35,8 +36,9 @@ Use this skill when reusable lessons should be evaluated for candidate or valida
 ## Load References As Needed
 
 - Read [`references/promotion-playbook.md`](references/promotion-playbook.md) when deciding whether a lesson should stay a candidate, be promoted, or be demoted.
+- Run [`scripts/validate_memory_artifact.py`](scripts/validate_memory_artifact.py) when validating one or more candidate or validated memory JSON files.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when checking shared validation, safety, and redaction constraints.
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when the source decision record is missing or incomplete.
 - Read [`../../spec/memory-promotion-policy.md`](../../spec/memory-promotion-policy.md) when checking candidate and validated memory requirements.
 - Read [`../../spec/decision-record-schema.md`](../../spec/decision-record-schema.md) when tracing the lesson back to the source decision records.
-- Note that no public memory-promotion example is published yet; keep promotion conservative until the first candidate-to-validated example lands.
+- Inspect the public example under [`../../examples/cache-client-tls-memory/`](../../examples/cache-client-tls-memory/) when you need a concrete candidate-to-validated memory flow.
