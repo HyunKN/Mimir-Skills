@@ -1,0 +1,82 @@
+{
+  "id": "dec-20260320-cache-client-v43-migration-003",
+  "timestamp": "2026-03-20T07:45:00Z",
+  "task_ref": {
+    "source": "other",
+    "id": "release-2048",
+    "title": "Complete synthetic cache client v4.3 migration"
+  },
+  "decision": "Add tls.ca_bundle configuration and upgrade the synthetic acme-cache-client dependency to 4.3.0 in staging.",
+  "problem_context": "The release branch had previously pinned acme-cache-client to 4.2.7 because v4.3 required tls.ca_bundle. The follow-up task adds the missing config so the upgrade can proceed safely.",
+  "alternatives_considered": [
+    {
+      "name": "Keep the 4.2.7 pin",
+      "status": "rejected",
+      "reason": "Would leave the migration debt in place and postpone the verified TLS contract update again."
+    },
+    {
+      "name": "Disable TLS verification temporarily",
+      "status": "rejected",
+      "reason": "Would weaken transport safety and conflict with the repository security baseline."
+    },
+    {
+      "name": "Add tls.ca_bundle and upgrade to 4.3.0",
+      "status": "selected",
+      "reason": "Restores forward progress while preserving verified TLS behavior."
+    }
+  ],
+  "selected_option": {
+    "name": "Add tls.ca_bundle and upgrade to 4.3.0",
+    "summary": "Update the synthetic cache TLS config with ca_bundle and remove the temporary version pin."
+  },
+  "rationale": "The earlier pin isolated the missing config contract clearly, and the follow-up change validates that the upgrade is safe once tls.ca_bundle is present.",
+  "evidence_refs": [
+    {
+      "kind": "doc",
+      "ref": "docs/upgrade-notes/acme-cache-client-v4.3.md",
+      "summary": "Synthetic upgrade note states that verified TLS connections require tls.ca_bundle in v4.3+.",
+      "captured_at": "2026-03-20T07:18:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": "config/cache.yaml",
+      "summary": "Synthetic cache config now includes tls.ca_bundle alongside the existing verified TLS settings.",
+      "captured_at": "2026-03-20T07:24:00Z"
+    },
+    {
+      "kind": "test",
+      "ref": "tests/cache/client-config.test.ts",
+      "summary": "Synthetic compatibility test passed on acme-cache-client 4.3.0 after the TLS config update.",
+      "captured_at": "2026-03-20T07:35:00Z"
+    }
+  ],
+  "affected_paths": [
+    "config/cache.yaml",
+    "package.json",
+    "pnpm-lock.yaml"
+  ],
+  "validation_run": [
+    {
+      "type": "test",
+      "command": "pnpm test:cache-client",
+      "result": "passed",
+      "summary": "Synthetic cache client compatibility tests passed with acme-cache-client 4.3.0 and the new TLS config."
+    },
+    {
+      "type": "build",
+      "command": "pnpm build",
+      "result": "passed",
+      "summary": "The service build and synthetic staging boot check completed with the migrated config."
+    }
+  ],
+  "remaining_risks": [
+    "Future minor releases may still change the TLS bootstrap contract and should be checked against release notes."
+  ],
+  "confidence": 0.86,
+  "follow_up": [
+    "Promote the repeated TLS contract lesson into validated memory for future cache client upgrades."
+  ],
+  "supersedes": [
+    "dec-20260312-cache-client-pin-001"
+  ]
+}

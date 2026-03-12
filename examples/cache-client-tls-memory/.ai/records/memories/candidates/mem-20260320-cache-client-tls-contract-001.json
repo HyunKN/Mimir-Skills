@@ -1,0 +1,32 @@
+{
+  "id": "mem-20260320-cache-client-tls-contract-001",
+  "statement": "Synthetic services using acme-cache-client v4.3+ with verified TLS should add tls.ca_bundle before the upgrade is considered safe.",
+  "scope": "Synthetic cache client upgrades in services that keep TLS verification enabled.",
+  "source_decision_ids": [
+    "dec-20260312-cache-client-pin-001",
+    "dec-20260320-cache-client-v43-migration-003"
+  ],
+  "evidence_refs": [
+    {
+      "kind": "doc",
+      "ref": "docs/upgrade-notes/acme-cache-client-v4.3.md",
+      "summary": "Synthetic upgrade note documents the tls.ca_bundle requirement for verified TLS.",
+      "captured_at": "2026-03-20T07:18:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": "config/cache.yaml",
+      "summary": "The synthetic config became compatible only after tls.ca_bundle was added.",
+      "captured_at": "2026-03-20T07:24:00Z"
+    },
+    {
+      "kind": "test",
+      "ref": "tests/cache/client-config.test.ts",
+      "summary": "The synthetic compatibility test failed before the TLS config update and passed after the migration.",
+      "captured_at": "2026-03-20T07:35:00Z"
+    }
+  ],
+  "confidence": 0.80,
+  "created_at": "2026-03-20T08:10:00Z",
+  "status": "candidate"
+}

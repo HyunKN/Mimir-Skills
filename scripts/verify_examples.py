@@ -31,7 +31,7 @@ def main() -> int:
         print("No example decision records found.", file=sys.stderr)
         return 1
 
-    if not run_validator():
+    if not run_validator(records):
         return 2
 
     if not check_rendered_summaries(records):
@@ -59,8 +59,8 @@ def check_schema_json() -> bool:
     return True
 
 
-def run_validator() -> bool:
-    command = [sys.executable, str(VALIDATOR_PATH), str(EXAMPLES_ROOT)]
+def run_validator(records: list[Path]) -> bool:
+    command = [sys.executable, str(VALIDATOR_PATH), *[str(path) for path in records]]
     result = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
 
     if result.stdout:

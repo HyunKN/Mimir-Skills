@@ -20,5 +20,6 @@ Current examples:
 
 - `windows-ci-timeout/` shows a runtime-style `.ai/records/` layout with one canonical decision record and one rendered Markdown summary. It is the anchor example for the `ci-rationale` workflow-specific skill.
 - `cache-client-pin/` shows a dependency-and-config trigger with one canonical decision record and one rendered Markdown summary derived from the JSON source. It is the anchor example for the `dependency-upgrade-decision` workflow-specific skill.
+- `cache-client-tls-memory/` shows a dependency follow-up decision plus a public-safe `candidate -> validated` memory flow derived from decision records. It is the anchor example for the `memory-promote` workflow-specific skill.
 
-The rendered summaries in both published examples also serve as reference shapes for the `handoff-context` and `pr-rationale` workflow-specific skills.
+The rendered summaries in the published examples also serve as reference shapes for the `handoff-context` and `pr-rationale` workflow-specific skills.

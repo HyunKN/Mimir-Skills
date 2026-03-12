@@ -39,7 +39,7 @@ What is available now:
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion
 - starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, and `memory-promote`
-- public-safe end-to-end examples for CI and dependency/config triggers
+- public-safe end-to-end examples for CI, dependency/config, and memory-promotion flows
 - evaluation prompts for replay and reviewer comprehension
 - minimal CI for example validation and derived-summary drift checks
 - Korean companion docs for the root README and `docs/`, plus mirrored local workspace notes outside the published repository surface
@@ -47,7 +47,7 @@ What is available now:
 What comes next:
 
 - narrower hook or guardrail decisions after more usage feedback
-- first public candidate-to-validated memory-promotion example
+- bounded CI coverage for public memory artifacts
 - future evaluation automation and any additional workflow-specific skills that prove useful
 
 ## Documentation
