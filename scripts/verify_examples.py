@@ -15,6 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES_ROOT = REPO_ROOT / "examples"
 DECISION_SCHEMA_PATH = REPO_ROOT / "spec" / "decision-record-schema.json"
 MEMORY_SCHEMA_PATH = REPO_ROOT / "spec" / "memory-artifact-schema.json"
+SCHEMA_CONSISTENCY_PATH = REPO_ROOT / "scripts" / "check_schema_consistency.py"
 VALIDATOR_PATH = REPO_ROOT / "skills" / "decision-core" / "scripts" / "validate_decision_record.py"
 MEMORY_VALIDATOR_PATH = (
     REPO_ROOT / "skills" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
@@ -28,6 +29,9 @@ def main() -> int:
         return 1
 
     if not check_schema_json():
+        return 1
+
+    if not check_schema_consistency():
         return 1
 
     records = sorted(EXAMPLES_ROOT.glob("* /.ai/records/decisions/*.json".replace(" ", "")))
@@ -69,6 +73,18 @@ def check_schema_json() -> bool:
         print(f"PASS machine-readable schema parses: {schema_path.relative_to(REPO_ROOT)}")
 
     return success
+
+
+def check_schema_consistency() -> bool:
+    command = [sys.executable, str(SCHEMA_CONSISTENCY_PATH)]
+    result = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+
+    if result.stdout:
+        print(result.stdout, end="")
+    if result.stderr:
+        print(result.stderr, file=sys.stderr, end="")
+
+    return result.returncode == 0
 
 
 def run_validator(records: list[Path]) -> bool:

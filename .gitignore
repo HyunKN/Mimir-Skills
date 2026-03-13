@@ -3,3 +3,4 @@
 **/.ai/
 !examples/**/.ai/
 !examples/**/.ai/**
+__pycache__/

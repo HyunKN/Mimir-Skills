@@ -2,53 +2,68 @@
 
 # decision-skills
 
-AI 에이전트의 엔지니어링 결정을 추적 가능하고, 재사용 가능하며, 리뷰 가능한 형태로 만들기 위한 오픈 스킬과 레퍼런스 문서 모음입니다.
+로컬 프로젝트 상태를 바탕으로 handoff, PR rationale, CI investigation context 초안을 생성합니다.
+
+`decision-skills`는 AI coding agent를 위한 output-first workflow skill pack으로 전환 중입니다.
+제품 방향은 단순합니다. skill이 로컬 signal을 읽고 첫 번째로 유용한 버전을 초안으로 만들 수 있다면, 엔지니어링 맥락을 손으로 다시 구성하는 일을 멈추자는 것입니다.
+
+## 누구를 위한 것인가
+
+- 대략 2명에서 8명 규모의 작은 소프트웨어 팀
+- GitHub pull-request 기반 흐름으로 일하는 팀
+- 일상적인 엔지니어링 작업에서 이미 AI coding agent를 사용하는 팀
+
+또한 세션, 브랜치, 리뷰 사이에서 더 나은 연속성을 원하는, AI coding agent를 매일 사용하는 개인 개발자에게도 도움이 되도록 설계되고 있습니다.
+
+## v1이 하도록 만들고 있는 일
+
+- `prepare-handoff`: 현재 브랜치 context를 읽고 무엇이 바뀌었는지, 무엇이 남았는지, 어디서 이어야 하는지를 설명하는 handoff 초안을 만듭니다
+- `write-pr-rationale`: 브랜치 diff와 validation context를 읽고 왜 이 변경이 일어났는지를 설명하는 reviewer-facing 설명 초안을 만듭니다
+- `capture-ci-investigation`: 사용 가능한 실패 맥락에서 bounded CI investigation summary 초안을 만들되, 완벽한 root-cause analysis는 약속하지 않습니다
 
 ## 왜 필요한가
 
-AI 코딩 에이전트는 이미 코드를 수정하고, 테스트를 실행하고, CI를 확인하고, PR을 준비할 수 있습니다.
-그런데 팀이 여전히 잃어버리는 것은 그 작업을 둘러싼 결정 맥락입니다.
+AI coding agent는 이미 코드를 수정하고, 테스트를 실행하고, CI를 확인하고, pull request를 준비할 수 있습니다.
+그런데 팀이 여전히 잃어버리는 것은 그 작업을 둘러싼 맥락입니다.
 
 - 왜 이 경로를 선택했는가
-- 어떤 대안을 검토했는가
+- 실제로 무엇이 바뀌었는가
 - 무엇이 근거였는가
 - 무엇이 아직 위험하거나 불확실한가
-- 다음 에이전트가 이어서 작업하기 전에 무엇을 알아야 하는가
+- 다음 에이전트나 리뷰어가 이어가기 전에 무엇을 알아야 하는가
 
-`decision-skills`는 바로 그 공백에 집중합니다.
+`decision-skills`는 그 맥락을 보존하는 비용을 낮추기 위해 존재합니다.
 
-## 핵심 원칙
+## 품질 경계
 
-- Decision traceability 우선
-- AI-readable canonical record 우선
-- 같은 원본에서 파생되는 human-readable summary
-- 파생되고 검증된 계층으로서의 long-term memory
-- 공개 재사용을 위한 skills 스타일 저장소 구조
+이 저장소는 강한 초안을 생성하는 데 도움을 줘야지, engineering judgment를 대체하는 것처럼 보여서는 안 됩니다.
 
-## 안전성 안내
-
-`decision-skills`는 기본적으로 결정 기록 도구입니다. 일관성과 안전성을 높이는 범위에서 제한적인 script나 hook을 포함할 수 있지만, 자동화는 항상 보조적이어야 하며 명시적 근거 기반 record보다 앞서면 안 됩니다.
+- output은 final truth가 아니라 draft입니다
+- 외부 공유 전에는 여전히 human review가 필요합니다
+- CI 지원은 best-effort이며, 사용 가능한 log와 context에 좌우됩니다
+- 자동화는 bounded되고 review 가능해야 하며, 명시적 근거 기반 record보다 앞서면 안 됩니다
 
 ## 현재 상태
 
-이 저장소는 문서 우선 공개형 v0.1 단계에 있습니다.
+이 저장소는 오늘 시점에도 여전히 문서 우선 공개형 v0.1 단계에 있습니다.
+위의 output-first 방향은 현재 내부 엔진 위에 다음으로 쌓아 올리고 있는 레이어입니다.
 
 현재 제공되는 것:
 
-- 공개용 project one-pager
+- 공개 project one-pager
 - 공통 glossary
-- trigger, decision record, memory promotion에 대한 v0.1 spec과 decision record 및 memory artifact를 위한 machine-readable companion schema
-- 시작용 skill template와 `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`
-- CI, dependency/config, memory-promotion 흐름을 다루는 공개용 end-to-end example
+- trigger, decision record, memory promotion을 위한 v0.1 spec과, decision record 및 memory artifact를 위한 machine-readable companion schema
+- `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`를 포함한 시작용 skill template
+- CI, dependency/config, memory-promotion 흐름을 위한 public-safe end-to-end example
 - replay, reviewer comprehension, memory promotion을 위한 evaluation prompt
-- example 검증, 공개 memory artifact 검증, 파생 summary drift 체크를 위한 최소 CI
-- 루트 README와 `docs/`에 대한 한국어 동반 문서
+- schema-helper 일관성 체크, example 검증, 공개 memory artifact 검증, 파생 summary drift 체크를 위한 최소 CI
+- 루트 README와 `docs/`에 대한 한국어 동반 문서, 그리고 공개 저장소 표면 밖의 미러링된 로컬 workspace 메모
 
 다음 단계:
 
-- 더 많은 사용 피드백 이후의 좁은 hook 또는 guardrail 결정
-- 이후의 evaluation automation과, 실제로 유용함이 확인된 추가 workflow-specific skill
-- 더 엄격한 schema-driven validation이 필요한지, 아니면 현재 helper-validator 분리를 유지할지 판단
+- 공개 skill surface를 `prepare-handoff`, `write-pr-rationale`, `capture-ci-investigation` 중심으로 다시 구성
+- 첫 두 workflow를 위한 로컬 context collector와 바로 쓸 수 있는 Markdown output 구현
+- 더 강한 example과 reliability boundary가 마련될 때까지 `capture-ci-investigation`은 더 좁고 best-effort로 유지
 
 ## 문서 안내
 
@@ -75,7 +90,7 @@ decision-skills/
   evaluations/
 ```
 
-사용자 저장소 안에서 의도하는 런타임 산출물 구조는 다음과 같습니다.
+사용자 저장소 내부에서 의도하는 runtime artifact 구조는 다음과 같습니다.
 
 ```text
 .ai/
@@ -91,11 +106,11 @@ decision-skills/
 ## 언어 운영 정책
 
 - GitHub 기본 진입점은 `README.md`입니다.
-- 의미 기준 원문은 영어 문서입니다.
-- 한국어 문서는 루트 README와 `docs/` 아래 문서에 한해 같은 구조로 `*.ko.md` 이름을 사용합니다.
-- 로컬 `.workspace/` 문서는 한글 미러를 둘 수 있지만 gitignore 대상이며 공개 저장소 표면에는 포함되지 않습니다.
-- 공개 기술 스펙, skill, example, evaluation, contributor workflow 문서는 영어만 유지합니다.
-- JSON 키, 스키마 이름, 파일 경로는 두 언어 모두 영어를 유지합니다.
+- 의미 기준 source of truth는 영어 파일입니다.
+- 한국어 파일은 영어 원문과 나란히 `*.ko.md` 형식으로, 루트 README와 `docs/` 아래 파일에 대해서만 유지합니다.
+- 로컬 `.workspace/` 메모도 한국어로 미러링할 수 있지만, gitignore 대상이며 공개 저장소 표면에는 포함되지 않습니다.
+- 공개 기술 스펙, skill, example, evaluation, contributor workflow 파일은 영어만 유지합니다.
+- JSON 키, schema 이름, file path는 두 언어 모두 영어를 유지합니다.
 
 ## 시작 자산
 
@@ -108,4 +123,4 @@ decision-skills/
 
 ## 단기 목표
 
-기여자가 문제 정의를 이해하고, 스키마를 검토하고, 첫 스킬과 example을 안정적인 문서 기반 위에서 만들 수 있는 작지만 신뢰할 수 있는 공개 v0.1을 만드는 것입니다.
+현재의 문서, schema, validation 기반을 그 아래에 그대로 유지하면서도, 팀이 즉시 workflow 가치를 느낄 수 있는 신뢰할 만한 public v1 방향을 만드는 것입니다.
