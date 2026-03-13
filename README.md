@@ -51,6 +51,7 @@ The output-first direction above is the next layer being built on top of the cur
 What is available now:
 
 - a public project one-pager
+- a first Codex-local install path under `adapters/codex/scripts/install_codex_skills.py`, documented in `docs/codex-local-install.md`
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion, plus machine-readable companion schemas for decision records and memory artifacts
 - starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`, and the public workflow wrappers `prepare-handoff`, `write-pr-rationale`, and the narrower beta `capture-ci-investigation`
@@ -64,11 +65,13 @@ What comes next:
 - continue implementing the public skill surface around `prepare-handoff`, `write-pr-rationale`, and `capture-ci-investigation`
 - tighten `prepare-handoff` and `write-pr-rationale` with better output shaping, optional evidence inputs, and usage feedback
 - keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries justify any direct-use script layer
+- collect real usage feedback from the first Codex-local adapter before broadening installation UX to other agent surfaces
 
 ## Documentation
 
 - [Project One-Pager](docs/project-one-pager.md)
 - [Glossary](docs/glossary.md)
+- [Codex Local Install](docs/codex-local-install.md)
 - [Workflow Surface](docs/workflow-surface.md)
 - [Trigger Taxonomy v0.1](spec/trigger-taxonomy.md)
 - [Decision Record Schema v0.1](spec/decision-record-schema.md)

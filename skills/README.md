@@ -30,3 +30,4 @@ The public product story is being simplified around user-facing workflow outputs
 The current internal packages stay important, but they are now treated as building blocks rather than as the final outward-facing surface.
 `prepare-handoff` and `write-pr-rationale` are now the first direct-use public wrappers on top of that internal engine.
 `capture-ci-investigation` is intentionally narrower: a beta wrapper that stays best-effort until stronger examples justify a direct-use script layer.
+A first Codex-local install path now exists via `adapters/codex/scripts/install_codex_skills.py`, which installs the outward-facing wrappers and their required internal dependencies into `$CODEX_HOME/skills/`.

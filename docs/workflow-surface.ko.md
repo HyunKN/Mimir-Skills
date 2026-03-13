@@ -39,7 +39,8 @@ Current status:
 - public workflow 이름은 정의되어 있다
 - 초기 user-facing skill skeleton이 이제 `skills/prepare-handoff/` 아래에 존재한다
 - 첫 번째 로컬 context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/prepare-handoff/scripts/` 아래에 존재한다
-- install UX와 adapter 수준 packaging은 아직 구현되지 않았다
+- 첫 Codex 전용 로컬 install path가 이제 `adapters/codex/scripts/install_codex_skills.py` 아래에 존재한다
+- 더 넓은 multi-agent packaging은 아직 구현되지 않았다
 
 ### `write-pr-rationale`
 
@@ -59,7 +60,8 @@ Current status:
 - public workflow 이름은 정의되어 있다
 - 초기 user-facing skill이 이제 `skills/write-pr-rationale/` 아래에 존재한다
 - 첫 번째 로컬 PR-context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/write-pr-rationale/scripts/` 아래에 존재한다
-- install UX와 adapter 수준 packaging은 아직 구현되지 않았다
+- 첫 Codex 전용 로컬 install path가 이제 `adapters/codex/scripts/install_codex_skills.py` 아래에 존재한다
+- 더 넓은 multi-agent packaging은 아직 구현되지 않았다
 
 ### `capture-ci-investigation`
 
@@ -78,6 +80,7 @@ Current status:
 
 - public workflow 이름은 정의되어 있다
 - 초기 beta user-facing skill이 이제 `skills/capture-ci-investigation/` 아래에 존재한다
+- 첫 Codex 전용 로컬 install path는 이제 `adapters/codex/scripts/install_codex_skills.py`를 통해 이 workflow도 포함할 수 있다
 - 전용 direct-use script는 의도적으로 아직 구현하지 않았다
 - 더 강한 example과 reliability boundary가 생길 때까지 더 좁고 best-effort인 방향으로 유지된다
 
