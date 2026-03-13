@@ -53,6 +53,12 @@ python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --fo
 
 그러면 Codex는 이런 prompt를 기준으로 설치된 workflow skill을 trigger할 수 있고, wrapper가 이미 direct draft generation을 지원하는 곳에서는 함께 설치된 script도 사용할 수 있다.
 
+## 피드백 루프
+
+실제 사용 뒤에는 [Adapter 피드백 루프](adapter-feedback-loop.ko.md)의 가벼운 검토 절차를 사용한다.
+
+현재 목표는 설치된 workflow가 더 넓은 adapter 작업을 정당화할 만큼 빠르게 유용한 draft를 만드는지 배우는 것이지, 첫 adapter 경로가 이미 최종 형태라고 주장하는 것이 아니다.
+
 ## 현재 한계
 
 - 이것은 Codex 전용 로컬 install path다.

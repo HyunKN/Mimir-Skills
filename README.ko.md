@@ -72,6 +72,7 @@ AI coding agent는 이미 코드를 수정하고, 테스트를 실행하고, CI�
 - [Project One-Pager](docs/project-one-pager.ko.md)
 - [Glossary](docs/glossary.ko.md)
 - [Codex Local Install](docs/codex-local-install.ko.md)
+- [Adapter 피드백 루프](docs/adapter-feedback-loop.ko.md)
 - [Workflow Surface](docs/workflow-surface.ko.md)
 - [Trigger Taxonomy v0.1](spec/trigger-taxonomy.md)
 - [Decision Record Schema v0.1](spec/decision-record-schema.md)

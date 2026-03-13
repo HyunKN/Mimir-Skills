@@ -53,6 +53,12 @@ After install, ask Codex with direct workflow language such as:
 
 Codex can then trigger the installed workflow skills from those prompts and use the bundled scripts where the wrapper already supports direct draft generation.
 
+## Feedback Loop
+
+Use the lightweight review loop in [Adapter Feedback Loop](adapter-feedback-loop.md) after real usage.
+
+The current goal is to learn whether the installed workflows produce useful drafts quickly enough to justify broader adapter work, not to claim that the first adapter path is already final.
+
 ## Current Limits
 
 - This is a local Codex install path only.

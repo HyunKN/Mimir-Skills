@@ -72,6 +72,7 @@ What comes next:
 - [Project One-Pager](docs/project-one-pager.md)
 - [Glossary](docs/glossary.md)
 - [Codex Local Install](docs/codex-local-install.md)
+- [Adapter Feedback Loop](docs/adapter-feedback-loop.md)
 - [Workflow Surface](docs/workflow-surface.md)
 - [Trigger Taxonomy v0.1](spec/trigger-taxonomy.md)
 - [Decision Record Schema v0.1](spec/decision-record-schema.md)
