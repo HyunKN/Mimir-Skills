@@ -53,7 +53,7 @@ What is available now:
 - a public project one-pager
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion, plus machine-readable companion schemas for decision records and memory artifacts
-- starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`, and the first public workflow wrapper `prepare-handoff`
+- starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`, and the public workflow wrappers `prepare-handoff`, `write-pr-rationale`, and the narrower beta `capture-ci-investigation`
 - public-safe end-to-end examples for CI, dependency/config, and memory-promotion flows
 - evaluation prompts for replay, reviewer comprehension, and memory promotion
 - minimal CI for schema-helper consistency checks, example validation, public memory artifact validation, and derived-summary drift checks
@@ -62,9 +62,8 @@ What is available now:
 What comes next:
 
 - continue implementing the public skill surface around `prepare-handoff`, `write-pr-rationale`, and `capture-ci-investigation`
-- tighten `prepare-handoff` with better output shaping, optional evidence inputs, and usage feedback
-- implement the same direct-usage layer for `write-pr-rationale`
-- keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries exist
+- tighten `prepare-handoff` and `write-pr-rationale` with better output shaping, optional evidence inputs, and usage feedback
+- keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries justify any direct-use script layer
 
 ## Documentation
 

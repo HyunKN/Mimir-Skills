@@ -57,7 +57,9 @@ Current internal building blocks:
 Current status:
 
 - public workflow name is defined
-- dedicated user-facing skill and scripts are not implemented yet
+- an initial user-facing skill now exists under `skills/write-pr-rationale/`
+- the first local PR-context collectors and direct Markdown output scripts now exist under `skills/write-pr-rationale/scripts/`
+- install UX and adapter-level packaging are still not implemented
 
 ### `capture-ci-investigation`
 
@@ -75,7 +77,9 @@ Current internal building blocks:
 Current status:
 
 - public workflow name is defined
-- this remains a narrower beta direction until stronger examples and reliability boundaries exist
+- an initial beta user-facing skill now exists under `skills/capture-ci-investigation/`
+- dedicated direct-use scripts are intentionally not implemented yet
+- this remains a narrower best-effort direction until stronger examples and reliability boundaries exist
 
 ## Supporting Internal Skills
 

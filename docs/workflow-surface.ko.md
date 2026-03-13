@@ -57,7 +57,9 @@ Current internal building blocks:
 Current status:
 
 - public workflow 이름은 정의되어 있다
-- 전용 user-facing skill과 script는 아직 구현되지 않았다
+- 초기 user-facing skill이 이제 `skills/write-pr-rationale/` 아래에 존재한다
+- 첫 번째 로컬 PR-context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/write-pr-rationale/scripts/` 아래에 존재한다
+- install UX와 adapter 수준 packaging은 아직 구현되지 않았다
 
 ### `capture-ci-investigation`
 
@@ -75,7 +77,9 @@ Current internal building blocks:
 Current status:
 
 - public workflow 이름은 정의되어 있다
-- 더 강한 example과 reliability boundary가 생길 때까지 더 좁은 beta 방향으로 유지된다
+- 초기 beta user-facing skill이 이제 `skills/capture-ci-investigation/` 아래에 존재한다
+- 전용 direct-use script는 의도적으로 아직 구현하지 않았다
+- 더 강한 example과 reliability boundary가 생길 때까지 더 좁고 best-effort인 방향으로 유지된다
 
 ## Supporting Internal Skills
 
