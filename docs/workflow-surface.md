@@ -37,7 +37,8 @@ Current internal building blocks:
 Current status:
 
 - public workflow name is defined
-- dedicated user-facing skill and scripts are not implemented yet
+- an initial user-facing skill skeleton now exists under `skills/prepare-handoff/`
+- dedicated local context collectors and output scripts are not implemented yet
 
 ### `write-pr-rationale`
 

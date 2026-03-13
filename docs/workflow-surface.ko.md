@@ -37,7 +37,8 @@ Current internal building blocks:
 Current status:
 
 - public workflow 이름은 정의되어 있다
-- 전용 user-facing skill과 script는 아직 구현되지 않았다
+- 초기 user-facing skill skeleton이 이제 `skills/prepare-handoff/` 아래에 존재한다
+- 전용 로컬 context collector와 output script는 아직 구현되지 않았다
 
 ### `write-pr-rationale`
 
