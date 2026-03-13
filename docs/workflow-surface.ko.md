@@ -38,7 +38,8 @@ Current status:
 
 - public workflow 이름은 정의되어 있다
 - 초기 user-facing skill skeleton이 이제 `skills/prepare-handoff/` 아래에 존재한다
-- 전용 로컬 context collector와 output script는 아직 구현되지 않았다
+- 첫 번째 로컬 context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/prepare-handoff/scripts/` 아래에 존재한다
+- install UX와 adapter 수준 packaging은 아직 구현되지 않았다
 
 ### `write-pr-rationale`
 

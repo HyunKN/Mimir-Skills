@@ -38,7 +38,8 @@ Current status:
 
 - public workflow name is defined
 - an initial user-facing skill skeleton now exists under `skills/prepare-handoff/`
-- dedicated local context collectors and output scripts are not implemented yet
+- the first local context collectors and direct Markdown output scripts now exist under `skills/prepare-handoff/scripts/`
+- install UX and adapter-level packaging are still not implemented
 
 ### `write-pr-rationale`
 
