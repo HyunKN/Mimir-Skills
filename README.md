@@ -69,6 +69,7 @@ What comes next:
 
 - [Project One-Pager](docs/project-one-pager.md)
 - [Glossary](docs/glossary.md)
+- [Workflow Surface](docs/workflow-surface.md)
 - [Trigger Taxonomy v0.1](spec/trigger-taxonomy.md)
 - [Decision Record Schema v0.1](spec/decision-record-schema.md)
 - [Memory Promotion Policy v0.1](spec/memory-promotion-policy.md)
@@ -116,6 +117,7 @@ The intended runtime artifact layout inside a user repository is:
 
 - [Skill Template](template/SKILL.md)
 - [Skills Directory Notes](skills/README.md)
+- [Workflow Surface](docs/workflow-surface.md)
 - [Examples Directory Notes](examples/README.md)
 - [Evaluations Directory Notes](evaluations/README.md)
 - [Contributing Guide](CONTRIBUTING.md)
