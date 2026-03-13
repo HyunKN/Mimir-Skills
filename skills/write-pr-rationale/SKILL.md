@@ -14,8 +14,10 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 3. Read [`../pr-rationale/SKILL.md`](../pr-rationale/SKILL.md) for reviewer-facing framing and [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a canonical decision record is missing but should exist.
 4. Prefer the smallest evidence set that still explains what changed, why it changed, what was validated, and what reviewers should watch.
 5. Link back to canonical decision records or derived summaries when they exist instead of copying raw logs into the PR rationale.
-6. State uncertainty plainly when the branch context is incomplete or validation evidence is missing.
-7. Treat the generated Markdown as a first draft to review and tighten before sharing in a pull request.
+6. When the working tree is already clean, surface committed branch-range context or recent committed work instead of defaulting to a nearly empty reviewer draft.
+7. Accept optional evidence notes when local branch data alone would underspecify why the change matters.
+8. State uncertainty plainly when the branch context is incomplete or validation evidence is missing.
+9. Treat the generated Markdown as a first draft to review and tighten before sharing in a pull request.
 
 ## Output Focus
 
@@ -24,6 +26,7 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 - what validation ran or is still missing
 - what reviewers should pay attention to
 - what risks or follow-up remain
+- what committed branch work still matters when there are no uncommitted files
 
 ## Guardrails
 
@@ -32,6 +35,7 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 - Do not paste raw logs, hidden reasoning, or sensitive output into reviewer-facing text.
 - Do not hide incomplete validation, uncertainty, or remaining risks to make the PR sound cleaner.
 - Do not let reviewer-facing text drift away from the branch state or the canonical records behind it.
+- Do not let a clean working tree collapse the rationale into generic filler when committed branch context is still available.
 
 ## Load References As Needed
 
@@ -39,6 +43,6 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a missing canonical record should be created before drafting the rationale.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when shared validation, evidence, and safety constraints need to be checked.
 - Run [`scripts/collect_pr_context.py`](scripts/collect_pr_context.py) when you need a reusable JSON snapshot of branch, diff, changed files, and recent-commit context.
-- Run [`scripts/generate_pr_rationale.py`](scripts/generate_pr_rationale.py) when you need a directly usable `pr-rationale.md` draft from the current repository state.
+- Run [`scripts/generate_pr_rationale.py`](scripts/generate_pr_rationale.py) when you need a directly usable `pr-rationale.md` draft from the current repository state, including clean-state fallback from committed work when needed.
 - Inspect the public summaries under [`../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md`](../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md) and [`../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md`](../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md) when you need concrete reviewer-facing rationale shapes.
 - Read [`../../evaluations/reviewer-comprehension.md`](../../evaluations/reviewer-comprehension.md) when checking whether the generated rationale is likely to answer a reviewer’s core questions quickly.

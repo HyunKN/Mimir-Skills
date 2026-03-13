@@ -60,15 +60,17 @@ def collect_context(repo_path: Path, commit_limit: int = 5) -> dict[str, Any]:
     branch = run_git(repo_root, "branch", "--show-current")
     head_short = run_git(repo_root, "rev-parse", "--short", "HEAD")
     head_full = run_git(repo_root, "rev-parse", "HEAD")
-    base_ref = find_merge_base(repo_root)
+    base_ref = detect_base_ref(repo_root)
     changed_files = split_nonempty(run_git(repo_root, "diff", "--name-only"))
     staged_files = split_nonempty(run_git(repo_root, "diff", "--cached", "--name-only"))
     untracked_files = split_nonempty(
         run_git(repo_root, "ls-files", "--others", "--exclude-standard")
     )
     recent_commits = split_nonempty(run_git(repo_root, "log", f"-n{commit_limit}", "--oneline"))
+    recent_commit_details = collect_recent_commit_details(repo_root, commit_limit)
     name_status = split_nonempty(run_git(repo_root, "diff", "--name-status"))
     name_status.extend([f"??\t{path}" for path in untracked_files])
+    branch_range = collect_branch_range(repo_root, base_ref)
 
     return {
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
@@ -77,7 +79,7 @@ def collect_context(repo_path: Path, commit_limit: int = 5) -> dict[str, Any]:
         "branch": branch or "(detached HEAD)",
         "head_short": head_short,
         "head_full": head_full,
-        "base_ref": base_ref,
+        "base_ref": base_ref.get("label", "(no base ref detected)"),
         "working_tree_clean": not changed_files and not staged_files and not untracked_files,
         "diff": {
             "changed_files": sorted(set(changed_files + staged_files + untracked_files)),
@@ -89,15 +91,70 @@ def collect_context(repo_path: Path, commit_limit: int = 5) -> dict[str, Any]:
             "name_status": name_status,
         },
         "recent_commits": recent_commits,
+        "recent_commit_details": recent_commit_details,
+        "branch_range": branch_range,
     }
 
 
-def find_merge_base(repo_root: Path) -> str:
+def detect_base_ref(repo_root: Path) -> dict[str, str]:
     for candidate in ("origin/main", "origin/master", "main", "master"):
         result = run_git_optional(repo_root, "merge-base", "HEAD", candidate)
         if result:
-            return f"{candidate}@{result}"
-    return "(no base ref detected)"
+            return {
+                "candidate": candidate,
+                "merge_base": result,
+                "label": f"{candidate}@{short_sha(result)}",
+            }
+    return {}
+
+
+def collect_branch_range(repo_root: Path, base_ref: dict[str, str]) -> dict[str, Any]:
+    merge_base = base_ref.get("merge_base", "")
+    label = base_ref.get("label", "(no base ref detected)")
+    if not merge_base:
+        return {
+            "base_ref": label,
+            "commit_count": 0,
+            "commits": [],
+            "changed_files": [],
+            "name_status": [],
+            "diff_stat": [],
+        }
+
+    commits = split_nonempty(run_git(repo_root, "log", f"{merge_base}..HEAD", "--oneline"))
+    changed_files = split_nonempty(run_git(repo_root, "diff", "--name-only", f"{merge_base}..HEAD"))
+    return {
+        "base_ref": label,
+        "commit_count": len(commits),
+        "commits": commits,
+        "changed_files": changed_files,
+        "name_status": split_nonempty(run_git(repo_root, "diff", "--name-status", f"{merge_base}..HEAD")),
+        "diff_stat": split_nonempty(run_git(repo_root, "diff", "--stat", f"{merge_base}..HEAD")),
+    }
+
+
+def collect_recent_commit_details(repo_root: Path, commit_limit: int) -> list[dict[str, Any]]:
+    raw_commits = split_nonempty(
+        run_git(repo_root, "log", f"-n{commit_limit}", "--format=%H%x1f%h%x1f%s")
+    )
+    details: list[dict[str, Any]] = []
+    for row in raw_commits:
+        parts = row.split("\x1f", 2)
+        if len(parts) != 3:
+            continue
+        full_hash, short_hash, subject = parts
+        files = split_nonempty(
+            run_git(repo_root, "show", "--format=", "--name-only", "--diff-filter=ACDMRT", full_hash)
+        )
+        details.append(
+            {
+                "full_hash": full_hash,
+                "short_hash": short_hash,
+                "subject": subject,
+                "files": files,
+            }
+        )
+    return details
 
 
 def run_git(repo_path: Path, *args: str) -> str:
@@ -133,6 +190,10 @@ def run_git_optional(repo_path: Path, *args: str) -> str:
 
 def split_nonempty(value: str) -> list[str]:
     return [line for line in value.splitlines() if line.strip()]
+
+
+def short_sha(value: str) -> str:
+    return value[:7] if value else value
 
 
 if __name__ == "__main__":
