@@ -38,6 +38,7 @@ Current status:
 
 - public workflow name is defined
 - an initial user-facing skill skeleton now exists under `skills/prepare-handoff/`
+- a shared CLI entry now exists under `python -m decision_skills prepare-handoff`
 - the first local context collectors and direct Markdown output scripts now exist under `skills/prepare-handoff/scripts/`
 - a first Codex-local install path now exists under `adapters/codex/scripts/install_codex_skills.py`
 - broader multi-agent packaging is still not implemented
@@ -59,6 +60,7 @@ Current status:
 
 - public workflow name is defined
 - an initial user-facing skill now exists under `skills/write-pr-rationale/`
+- a shared CLI entry now exists under `python -m decision_skills write-pr-rationale`
 - the first local PR-context collectors and direct Markdown output scripts now exist under `skills/write-pr-rationale/scripts/`
 - a first Codex-local install path now exists under `adapters/codex/scripts/install_codex_skills.py`
 - broader multi-agent packaging is still not implemented
@@ -80,6 +82,7 @@ Current status:
 
 - public workflow name is defined
 - an initial beta user-facing skill now exists under `skills/capture-ci-investigation/`
+- the workflow now appears in `python -m decision_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
 - the first Codex-local install path can now include this workflow through `adapters/codex/scripts/install_codex_skills.py`
 - dedicated direct-use scripts are intentionally not implemented yet
 - this remains a narrower best-effort direction until stronger examples and reliability boundaries exist

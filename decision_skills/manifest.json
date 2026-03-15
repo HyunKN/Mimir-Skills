@@ -1,0 +1,26 @@
+{
+  "workflows": [
+    {
+      "name": "prepare-handoff",
+      "availability": "shared-cli",
+      "entrypoint": "python -m decision_skills prepare-handoff",
+      "skill_path": "skills/prepare-handoff/SKILL.md",
+      "summary": "Draft a handoff from the current branch or working tree with optional validation, blocker, risk, next-step, and evidence notes."
+    },
+    {
+      "name": "write-pr-rationale",
+      "availability": "shared-cli",
+      "entrypoint": "python -m decision_skills write-pr-rationale",
+      "skill_path": "skills/write-pr-rationale/SKILL.md",
+      "summary": "Draft reviewer-facing PR rationale from local branch context with optional why, validation, reviewer-note, risk, and evidence inputs."
+    },
+    {
+      "name": "capture-ci-investigation",
+      "availability": "beta-wrapper",
+      "entrypoint": null,
+      "skill_path": "skills/capture-ci-investigation/SKILL.md",
+      "summary": "Wrapper-only beta workflow for bounded CI investigation summaries. Direct shared CLI generation is not implemented yet."
+    }
+  ]
+}
+

@@ -21,7 +21,7 @@ installer는 현재 outward-facing workflow와 그 internal dependency를 `$CODE
 - `decision-capture`
 - `decision-core`
 
-또한 install 뒤에도 example과 evaluation reference가 계속 해석되도록, 공개 가능한 support asset을 `$CODEX_HOME/skills/decision-skills-support/` 아래로 복사한다.
+또한 install 뒤에도 example과 evaluation reference가 계속 해석되고, 설치된 direct-use script가 shared `decision_skills` runtime package를 계속 import할 수 있도록, 공개 가능한 support asset을 `$CODEX_HOME/skills/decision-skills-support/` 아래로 복사한다.
 
 ## 설치
 

@@ -51,6 +51,7 @@ The output-first direction above is the next layer being built on top of the cur
 What is available now:
 
 - a public project one-pager
+- a shared CLI-friendly surface under `decision_skills/`, including `python -m decision_skills list`, `python -m decision_skills prepare-handoff`, and `python -m decision_skills write-pr-rationale`
 - a first Codex-local install path under `adapters/codex/scripts/install_codex_skills.py`, documented in `docs/codex-local-install.md`
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion, plus machine-readable companion schemas for decision records and memory artifacts
@@ -62,10 +63,10 @@ What is available now:
 
 What comes next:
 
-- continue implementing the public skill surface around `prepare-handoff`, `write-pr-rationale`, and `capture-ci-investigation`
-- tighten `prepare-handoff` and `write-pr-rationale` with better output shaping, optional evidence inputs, and usage feedback
+- collect structured usage feedback from the new shared CLI surface and the current Codex-local adapter path before broadening installation UX to other agent surfaces
+- use that feedback to decide whether `prepare-handoff` and `write-pr-rationale` need more output shaping or are strong enough to freeze as public guidance
 - keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries justify any direct-use script layer
-- collect real usage feedback from the first Codex-local adapter before broadening installation UX to other agent surfaces
+- define support levels for the near-term target agent families around `shared CLI support`, `documented support`, and `thin adapter support`
 
 ## Documentation
 
@@ -87,6 +88,8 @@ What comes next:
 decision-skills/
   README.md
   README.ko.md
+  adapters/
+  decision_skills/
   docs/
   spec/
   template/

@@ -21,7 +21,7 @@ The installer copies the current outward-facing workflows and their internal dep
 - `decision-capture`
 - `decision-core`
 
-It also copies publishable support assets into `$CODEX_HOME/skills/decision-skills-support/` so example and evaluation references still resolve after install.
+It also copies publishable support assets into `$CODEX_HOME/skills/decision-skills-support/` so example and evaluation references still resolve after install, and so the installed direct-use scripts can still import the shared `decision_skills` runtime package.
 
 ## Install
 

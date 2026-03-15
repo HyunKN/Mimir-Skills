@@ -91,6 +91,7 @@ def install_support_assets(repo_root: Path, skills_root: Path, force: bool) -> P
 
     copy_tree(repo_root / "examples", support_root / "examples", force)
     copy_tree(repo_root / "evaluations", support_root / "evaluations", force)
+    copy_tree(repo_root / "decision_skills", support_root / "decision_skills", force)
 
     return support_root
 
@@ -124,6 +125,7 @@ def main() -> int:
         "workflows": selected_workflows,
         "installed_skills": skill_names,
         "support_root": str(support_root),
+        "shared_runtime_root": str(support_root / "decision_skills"),
     }
     (support_root / "install-manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n",
