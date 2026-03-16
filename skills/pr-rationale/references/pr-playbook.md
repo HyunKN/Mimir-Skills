@@ -27,6 +27,7 @@
 
 ## Inference Boundary
 
+- This boundary mirrors [`../../write-pr-rationale/SKILL.md`](../../write-pr-rationale/SKILL.md) Decision Rule #1 and should stay aligned with it.
 - When explicit rationale is missing, inferred goals are temporary substitutes, not confirmed author intent.
 - Prefer wording such as `this branch appears to...`, `local evidence suggests...`, and `review should check...`.
 - Avoid wording such as `this branch does...`, `the author intended...`, or `reviewers can assume...` unless that claim is backed by explicit rationale input or canonical records.

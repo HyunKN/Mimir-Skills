@@ -13,7 +13,8 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
    Treat all inferred goals, signal-based reviewer notes, and signal-based risks as temporary substitutes when explicit `--why` notes are missing.
    Write `this branch appears to...`, `local branch evidence suggests...`, or `review should check...`, not `this branch does...` or `the author intended...`.
 2. Let explicit rationale inputs win.
-   `--why`, `--validation`, `--reviewer-note`, `--risk`, and `--evidence` override local inference and should be added whenever product intent, incident context, or tradeoff context is not recoverable from the branch alone.
+   Explicit rationale can arrive as user notes, helper-command flags such as `--why`, issue or incident context, editor context, or linked decision records.
+   When that explicit rationale exists, treat it as higher-confidence input than any local inference.
 3. Use the narrowest truthful evidence source and name it.
    Prefer the current working-tree diff first, then committed branch-range context when the tree is clean, then recent committed work only when both diff layers are clean.
 4. Keep the draft reviewer-shaped.
@@ -67,7 +68,7 @@ Use this shape and keep every section truthful to the evidence source you actual
 
 1. Start with this skill and the reviewer-facing references before relying on helper commands.
 2. Read [`../pr-rationale/SKILL.md`](../pr-rationale/SKILL.md) for canonical PR-summary framing and [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a canonical record is missing but should exist.
-3. Read [`../pr-rationale/references/pr-playbook.md`](../pr-rationale/references/pr-playbook.md) when you need the signal map, section defaults, and compact fallback examples.
+3. Read [`../pr-rationale/references/pr-playbook.md`](../pr-rationale/references/pr-playbook.md) first when you need the signal map, section defaults, and compact fallback examples.
 4. Prefer the smallest evidence set that still explains what changed, why it changed, what was validated, and what reviewers should watch.
 5. Link back to canonical decision records or derived summaries when they exist instead of copying raw logs into the PR rationale.
 6. Use helper commands only when they save time:
@@ -101,11 +102,11 @@ Use this shape and keep every section truthful to the evidence source you actual
 ## Load References As Needed
 
 - Read [`../pr-rationale/SKILL.md`](../pr-rationale/SKILL.md) for the reviewer-facing summary shape and PR-specific guardrails.
-- Read [`../pr-rationale/references/pr-playbook.md`](../pr-rationale/references/pr-playbook.md) for the local signal map, default section patterns, and compact fallback examples behind this skill.
-- Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a missing canonical record should be created before drafting the rationale.
-- Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when shared validation, evidence, and safety constraints need to be checked.
+- Read [`../pr-rationale/references/pr-playbook.md`](../pr-rationale/references/pr-playbook.md) first for the local signal map, default section patterns, and compact fallback examples behind this skill.
+- Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) only when a missing canonical record should be created before drafting the rationale.
+- Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) only when shared validation, evidence, and safety constraints need to be checked.
 - Optionally run `python -m mimir_skills write-pr-rationale --repo <path>` when the shared helper path is faster than assembling the draft manually from the skill.
 - Optionally run [`scripts/collect_pr_context.py`](scripts/collect_pr_context.py) when you need a reusable JSON snapshot of branch, diff, changed files, and recent-commit context.
 - Optionally run [`scripts/generate_pr_rationale.py`](scripts/generate_pr_rationale.py) when you want the direct helper-script path, and add `--output <path>` when you want to persist the Markdown draft to disk.
-- Inspect the public summaries under [`../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md`](../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md) and [`../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md`](../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md) when you need concrete reviewer-facing rationale shapes.
-- Read [`../../evaluations/reviewer-comprehension.md`](../../evaluations/reviewer-comprehension.md) when checking whether the generated rationale is likely to answer a reviewer’s core questions quickly.
+- Inspect the public summaries under [`../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md`](../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md) and [`../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md`](../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md) only when you need concrete reviewer-facing rationale shapes.
+- Read [`../../evaluations/reviewer-comprehension.md`](../../evaluations/reviewer-comprehension.md) only when checking whether the generated rationale is likely to answer a reviewer’s core questions quickly.
