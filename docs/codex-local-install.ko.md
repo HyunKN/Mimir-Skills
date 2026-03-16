@@ -9,6 +9,7 @@
 remote registry, hosted installer, full multi-agent packaging을 약속하지 않으면서도, Codex에서 실제로 사용할 수 있는 로컬 install path를 제공한다.
 
 이 Codex 경로가 Claude Code, Gemini CLI, Qwen Code, 그리고 shared CLI baseline과 어떤 관계인지 보려면 [Agent Support Levels](agent-support-levels.ko.md)를 참고한다.
+future adapter와 shared CLI run에서 같이 보여야 하는 compact rule layer는 [Always-Loaded Rules](always-loaded-rules.ko.md)를 참고한다.
 
 ## 무엇이 설치되는가
 

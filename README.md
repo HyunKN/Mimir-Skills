@@ -54,6 +54,7 @@ What is available now:
 - a shared CLI-friendly surface under `decision_skills/`, including `python -m decision_skills list`, `python -m decision_skills prepare-handoff`, and `python -m decision_skills write-pr-rationale`
 - a first Codex-local install path under `adapters/codex/scripts/install_codex_skills.py`, documented in `docs/codex-local-install.md`
 - a public support-level definition for Claude Code, OpenAI / Codex and GPT-facing coding-agent surfaces, Gemini CLI, and Qwen Code under `shared CLI support`, `documented support`, and `thin adapter support`
+- a compact always-loaded rules baseline for shared CLI runs and future adapters
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion, plus machine-readable companion schemas for decision records and memory artifacts
 - starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`, and the public workflow wrappers `prepare-handoff`, `write-pr-rationale`, and the narrower beta `capture-ci-investigation`
@@ -73,6 +74,7 @@ What comes next:
 
 - [Project One-Pager](docs/project-one-pager.md)
 - [Glossary](docs/glossary.md)
+- [Always-Loaded Rules](docs/always-loaded-rules.md)
 - [Codex Local Install](docs/codex-local-install.md)
 - [Agent Support Levels](docs/agent-support-levels.md)
 - [Adapter Feedback Loop](docs/adapter-feedback-loop.md)

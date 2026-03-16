@@ -50,3 +50,4 @@
 - 이 수준들은 target agent family 사이의 UX 품질이 모두 같다고 주장하지 않는다.
 - 이 문서는 각 family에 대해 저장소가 현재 공개적으로 어디까지 지원한다고 말할 수 있는지를 정의한다.
 - 현재 실 adapter가 있는 가까운 범위 target은 Codex뿐이지만, 그렇다고 미래 adapter 순서가 영구적으로 고정되는 것은 아니다.
+- 세 수준 모두의 공통 baseline은 [Always-Loaded Rules](always-loaded-rules.ko.md)와 정렬되어야 한다.

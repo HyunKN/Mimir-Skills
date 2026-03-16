@@ -50,3 +50,4 @@ The goal is to avoid implying that every target has the same install, discovery,
 - These levels do not claim equal UX quality across the target agent families.
 - They describe the highest public support layer that the repository currently stands behind for each family.
 - Codex is the only near-term target with a real adapter today, and that does not fix the permanent order of future adapters.
+- The shared baseline for all three levels should stay aligned with [Always-Loaded Rules](always-loaded-rules.md).
