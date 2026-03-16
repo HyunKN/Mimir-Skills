@@ -41,8 +41,11 @@ Current status:
 - the primary user-facing skill now exists under `skills/prepare-handoff/`
 - the skill and handoff playbook now carry the main dirty-tree, clean branch-range, and recent-commit fallback rules directly
 - docs-only reproduction now succeeds for the three representative branch-state cases above, so the runtime is no longer the only source of truth for this workflow's decision rules
-- local helper commands still exist under `python -m mimir_skills prepare-handoff` and `skills/prepare-handoff/scripts/`, but they are now secondary to the skill documents
+- the first runtime-reduction pass now keeps only git-context collection in the helper runtime
+- local helper commands still exist, but `python -m mimir_skills prepare-handoff` and `skills/prepare-handoff/scripts/generate_handoff.py` now emit deprecation guidance instead of handoff Markdown
+- the remaining live helper path is `skills/prepare-handoff/scripts/collect_git_context.py`
 - the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
+- this workflow now follows the same skill-first plus thin-collector pattern as `write-pr-rationale`
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `write-pr-rationale`

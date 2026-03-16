@@ -32,7 +32,7 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "prepare-handoff",
         add_help=False,
-        help="Generate a handoff draft from local repository context.",
+        help="Show the deprecated prepare-handoff helper note and point back to the skill-first path.",
     )
     subparsers.add_parser(
         "write-pr-rationale",

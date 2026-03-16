@@ -9,15 +9,17 @@ Use this skill to draft a user-facing handoff from the current local project sta
 
 ## Workflow
 
-1. Start with `python -m mimir_skills prepare-handoff --repo <path>` when a quick handoff draft from the local repository state is enough.
-2. Use `scripts/collect_git_context.py --repo <path> --output <context.json>` first when the repository snapshot should be inspected or reused before rendering the handoff, or when you want to call the collector directly without the shared CLI entry point.
-3. Read [`../handoff-context/SKILL.md`](../handoff-context/SKILL.md) for the continuation-summary shape and [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a canonical decision record is missing but should exist.
+1. Start with this skill and the continuation-summary references before relying on helper commands.
+2. Read [`../handoff-context/SKILL.md`](../handoff-context/SKILL.md) for the continuation-summary shape and [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a canonical decision record is missing but should exist.
+3. Read [`../handoff-context/references/handoff-playbook.md`](../handoff-context/references/handoff-playbook.md) first when you need dirty-tree, clean-state branch-range, or recent-commit fallback output patterns.
 4. Prefer the minimum evidence set that still explains what changed, what remains, where to continue, what was validated, and what is still risky.
 5. Link back to canonical decision records or derived summaries when they exist instead of copying raw logs into the handoff.
-6. When the working tree is already clean, fall back to committed branch context or recent committed work instead of implying that nothing happened.
-7. Accept optional evidence notes when the local git snapshot alone would be too thin for the next owner.
-8. State uncertainty plainly when the branch context is incomplete or validation evidence is missing.
-9. Treat the generated Markdown as a first draft to review and tighten before handing it to another human or agent.
+6. Use helper commands only when they save time:
+   - `scripts/collect_git_context.py --repo <path> --output <context.json>` when the repository snapshot should be inspected or reused before drafting
+   - `python -m mimir_skills prepare-handoff --repo <path>` only when you need the deprecated shared helper note from an older workflow
+   - `scripts/generate_handoff.py --repo <path>` only when you need the deprecated direct-helper note from an older workflow
+7. State uncertainty plainly when the branch context is incomplete or validation evidence is missing.
+8. Treat the generated Markdown as a first draft to review and tighten before handing it to another human or agent.
 
 ## Decision Rules
 
@@ -153,7 +155,7 @@ Use this structure unless the user asks for a different handoff shape:
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a missing canonical record should be created before drafting the handoff.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when shared validation, evidence, and safety constraints need to be checked.
 - Run `python -m mimir_skills list` from the repository root when you need a quick view of the current shared CLI workflows.
-- Run `python -m mimir_skills prepare-handoff --repo <path>` when you need a directly usable handoff draft from the current repository state, including clean-state fallback from committed work when needed.
 - Run [`scripts/collect_git_context.py`](scripts/collect_git_context.py) when you need a reusable JSON snapshot of branch, status, diff, and recent-commit context.
-- Run [`scripts/generate_handoff.py`](scripts/generate_handoff.py) when you want the same shared generator through the direct script path, and add `--output <path>` when you want to persist the Markdown draft to disk.
+- The old `python -m mimir_skills prepare-handoff --repo <path>` path now emits a deprecation note that points older helper-based flows back to this skill.
+- The old [`scripts/generate_handoff.py`](scripts/generate_handoff.py) path also emits a deprecation note instead of generating handoff Markdown.
 - Inspect the public summaries under [`../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md`](../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md) and [`../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md`](../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md) when you need concrete published handoff shapes.

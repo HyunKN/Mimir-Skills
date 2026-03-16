@@ -41,8 +41,11 @@ Current status:
 - 이제 primary user-facing skill이 `skills/prepare-handoff/` 아래에 존재한다
 - skill과 handoff playbook이 이제 dirty-tree, clean branch-range, recent-commit fallback 규칙의 중심을 직접 담고 있다
 - 위 세 representative branch-state 케이스에 대한 docs-only 재현도 통과했으므로, 이 workflow의 판단 규칙은 더 이상 runtime만의 source of truth가 아니다
-- `python -m mimir_skills prepare-handoff`와 `skills/prepare-handoff/scripts/` 아래의 local helper command는 여전히 존재하지만, 이제는 skill 문서보다 secondary다
+- 첫 runtime-reduction pass는 이제 helper runtime에 git-context collection만 남긴다
+- local helper command는 여전히 존재하지만, `python -m mimir_skills prepare-handoff`와 `skills/prepare-handoff/scripts/generate_handoff.py`는 이제 handoff Markdown 대신 deprecation guidance를 출력한다
+- 남아 있는 live helper path는 `skills/prepare-handoff/scripts/collect_git_context.py`다
 - `adapters/codex/scripts/install_codex_skills.py` 아래의 Codex-local install path는 optional thin-adapter proof point로만 유지된다
+- 이 workflow도 이제 `write-pr-rationale`와 같은 skill-first + thin-collector 패턴을 따른다
 - 더 넓은 multi-agent packaging은 아직 구현되지 않았고, 더 이상 main short-term story도 아니다
 
 ### `write-pr-rationale`
