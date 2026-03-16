@@ -46,6 +46,8 @@ Install into a specific Codex home and replace existing installed copies:
 python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --force
 ```
 
+With `--force`, the installer now replaces only paths that already look like a previous `decision-skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.
+
 ## Quick Start
 
 See [Quick Start](quick-start.md) for the broader side-by-side guidance between the shared CLI baseline and this Codex-local install path.
@@ -71,5 +73,6 @@ The current goal is to learn whether the installed workflows produce useful draf
 - This is a local Codex install path only.
 - It does not publish to a remote skill registry.
 - It does not install every internal workflow in the repository.
+- `--force` is intentionally conservative and refuses to replace unrelated-looking directories.
 - Outputs remain drafts and still require human review.
 - `capture-ci-investigation` remains a narrower beta wrapper and does not yet include direct-use collector or generator scripts.

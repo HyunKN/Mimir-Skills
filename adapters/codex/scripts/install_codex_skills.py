@@ -9,6 +9,7 @@ from pathlib import Path
 
 
 SUPPORT_DIR_NAME = "decision-skills-support"
+INSTALL_MARKER_NAME = ".decision-skills-install.json"
 WORKFLOW_DEPENDENCIES = {
     "prepare-handoff": [
         "prepare-handoff",
@@ -67,6 +68,88 @@ def resolve_codex_home(explicit: Path | None) -> Path:
     return (Path.home() / ".codex").resolve()
 
 
+def is_relative_to(path: Path, root: Path) -> bool:
+    try:
+        path.relative_to(root)
+        return True
+    except ValueError:
+        return False
+
+
+def write_install_marker(destination: Path, repo_root: Path, entry_type: str, name: str) -> None:
+    marker = {
+        "source_repo": str(repo_root),
+        "entry_type": entry_type,
+        "name": name,
+    }
+    (destination / INSTALL_MARKER_NAME).write_text(
+        json.dumps(marker, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+
+
+def looks_like_managed_skill_dir(destination: Path, expected_name: str) -> bool:
+    marker_file = destination / INSTALL_MARKER_NAME
+    if marker_file.exists():
+        try:
+            marker = json.loads(marker_file.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return False
+        return (
+            marker.get("entry_type") == "skill"
+            and marker.get("name") == expected_name
+        )
+
+    skill_file = destination / "SKILL.md"
+    if not skill_file.exists():
+        return False
+
+    text = skill_file.read_text(encoding="utf-8")
+    return f"name: {expected_name}" in text
+
+
+def looks_like_managed_support_dir(destination: Path) -> bool:
+    marker_file = destination / INSTALL_MARKER_NAME
+    if marker_file.exists():
+        try:
+            marker = json.loads(marker_file.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return False
+        return (
+            marker.get("entry_type") == "support"
+            and marker.get("name") == SUPPORT_DIR_NAME
+        )
+
+    manifest_file = destination / "install-manifest.json"
+    runtime_root = destination / "decision_skills"
+    return manifest_file.exists() and runtime_root.exists()
+
+
+def ensure_safe_force_replace(
+    destination: Path,
+    skills_root: Path,
+    *,
+    entry_type: str,
+    expected_name: str,
+) -> None:
+    if destination.parent != skills_root or not is_relative_to(destination, skills_root):
+        raise RuntimeError(
+            f"Refusing to replace {destination} because it is outside the managed Codex skills root {skills_root}."
+        )
+
+    if entry_type == "support":
+        looks_managed = looks_like_managed_support_dir(destination)
+    else:
+        looks_managed = looks_like_managed_skill_dir(destination, expected_name)
+
+    if not looks_managed:
+        raise RuntimeError(
+            f"Refusing to replace {destination} with --force because it does not look like a previous decision-skills installation. "
+            "Remove it manually or choose a different --codex-home if this path is intentional."
+        )
+
+
 def copy_tree(source: Path, destination: Path, force: bool) -> None:
     if destination.exists():
         if not force:
@@ -89,9 +172,25 @@ def install_support_assets(repo_root: Path, skills_root: Path, force: bool) -> P
     support_root = skills_root / SUPPORT_DIR_NAME
     support_root.mkdir(parents=True, exist_ok=True)
 
+    if force and any(
+        destination.exists()
+        for destination in [
+            support_root / "examples",
+            support_root / "evaluations",
+            support_root / "decision_skills",
+        ]
+    ):
+        ensure_safe_force_replace(
+            support_root,
+            skills_root,
+            entry_type="support",
+            expected_name=SUPPORT_DIR_NAME,
+        )
+
     copy_tree(repo_root / "examples", support_root / "examples", force)
     copy_tree(repo_root / "evaluations", support_root / "evaluations", force)
     copy_tree(repo_root / "decision_skills", support_root / "decision_skills", force)
+    write_install_marker(support_root, repo_root, "support", SUPPORT_DIR_NAME)
 
     return support_root
 
@@ -117,8 +216,16 @@ def main() -> int:
     for skill_name in skill_names:
         source = repo_root / "skills" / skill_name
         destination = skills_root / skill_name
+        if args.force and destination.exists():
+            ensure_safe_force_replace(
+                destination,
+                skills_root,
+                entry_type="skill",
+                expected_name=skill_name,
+            )
         copy_tree(source, destination, args.force)
         rewrite_installed_skill(destination)
+        write_install_marker(destination, repo_root, "skill", skill_name)
 
     manifest = {
         "source_repo": str(repo_root),
