@@ -14,8 +14,8 @@ Current internal entries:
 
 Current outward-facing workflow entry:
 
-- `prepare-handoff` -> user-facing wrapper built from `handoff-context`, `decision-capture`, and `decision-core`, now with a shared CLI entry plus local git-context collection and Markdown handoff draft scripts
-- `write-pr-rationale` -> user-facing wrapper built from `pr-rationale`, `decision-capture`, and `decision-core`, now with a shared CLI entry plus local PR-context collection and Markdown rationale draft scripts
+- `prepare-handoff` -> user-facing wrapper built from `handoff-context`, `decision-capture`, and `decision-core`, now with a shared CLI entry plus local git-context collection and Markdown handoff draft scripts, and currently the stronger clean-state workflow
+- `write-pr-rationale` -> user-facing wrapper built from `pr-rationale`, `decision-capture`, and `decision-core`, now with a shared CLI entry plus local PR-context collection and Markdown rationale draft scripts, but still in active shaping for clean-state rationale capture
 - `capture-ci-investigation` -> narrow beta wrapper built from `ci-rationale`, `decision-capture`, and `decision-core`, intentionally kept best-effort and script-light for now
 
 Specialized supporting workflows:
@@ -29,5 +29,6 @@ They include bounded local automation where needed: schema validation in `decisi
 The public product story is being simplified around user-facing workflow outputs.
 The current internal packages stay important, but they are now treated as building blocks rather than as the final outward-facing surface.
 `prepare-handoff` and `write-pr-rationale` are now the first direct-use public wrappers on top of that internal engine.
+Right now they should not be described as equally mature: `prepare-handoff` is closer to guidance-ready, while `write-pr-rationale` still needs stronger rationale capture before it should be treated as stable public guidance for clean-state runs.
 `capture-ci-investigation` is intentionally narrower: a beta wrapper that stays best-effort until stronger examples justify a direct-use script layer.
 A first shared CLI-friendly surface now exists under `decision_skills/` for `prepare-handoff` and `write-pr-rationale`, while the Codex-local install path via `adapters/codex/scripts/install_codex_skills.py` remains a separate install and discovery layer on top.

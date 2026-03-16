@@ -41,6 +41,8 @@ Current status:
 - 이제 `python -m decision_skills prepare-handoff` 아래에 shared CLI entry가 존재한다
 - 첫 번째 로컬 context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/prepare-handoff/scripts/` 아래에 존재한다
 - 첫 Codex 전용 로컬 install path가 이제 `adapters/codex/scripts/install_codex_skills.py` 아래에 존재한다
+- 두 번째 observation pass 결과, 이 workflow에서는 shared CLI 경로가 현재 Codex-local path보다 마찰이 적었다
+- 현재 clean-state checkpoint shape는 guidance-ready 상태에 가까워졌지만, stable public guidance라고 부르기 전에는 진행 중인 non-clean task state에서 한 번 더 확인할 예정이다
 - 더 넓은 multi-agent packaging은 아직 구현되지 않았다
 
 ### `write-pr-rationale`
@@ -63,6 +65,9 @@ Current status:
 - 이제 `python -m decision_skills write-pr-rationale` 아래에 shared CLI entry가 존재한다
 - 첫 번째 로컬 PR-context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/write-pr-rationale/scripts/` 아래에 존재한다
 - 첫 Codex 전용 로컬 install path가 이제 `adapters/codex/scripts/install_codex_skills.py` 아래에 존재한다
+- 두 번째 observation pass 결과, 이 workflow에서도 shared CLI 경로가 현재 Codex-local path보다 마찰이 적었다
+- 현재 clean-state rationale은 `prepare-handoff`보다 더 큰 재작성이 필요하며, 특히 명시적 `why` context가 없을 때 그 차이가 더 크다
+- 이 workflow는 여전히 active output shaping 단계에 있으며, clean-state run에 대해서는 아직 stable public guidance로 취급하면 안 된다
 - 더 넓은 multi-agent packaging은 아직 구현되지 않았다
 
 ### `capture-ci-investigation`

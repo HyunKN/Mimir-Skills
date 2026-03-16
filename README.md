@@ -63,8 +63,9 @@ What is available now:
 
 What comes next:
 
-- collect structured usage feedback from the new shared CLI surface and the current Codex-local adapter path before broadening installation UX to other agent surfaces
-- use that feedback to decide whether `prepare-handoff` and `write-pr-rationale` need more output shaping or are strong enough to freeze as public guidance
+- keep the shared CLI surface as the default low-friction execution path while support levels are defined for the near-term target agent families
+- treat `prepare-handoff` as the stronger current workflow and confirm it once more on an in-progress, non-clean task state before freezing it as stable public guidance
+- keep `write-pr-rationale` in active output shaping until it can capture stronger `why` context for clean-state runs without depending on generic placeholders or heavy manual rewrite
 - keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries justify any direct-use script layer
 - define support levels for the near-term target agent families around `shared CLI support`, `documented support`, and `thin adapter support`
 

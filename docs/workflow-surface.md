@@ -41,6 +41,8 @@ Current status:
 - a shared CLI entry now exists under `python -m decision_skills prepare-handoff`
 - the first local context collectors and direct Markdown output scripts now exist under `skills/prepare-handoff/scripts/`
 - a first Codex-local install path now exists under `adapters/codex/scripts/install_codex_skills.py`
+- the second observation pass showed that the shared CLI path is lower-friction than the current Codex-local path for this workflow
+- the current clean-state checkpoint shape is approaching guidance-ready status, but one more non-clean task-state confirmation is still planned before calling it stable public guidance
 - broader multi-agent packaging is still not implemented
 
 ### `write-pr-rationale`
@@ -63,6 +65,9 @@ Current status:
 - a shared CLI entry now exists under `python -m decision_skills write-pr-rationale`
 - the first local PR-context collectors and direct Markdown output scripts now exist under `skills/write-pr-rationale/scripts/`
 - a first Codex-local install path now exists under `adapters/codex/scripts/install_codex_skills.py`
+- the second observation pass showed that the shared CLI path is lower-friction than the current Codex-local path for this workflow
+- the current clean-state rationale still needs heavier rewrite than `prepare-handoff`, especially when explicit `why` context is missing
+- this workflow remains in active output shaping and should not yet be treated as stable public guidance for clean-state runs
 - broader multi-agent packaging is still not implemented
 
 ### `capture-ci-investigation`
