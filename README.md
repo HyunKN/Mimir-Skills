@@ -69,7 +69,7 @@ What comes next:
 - keep the repository skill-first and move the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus reference playbooks
 - keep deterministic validators and example verification, but shrink workflow runtime code toward thin collectors instead of growing a larger Python engine
 - do not add another agent-specific adapter yet; only revisit adapter growth if a real UX gain remains after the skill-first reset
-- keep `write-pr-rationale` as the next skill-first codification target and keep `capture-ci-investigation` narrow until stronger examples justify anything more
+- keep `write-pr-rationale` in first-pass skill-first form while stronger explicit `why` capture is still being gathered, and keep `capture-ci-investigation` narrow until stronger examples justify anything more
 
 ## Documentation
 

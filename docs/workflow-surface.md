@@ -62,11 +62,13 @@ Current status:
 
 - public workflow name is defined
 - an initial user-facing skill now exists under `skills/write-pr-rationale/`
-- the current skill still depends more heavily on runtime-backed logic than `prepare-handoff`
+- the user-facing skill and PR playbook now carry the main inference guardrails, signal patterns, and reviewer-facing output template
+- the current skill still depends more heavily on runtime-backed logic than `prepare-handoff`, especially for signal inference and rendering
 - local helper commands still exist under `python -m mimir_skills write-pr-rationale` and `skills/write-pr-rationale/scripts/`
 - the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
 - the current clean-state rationale still needs heavier rewrite than `prepare-handoff`, especially when explicit `why` context is missing
-- this workflow remains the next skill-first codification target and should not yet be treated as stable public guidance for clean-state runs
+- the first skill-first codification pass now exists, with the epistemic guardrail placed ahead of the local signal map so inferred intent is treated as tentative by default
+- this workflow should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `capture-ci-investigation`

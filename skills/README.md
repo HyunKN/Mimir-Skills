@@ -15,7 +15,7 @@ Current internal entries:
 Current outward-facing workflow entries:
 
 - `prepare-handoff` -> user-facing workflow skill built from `handoff-context`, `decision-capture`, and `decision-core`, now with its main decision rules living in the skill and playbook docs
-- `write-pr-rationale` -> user-facing workflow skill built from `pr-rationale`, `decision-capture`, and `decision-core`, still in active skill-first codification for clean-state rationale capture
+- `write-pr-rationale` -> user-facing workflow skill built from `pr-rationale`, `decision-capture`, and `decision-core`, now carrying a first-pass skill-first rule set while clean-state rationale capture still needs stronger explicit `why` support
 - `capture-ci-investigation` -> narrow beta workflow skill built from `ci-rationale`, `decision-capture`, and `decision-core`, intentionally kept best-effort and script-light for now
 
 Specialized supporting workflows:

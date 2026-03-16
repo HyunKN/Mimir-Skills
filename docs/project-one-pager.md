@@ -69,7 +69,7 @@ The project is built on six claims:
 ## Near-Term Roadmap
 
 1. Finish the skill-first direction reset in the public docs.
-2. Move the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus references, starting with `write-pr-rationale`.
+2. Continue moving the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus references, with `write-pr-rationale` now on its first skill-first pass and runtime reduction still ahead.
 3. Keep deterministic validators and example verification stable while runtime code shrinks toward thin collectors.
 4. Treat adapter paths as optional proof points, not as the main product story.
 5. Expand workflow-specific skills only when the skill docs and examples stay stronger than the runtime they replace.
