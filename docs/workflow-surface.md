@@ -89,8 +89,15 @@ Current status:
 - an initial beta user-facing skill now exists under `skills/capture-ci-investigation/`
 - the workflow now appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
 - the first Codex-local install path can now include this workflow through `adapters/codex/scripts/install_codex_skills.py`
+- the beta guidance now points at both a stronger config-backed CI example and a weaker rerun-only monitoring example, so the overclaim boundary is more explicit
 - dedicated direct-use scripts are intentionally not implemented yet
 - this remains a narrower best-effort direction until stronger examples and reliability boundaries exist
+
+Beta graduation note:
+
+- keep it beta until it has multiple public-safe examples across different CI failure shapes
+- keep it beta until either a direct-use path exists or wrapper-only remains an explicit product decision
+- keep it beta until repeated observations show it can separate evidence, explanation, uncertainty, and next step without repeated overclaiming
 
 ## Supporting Internal Skills
 

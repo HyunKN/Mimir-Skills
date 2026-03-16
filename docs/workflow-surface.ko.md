@@ -89,8 +89,15 @@ Current status:
 - 초기 beta user-facing skill이 이제 `skills/capture-ci-investigation/` 아래에 존재한다
 - 이 workflow는 이제 `python -m mimir_skills list`에 beta wrapper로 보이지만, direct shared CLI generation command는 아직 없다
 - 첫 Codex 전용 로컬 install path는 이제 `adapters/codex/scripts/install_codex_skills.py`를 통해 이 workflow도 포함할 수 있다
+- beta guidance가 이제 더 강한 config-backed CI example과 더 약한 rerun-only monitoring example을 함께 가리키도록 되어, overclaim boundary가 더 명확해졌다
 - 전용 direct-use script는 의도적으로 아직 구현하지 않았다
 - 더 강한 example과 reliability boundary가 생길 때까지 더 좁고 best-effort인 방향으로 유지된다
+
+Beta graduation 메모:
+
+- 서로 다른 CI failure shape를 아우르는 public-safe example이 여러 개 생기기 전까지는 beta로 유지한다
+- direct-use path가 생기거나, wrapper-only 유지가 명시적 product decision으로 남기 전까지는 beta로 유지한다
+- 반복 관찰에서 evidence, explanation, uncertainty, next step을 과장 없이 안정적으로 분리한다는 신호가 쌓이기 전까지는 beta로 유지한다
 
 ## Supporting Internal Skills
 

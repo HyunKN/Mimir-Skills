@@ -1,0 +1,78 @@
+{
+  "id": "dec-20260316-linux-ci-rerun-watch-001",
+  "timestamp": "2026-03-16T07:45:00Z",
+  "task_ref": {
+    "source": "ci",
+    "id": "build-1846",
+    "title": "Investigate intermittent Linux unit-test timeout"
+  },
+  "decision": "Keep the Linux unit-test workflow unchanged, rerun the failed job once, and monitor the next three CI runs before changing timeout or retry settings.",
+  "problem_context": "The Linux unit-test job timed out once during dependency install after a base image refresh. A single rerun passed, and no branch-local workflow or test-command change explains the failure yet.",
+  "alternatives_considered": [
+    {
+      "name": "Increase the workflow timeout",
+      "status": "deferred",
+      "reason": "Would weaken the current signal before confirming that the timeout threshold is actually too low."
+    },
+    {
+      "name": "Increase the retry count",
+      "status": "rejected",
+      "reason": "Would make future failures harder to interpret while the evidence is still thin."
+    },
+    {
+      "name": "Rerun once and monitor subsequent runs",
+      "status": "selected",
+      "reason": "Preserves the current workflow signal while acknowledging that the rerun reduces urgency without proving a fix."
+    }
+  ],
+  "selected_option": {
+    "name": "Rerun once and monitor subsequent runs",
+    "summary": "Leave timeout and retry settings unchanged, record the rerun result, and collect the next three Linux job durations before deciding whether a workflow change is justified."
+  },
+  "rationale": "The current evidence is too weak to justify a shared workflow change. A rerun-only success suggests the failure may be transient, but it does not confirm root cause or prove the issue is fixed.",
+  "evidence_refs": [
+    {
+      "kind": "ci",
+      "ref": "build-1846/linux-unit",
+      "summary": "The initial job timed out during dependency install at 14m58s, two seconds before the current 15-minute threshold.",
+      "captured_at": "2026-03-16T07:02:00Z"
+    },
+    {
+      "kind": "ci",
+      "ref": "build-1846-rerun/linux-unit",
+      "summary": "A single rerun passed without code or workflow changes, which lowered urgency but did not identify a cause.",
+      "captured_at": "2026-03-16T07:18:00Z"
+    },
+    {
+      "kind": "diff",
+      "ref": "origin/main...HEAD",
+      "summary": "The branch diff does not include Linux workflow, dependency-install, or unit-test command changes related to this job.",
+      "captured_at": "2026-03-16T07:24:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": ".github/workflows/test.yml",
+      "summary": "The Linux unit-test job already uses a 15-minute timeout, so changing the limit would affect a shared workflow path rather than a branch-local fix.",
+      "captured_at": "2026-03-16T07:29:00Z"
+    }
+  ],
+  "affected_paths": [],
+  "validation_run": [
+    {
+      "type": "manual",
+      "command": "Re-run linux-unit job in CI",
+      "result": "partial",
+      "summary": "One rerun passed, but the run did not reproduce the timeout or validate a concrete fix."
+    }
+  ],
+  "remaining_risks": [
+    "The timeout may recur if the image-refresh slowdown or package-registry variance continues.",
+    "A future workflow change made on this evidence alone could hide the real source of the instability."
+  ],
+  "confidence": 0.41,
+  "follow_up": [
+    "Collect the next three Linux unit-test job durations and failure stages before changing timeout or retry policy.",
+    "Re-open deeper CI triage if another timeout occurs with the same base image."
+  ],
+  "supersedes": []
+}
