@@ -103,6 +103,26 @@ class DefaultSectionTests(unittest.TestCase):
             ["- Use the current working-tree status and diff summary above as the primary local evidence for this draft."],
         )
 
+    def test_default_evidence_lines_for_recent_commit_fallback_are_explicit(self) -> None:
+        context = make_context(
+            recent_commit_details=[
+                {
+                    "short_hash": "abc1234",
+                    "subject": "docs: refresh handoff note",
+                    "files": ["README.md"],
+                }
+            ]
+        )
+
+        lines = default_evidence_lines(context, context["status"], context["branch_range"])
+
+        self.assertEqual(
+            lines,
+            [
+                "- The working tree and branch-range diff are both clean, so this draft is using recent committed work as fallback evidence.",
+            ],
+        )
+
     def test_default_risk_lines_for_dirty_tree_flag_uncommitted_state(self) -> None:
         lines = default_risk_lines(
             {
@@ -120,6 +140,23 @@ class DefaultSectionTests(unittest.TestCase):
             ],
         )
 
+    def test_default_risk_lines_for_clean_tree_flag_missing_context_check(self) -> None:
+        lines = default_risk_lines(
+            {
+                "staged_count": 0,
+                "unstaged_count": 0,
+                "untracked_count": 0,
+                "porcelain": [],
+            }
+        )
+
+        self.assertEqual(
+            lines,
+            [
+                "- No working-tree changes were detected; verify that any missing context already lives in commits or decision records."
+            ],
+        )
+
     def test_default_next_steps_for_dirty_tree_include_commit_and_validation_follow_up(self) -> None:
         steps = default_next_steps(
             {"porcelain": ["M  README.md"]},
@@ -133,6 +170,17 @@ class DefaultSectionTests(unittest.TestCase):
         self.assertIn(
             "- Re-run any relevant validation and replace the placeholder validation section with concrete results before external sharing.",
             steps,
+        )
+
+    def test_default_next_steps_for_clean_tree_stay_checkpoint_oriented(self) -> None:
+        steps = default_next_steps({"porcelain": []}, {"all_changed_files": []})
+
+        self.assertEqual(
+            steps,
+            [
+                "- Confirm whether the next owner needs only a clean-state checkpoint or a richer summary of the most recent committed work.",
+                "- Add task-specific blockers, risks, and owner notes if this draft is going to another person or agent.",
+            ],
         )
 
 
@@ -244,6 +292,38 @@ class RenderHandoffTests(unittest.TestCase):
         self.assertIn("### Committed Branch Diff Summary", markdown)
         self.assertIn(
             "- The working tree is clean, so this draft is using committed branch-range context as the primary local evidence.",
+            markdown,
+        )
+
+    def test_render_handoff_uses_recent_commit_fallback_when_no_branch_diff_exists(self) -> None:
+        context = make_context(
+            recent_commits=["abc1234 docs: refresh handoff note"],
+            recent_commit_details=[
+                {
+                    "short_hash": "abc1234",
+                    "subject": "docs: refresh handoff note",
+                    "files": ["README.md", "docs/workflow-surface.md"],
+                }
+            ],
+        )
+
+        markdown = render_handoff(
+            context,
+            title=None,
+            validations=[],
+            blockers=[],
+            risks=[],
+            next_steps=[],
+            evidence=[],
+        )
+
+        self.assertIn(
+            "- No committed branch-range diff was detected either, so this draft is falling back to recent committed work.",
+            markdown,
+        )
+        self.assertIn("### Recent Committed Work", markdown)
+        self.assertIn(
+            "- `abc1234` docs: refresh handoff note",
             markdown,
         )
 
