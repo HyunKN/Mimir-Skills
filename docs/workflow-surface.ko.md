@@ -63,13 +63,14 @@ Current status:
 - public workflow 이름은 정의되어 있다
 - 초기 user-facing skill이 이제 `skills/write-pr-rationale/` 아래에 존재한다
 - user-facing skill과 PR playbook이 이제 주요 inference guardrail, signal pattern, reviewer-facing output template를 담고 있다
-- 현재 skill은 여전히 `prepare-handoff`보다 runtime-backed logic 의존이 더 크며, 특히 signal inference와 rendering 쪽에서 그렇다
-- `python -m mimir_skills write-pr-rationale`와 `skills/write-pr-rationale/scripts/` 아래의 local helper command는 여전히 존재한다
+- 첫 runtime-reduction pass는 이제 helper runtime에 git-context collection만 남긴다
+- local helper command는 여전히 존재하지만, `python -m mimir_skills write-pr-rationale`와 `skills/write-pr-rationale/scripts/generate_pr_rationale.py`는 이제 reviewer-facing Markdown 대신 deprecation guidance를 출력한다
+- 남아 있는 live helper path는 `skills/write-pr-rationale/scripts/collect_pr_context.py`다
 - `adapters/codex/scripts/install_codex_skills.py` 아래의 Codex-local install path는 optional thin-adapter proof point로만 유지된다
 - 현재 clean-state rationale은 `prepare-handoff`보다 더 큰 재작성이 필요하며, 특히 명시적 `why` context가 없을 때 그 차이가 더 크다
 - 첫 skill-first codification pass는 이제 존재하며, inferred intent를 기본적으로 tentative하게 다루도록 epistemic guardrail을 local signal map보다 앞에 두었다
 - dirty tree, clean branch-range, recent-commit fallback, explicit `why` override 케이스를 포함한 첫 local agent-validation gate도 extra runtime-only rule 없이 통과했다
-- 그래도 이 workflow는 clean-state run에 대해서 아직 stable public guidance로 취급하면 안 되며, `prepare-handoff`보다 explicit product/tradeoff `why` note가 더 자주 필요하다
+- 이 workflow는 이제 thin-collector 상태를 향해 갈 수 있지만, 그래도 clean-state run에 대해서는 아직 stable public guidance로 취급하면 안 되며, `prepare-handoff`보다 explicit product/tradeoff `why` note가 더 자주 필요하다
 - 더 넓은 multi-agent packaging은 아직 구현되지 않았고, 더 이상 main short-term story도 아니다
 
 ### `capture-ci-investigation`

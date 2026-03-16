@@ -9,10 +9,10 @@
     },
     {
       "name": "write-pr-rationale",
-      "availability": "shared-cli",
-      "entrypoint": "python -m mimir_skills write-pr-rationale",
+      "availability": "skill-first",
+      "entrypoint": "python skills/write-pr-rationale/scripts/collect_pr_context.py --repo <path>",
       "skill_path": "skills/write-pr-rationale/SKILL.md",
-      "summary": "Draft reviewer-facing PR rationale from local branch context with optional why, validation, reviewer-note, risk, and evidence inputs."
+      "summary": "Draft from SKILL.md plus playbook directly; the local helper keeps git-context collection while the old generate path is now a deprecation stub."
     },
     {
       "name": "capture-ci-investigation",
@@ -23,4 +23,3 @@
     }
   ]
 }
-

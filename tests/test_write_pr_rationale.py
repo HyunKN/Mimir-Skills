@@ -1,370 +1,142 @@
 from __future__ import annotations
 
+import io
+import json
 import unittest
+from contextlib import redirect_stdout
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
-from mimir_skills.workflows.write_pr_rationale import (
-    analysis_inputs,
-    default_evidence_lines,
-    default_reviewer_notes,
-    default_risk_lines,
-    default_validation_lines,
-    default_why_lines,
-    infer_change_goal,
-    infer_signals,
-    render_pr_rationale,
-)
+from mimir_skills.workflows.write_pr_rationale import collect_context, generate_main
 
 
-def make_context(
-    *,
-    repo_name: str = "Mimir-Skills",
-    branch: str = "feature/test",
-    base_ref: str = "origin/main@abc1234",
-    generated_at: str = "2026-03-16T00:00:00+00:00",
-    head_short: str = "deadbee",
-    diff: dict | None = None,
-    branch_range: dict | None = None,
-    recent_commits: list[str] | None = None,
-    recent_commit_details: list[dict] | None = None,
-) -> dict:
-    return {
-        "repo_name": repo_name,
-        "branch": branch,
-        "base_ref": base_ref,
-        "generated_at": generated_at,
-        "head_short": head_short,
-        "diff": diff
-        or {
-            "changed_files": [],
-            "name_status": [],
-            "untracked_files": [],
-            "diff_stat": [],
-            "staged_diff_stat": [],
-        },
-        "branch_range": branch_range
-        or {
-            "base_ref": base_ref,
-            "changed_files": [],
-            "name_status": [],
-            "diff_stat": [],
-            "commits": [],
-        },
-        "recent_commits": recent_commits or [],
-        "recent_commit_details": recent_commit_details or [],
-    }
+class CollectContextTests(unittest.TestCase):
+    @patch("mimir_skills.workflows.write_pr_rationale.collect_branch_range")
+    @patch("mimir_skills.workflows.write_pr_rationale.collect_recent_commit_details")
+    @patch("mimir_skills.workflows.write_pr_rationale.detect_base_ref")
+    @patch("mimir_skills.workflows.write_pr_rationale.run_git")
+    def test_collect_context_returns_thin_git_snapshot(
+        self,
+        mock_run_git,
+        mock_detect_base_ref,
+        mock_collect_recent_commit_details,
+        mock_collect_branch_range,
+    ) -> None:
+        repo_path = Path("C:/repo")
 
-
-class InferSignalsTests(unittest.TestCase):
-    def test_infer_signals_recognizes_repo_specific_surfaces(self) -> None:
-        files = [
-            "README.md",
-            "adapters/codex/scripts/install_codex_skills.py",
-            "mimir_skills/workflows/write_pr_rationale.py",
+        mock_detect_base_ref.return_value = {
+            "candidate": "origin/main",
+            "merge_base": "abc1234567890",
+            "label": "origin/main@abc1234",
+        }
+        mock_collect_recent_commit_details.return_value = [
+            {
+                "full_hash": "abc1234567890",
+                "short_hash": "abc1234",
+                "subject": "docs: add temporary validation note",
+                "files": ["README.md"],
+            }
         ]
-        subjects = ["refactor: rename project and shared runtime to Mimir-Skills"]
+        mock_collect_branch_range.return_value = {
+            "base_ref": "origin/main@abc1234",
+            "commit_count": 1,
+            "commits": ["abc1234 docs: add temporary validation note"],
+            "changed_files": ["README.md"],
+            "name_status": ["M\tREADME.md"],
+            "diff_stat": ["README.md | 2 ++"],
+        }
 
-        signals = infer_signals(files, subjects)
+        def run_git_side_effect(_repo_path: Path, *args: str) -> str:
+            mapping = {
+                ("rev-parse", "--show-toplevel"): "C:/repo",
+                ("branch", "--show-current"): "feature/test",
+                ("rev-parse", "--short", "HEAD"): "deadbee",
+                ("rev-parse", "HEAD"): "deadbeefcafebabe",
+                ("diff", "--name-only"): "docs/quick-start.md\n",
+                ("diff", "--cached", "--name-only"): "skills/write-pr-rationale/SKILL.md\n",
+                ("ls-files", "--others", "--exclude-standard"): "notes/scratch.md\n",
+                ("log", "-n3", "--oneline"): "abc1234 docs: add temporary validation note\n",
+                ("diff", "--name-status"): "M\tdocs/quick-start.md\n",
+                ("diff", "--stat"): "docs/quick-start.md | 2 ++\n",
+                ("diff", "--cached", "--stat"): "skills/write-pr-rationale/SKILL.md | 4 ++--\n",
+            }
+            return mapping[args]
 
-        self.assertIn("docs", signals)
-        self.assertIn("adapter", signals)
-        self.assertIn("workflow", signals)
-        self.assertIn("runtime", signals)
-        self.assertIn("rename", signals)
+        mock_run_git.side_effect = run_git_side_effect
 
-    def test_infer_change_goal_prefers_rename_alignment_summary(self) -> None:
-        signals = {"rename", "workflow", "adapter", "docs"}
+        context = collect_context(repo_path, commit_limit=3)
 
-        goal = infer_change_goal(signals)
-
+        self.assertEqual(Path(context["repo_root"]), Path("C:/repo"))
+        self.assertEqual(context["branch"], "feature/test")
+        self.assertEqual(context["head_short"], "deadbee")
+        self.assertEqual(context["base_ref"], "origin/main@abc1234")
+        self.assertFalse(context["working_tree_clean"])
         self.assertEqual(
-            goal,
-            "align the rename across the runtime surface, installed path, and published guidance",
-        )
-
-    def test_infer_signals_treats_ci_workflow_files_as_ci_not_generic_config(self) -> None:
-        signals = infer_signals([".github/workflows/ci.yml"], [])
-
-        self.assertIn("ci", signals)
-        self.assertNotIn("config", signals)
-
-
-class AnalysisInputsTests(unittest.TestCase):
-    def test_analysis_inputs_prefers_working_tree_diff_without_recent_subject_fallback(self) -> None:
-        context = make_context(
-            diff={
-                "changed_files": ["mimir_skills/workflows/write_pr_rationale.py"],
-                "name_status": ["M\tmimir_skills/workflows/write_pr_rationale.py"],
-                "untracked_files": [],
-                "diff_stat": [],
-                "staged_diff_stat": [],
-            },
-            recent_commits=["a98a7bf refactor: rename project and shared runtime to Mimir-Skills"],
-            recent_commit_details=[
-                {
-                    "short_hash": "a98a7bf",
-                    "subject": "refactor: rename project and shared runtime to Mimir-Skills",
-                    "files": ["README.md"],
-                }
-            ],
-        )
-
-        source_label, files, subjects = analysis_inputs(context["diff"], context["branch_range"], context)
-
-        self.assertEqual(source_label, "the current working-tree diff")
-        self.assertEqual(files, ["mimir_skills/workflows/write_pr_rationale.py"])
-        self.assertEqual(subjects, [])
-
-    def test_analysis_inputs_prefers_branch_range_over_recent_commits(self) -> None:
-        context = make_context(
-            branch_range={
-                "base_ref": "origin/main@abc1234",
-                "changed_files": ["README.md"],
-                "name_status": ["M\tREADME.md"],
-                "diff_stat": ["README.md | 2 ++"],
-                "commits": ["bd4ac73 docs: add temporary validation note"],
-            },
-            recent_commits=["a98a7bf older recent commit"],
-            recent_commit_details=[
-                {"short_hash": "a98a7bf", "subject": "older recent commit", "files": ["docs/quick-start.md"]}
-            ],
-        )
-
-        source_label, files, subjects = analysis_inputs(context["diff"], context["branch_range"], context)
-
-        self.assertEqual(source_label, "committed branch-range context")
-        self.assertEqual(files, ["README.md"])
-        self.assertEqual(subjects, ["docs: add temporary validation note"])
-
-
-class DefaultSectionTests(unittest.TestCase):
-    def test_default_evidence_lines_for_recent_commit_fallback_include_subject_preview(self) -> None:
-        context = make_context(
-            recent_commit_details=[
-                {
-                    "short_hash": "abc1234",
-                    "subject": "docs: add temporary validation note",
-                    "files": ["README.md"],
-                }
-            ]
-        )
-
-        lines = default_evidence_lines(context["diff"], context["branch_range"], context)
-
-        self.assertIn(
-            "- The working tree and branch-range diff are both clean, so this draft is falling back to recent committed work as evidence.",
-            lines,
-        )
-        self.assertIn(
-            "- The most relevant recent commit signals are `docs: add temporary validation note`.",
-            lines,
-        )
-
-    def test_default_evidence_lines_without_any_context_stay_generic(self) -> None:
-        context = make_context()
-
-        lines = default_evidence_lines(context["diff"], context["branch_range"], context)
-
-        self.assertEqual(lines, ["- No extra branch evidence was provided for this draft."])
-
-    def test_default_why_lines_flag_inference_as_tentative(self) -> None:
-        context = make_context(
-            branch_range={
-                "base_ref": "origin/main@abc1234",
-                "changed_files": ["README.md"],
-                "name_status": ["M\tREADME.md"],
-                "diff_stat": ["README.md | 2 ++"],
-                "commits": ["bd4ac73 docs: add temporary validation note"],
-            }
-        )
-
-        lines = default_why_lines(context["diff"], context["branch_range"], context)
-
-        self.assertIn(
-            "- Inferred from committed branch-range context: this branch appears to tighten the published guidance around the current behavior or product direction.",
-            lines,
-        )
-        self.assertTrue(any("Replace or tighten this inferred rationale" in line for line in lines))
-
-    def test_default_validation_lines_for_docs_only_branch_are_specific(self) -> None:
-        context = make_context(
-            branch_range={
-                "base_ref": "origin/main@abc1234",
-                "changed_files": ["README.md"],
-                "name_status": ["M\tREADME.md"],
-                "diff_stat": ["README.md | 2 ++"],
-                "commits": ["bd4ac73 docs: add temporary validation note"],
-            }
-        )
-
-        lines = default_validation_lines(context["diff"], context["branch_range"], context)
-
-        self.assertEqual(lines[0], "- No explicit validation notes were provided for this draft.")
-        self.assertIn(
-            "- If this is guidance-only work, confirm that commands, paths, and examples still match the current implementation.",
-            lines,
-        )
-
-    def test_default_reviewer_notes_for_docs_only_branch_range_are_specific(self) -> None:
-        context = make_context(
-            branch_range={
-                "base_ref": "origin/main@abc1234",
-                "changed_files": ["README.md"],
-                "name_status": ["M\tREADME.md"],
-                "diff_stat": ["README.md | 2 ++"],
-                "commits": ["bd4ac73 docs: add temporary validation note"],
-            }
-        )
-
-        lines = default_reviewer_notes(context["diff"], context["branch_range"], context)
-
-        self.assertIn(
-            "- The working tree is clean, so review the committed branch-range changes above rather than expecting uncommitted diffs.",
-            lines,
-        )
-        self.assertIn(
-            "- Confirm that README, skill instructions, and examples describe the same behavior the code now implements.",
-            lines,
-        )
-
-    def test_default_reviewer_notes_for_ci_workflow_change_do_not_add_config_note(self) -> None:
-        context = make_context(
-            diff={
-                "changed_files": [".github/workflows/ci.yml"],
-                "name_status": ["M\t.github/workflows/ci.yml"],
-                "untracked_files": [],
-                "diff_stat": [".github/workflows/ci.yml | 3 +++"],
-                "staged_diff_stat": [],
-            }
-        )
-
-        lines = default_reviewer_notes(context["diff"], context["branch_range"], context)
-
-        self.assertIn(
-            "- Review whether the workflow change preserves failure visibility instead of only making the pipeline look greener.",
-            lines,
-        )
-        self.assertNotIn(
-            "- Check compatibility assumptions, migration cost, and rollback safety for the dependency or config change.",
-            lines,
-        )
-
-    def test_default_risk_lines_respect_explicit_why(self) -> None:
-        context = make_context(
-            branch_range={
-                "base_ref": "origin/main@abc1234",
-                "changed_files": ["README.md"],
-                "name_status": ["M\tREADME.md"],
-                "diff_stat": ["README.md | 2 ++"],
-                "commits": ["bd4ac73 docs: add temporary validation note"],
-            }
-        )
-
-        lines = default_risk_lines(
-            context["diff"],
-            context["branch_range"],
-            context,
-            has_explicit_why=True,
-        )
-
-        self.assertNotIn(
-            "- The reviewer-facing draft still needs an explicit tradeoff or motivation note if approval depends on more than the local branch evidence.",
-            lines,
-        )
-        self.assertIn(
-            "- Stale docs or examples would mislead reviewers and future agents even if the underlying code change is correct.",
-            lines,
-        )
-
-    def test_default_risk_lines_for_minimal_context_stay_safe_and_generic(self) -> None:
-        context = make_context()
-
-        lines = default_risk_lines(
-            context["diff"],
-            context["branch_range"],
-            context,
-            has_explicit_why=False,
-        )
-
-        self.assertEqual(
-            lines,
+            context["diff"]["changed_files"],
             [
-                "- The local branch evidence is still too thin to describe the main risk confidently; add an explicit risk or follow-up note before sharing externally."
+                "docs/quick-start.md",
+                "notes/scratch.md",
+                "skills/write-pr-rationale/SKILL.md",
             ],
         )
-
-
-class RenderPrRationaleTests(unittest.TestCase):
-    def test_render_pr_rationale_prefers_explicit_why_over_inference(self) -> None:
-        context = make_context(
-            diff={
-                "changed_files": ["mimir_skills/workflows/write_pr_rationale.py"],
-                "name_status": ["M\tmimir_skills/workflows/write_pr_rationale.py"],
-                "untracked_files": [],
-                "diff_stat": ["mimir_skills/workflows/write_pr_rationale.py | 2 ++"],
-                "staged_diff_stat": [],
-            }
+        self.assertEqual(context["diff"]["staged_files"], ["skills/write-pr-rationale/SKILL.md"])
+        self.assertEqual(context["diff"]["unstaged_files"], ["docs/quick-start.md"])
+        self.assertEqual(context["diff"]["untracked_files"], ["notes/scratch.md"])
+        self.assertIn("??\tnotes/scratch.md", context["diff"]["name_status"])
+        self.assertEqual(
+            context["branch_range"]["commits"],
+            ["abc1234 docs: add temporary validation note"],
+        )
+        self.assertEqual(
+            context["recent_commit_details"][0]["subject"],
+            "docs: add temporary validation note",
         )
 
-        markdown = render_pr_rationale(
-            context,
-            title=None,
-            why_items=["Phase 1 clean-state enhancement"],
-            validations=[],
-            reviewer_notes=[],
-            risks=[],
-            evidence=[],
-        )
 
-        self.assertIn("- Phase 1 clean-state enhancement", markdown)
-        self.assertNotIn("Replace or tighten this inferred rationale", markdown)
+class GenerateMainTests(unittest.TestCase):
+    def test_generate_main_prints_deprecation_note(self) -> None:
+        stdout = io.StringIO()
+        with redirect_stdout(stdout):
+            exit_code = generate_main(["--repo", "."])
 
-    def test_render_pr_rationale_uses_branch_range_commit_section_for_clean_state(self) -> None:
-        context = make_context(
-            branch_range={
-                "base_ref": "origin/main@abc1234",
-                "changed_files": ["README.md"],
-                "name_status": ["M\tREADME.md"],
-                "diff_stat": ["README.md | 2 ++"],
-                "commits": ["bd4ac73 docs: add temporary validation note"],
-            }
-        )
+        output = stdout.getvalue()
 
-        markdown = render_pr_rationale(
-            context,
-            title=None,
-            why_items=[],
-            validations=[],
-            reviewer_notes=[],
-            risks=[],
-            evidence=[],
-        )
+        self.assertEqual(exit_code, 0)
+        self.assertIn("# write-pr-rationale helper deprecated", output)
+        self.assertIn("skills/write-pr-rationale/SKILL.md", output)
+        self.assertIn("collect_pr_context.py --repo <path> --output pr-context.json", output)
 
-        self.assertIn("## Commits Since origin/main@abc1234", markdown)
-        self.assertIn("`bd4ac73 docs: add temporary validation note`", markdown)
-        self.assertIn(
-            "this branch appears to tighten the published guidance around the current behavior or product direction",
-            markdown,
-        )
+    def test_generate_main_accepts_legacy_inputs_and_mentions_explicit_context(self) -> None:
+        stdout = io.StringIO()
+        with redirect_stdout(stdout):
+            exit_code = generate_main(
+                [
+                    "--repo",
+                    ".",
+                    "--context-json",
+                    "pr-context.json",
+                    "--why",
+                    "Direction Reset skill-first codification",
+                ]
+            )
 
-    def test_render_pr_rationale_handles_minimal_context(self) -> None:
-        markdown = render_pr_rationale(
-            {},
-            title=None,
-            why_items=[],
-            validations=[],
-            reviewer_notes=[],
-            risks=[],
-            evidence=[],
-        )
+        output = stdout.getvalue()
 
-        self.assertIn("# PR Rationale: repository", markdown)
-        self.assertIn("- Repository: `repository`", markdown)
-        self.assertIn("- No extra branch evidence was provided for this draft.", markdown)
-        self.assertIn(
-            "- Local repository context shows what changed, but the motivating `why` is still missing; add an explicit `--why` note before external sharing.",
-            markdown,
-        )
-        self.assertIn("- No recent commit history was available.", markdown)
+        self.assertEqual(exit_code, 0)
+        self.assertIn("`pr-context.json`", output)
+        self.assertIn("Preserve any explicit why", output)
+
+    def test_generate_main_writes_note_to_output_path(self) -> None:
+        with TemporaryDirectory() as tempdir:
+            output_path = Path(tempdir) / "note.md"
+
+            exit_code = generate_main(["--repo", ".", "--output", str(output_path)])
+
+            self.assertEqual(exit_code, 0)
+            payload = output_path.read_text(encoding="utf-8")
+            self.assertIn("# write-pr-rationale helper deprecated", payload)
+            self.assertIn("scripts/generate_pr_rationale.py", payload)
 
 
 if __name__ == "__main__":

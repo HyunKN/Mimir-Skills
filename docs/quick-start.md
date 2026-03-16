@@ -53,23 +53,24 @@ Draft a handoff from the current repository state:
 python -m mimir_skills prepare-handoff --repo .
 ```
 
-Draft reviewer-facing PR rationale from the current branch:
+Collect structured PR context for the skill-first `write-pr-rationale` path:
 
 ```bash
-python -m mimir_skills write-pr-rationale --repo .
+python skills/write-pr-rationale/scripts/collect_pr_context.py --repo . --output pr-context.json
 ```
 
-Persist the Markdown draft to disk only when you actually want a file:
+Persist generated artifacts to disk only when you actually want a file:
 
 ```bash
 python -m mimir_skills prepare-handoff --repo . --output handoff.md
-python -m mimir_skills write-pr-rationale --repo . --output pr-rationale.md
+python skills/write-pr-rationale/scripts/collect_pr_context.py --repo . --output pr-context.json
 ```
 
 ### What to Expect
 
 - `prepare-handoff` is currently the stronger clean-state workflow.
-- `write-pr-rationale` is usable, but still needs stronger `why` capture when local branch context is thin.
+- `write-pr-rationale` is now a skill-first workflow. Use its `SKILL.md` plus playbook to draft the rationale, and use the collector only when you want structured git context first.
+- `python -m mimir_skills write-pr-rationale --repo .` still exists, but now prints a deprecation note instead of generating reviewer-facing Markdown.
 - outputs are drafts and still require human review before external sharing.
 
 ## Path 3: Codex Local Install

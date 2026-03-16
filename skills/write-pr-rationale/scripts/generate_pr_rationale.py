@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Thin wrapper for the shared write-pr-rationale generator."""
+"""Deprecation stub for the shared write-pr-rationale generator."""
 
 from __future__ import annotations
 

@@ -63,13 +63,14 @@ Current status:
 - public workflow name is defined
 - an initial user-facing skill now exists under `skills/write-pr-rationale/`
 - the user-facing skill and PR playbook now carry the main inference guardrails, signal patterns, and reviewer-facing output template
-- the current skill still depends more heavily on runtime-backed logic than `prepare-handoff`, especially for signal inference and rendering
-- local helper commands still exist under `python -m mimir_skills write-pr-rationale` and `skills/write-pr-rationale/scripts/`
+- the first runtime-reduction pass now keeps only git-context collection in the helper runtime
+- local helper commands still exist, but `python -m mimir_skills write-pr-rationale` and `skills/write-pr-rationale/scripts/generate_pr_rationale.py` now emit deprecation guidance instead of reviewer-facing Markdown
+- the remaining live helper path is `skills/write-pr-rationale/scripts/collect_pr_context.py`
 - the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
 - the current clean-state rationale still needs heavier rewrite than `prepare-handoff`, especially when explicit `why` context is missing
 - the first skill-first codification pass now exists, with the epistemic guardrail placed ahead of the local signal map so inferred intent is treated as tentative by default
 - the first local agent-validation gate also passed across dirty-tree, clean branch-range, recent-commit fallback, and explicit-`why` override cases without needing extra runtime-only rules
-- this workflow should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
+- this workflow can now move toward thin-collector status, but should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `capture-ci-investigation`

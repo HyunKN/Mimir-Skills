@@ -53,23 +53,24 @@ python -m mimir_skills list
 python -m mimir_skills prepare-handoff --repo .
 ```
 
-현재 브랜치로부터 reviewer-facing PR rationale 초안 생성:
+skill-first `write-pr-rationale` 경로를 위한 구조화된 PR context 수집:
 
 ```bash
-python -m mimir_skills write-pr-rationale --repo .
+python skills/write-pr-rationale/scripts/collect_pr_context.py --repo . --output pr-context.json
 ```
 
-실제로 파일이 필요할 때만 Markdown draft를 디스크에 남긴다:
+실제로 산출물이 필요할 때만 디스크에 남긴다:
 
 ```bash
 python -m mimir_skills prepare-handoff --repo . --output handoff.md
-python -m mimir_skills write-pr-rationale --repo . --output pr-rationale.md
+python skills/write-pr-rationale/scripts/collect_pr_context.py --repo . --output pr-context.json
 ```
 
 ### 기대할 수 있는 것
 
 - `prepare-handoff`가 현재 더 강한 clean-state workflow다.
-- `write-pr-rationale`도 사용 가능하지만, 로컬 branch context가 얇을 때는 더 강한 `why` capture가 아직 필요하다.
+- `write-pr-rationale`는 이제 skill-first workflow다. rationale 초안은 `SKILL.md`와 playbook으로 만들고, collector는 구조화된 git context가 먼저 필요할 때만 사용한다.
+- `python -m mimir_skills write-pr-rationale --repo .`는 여전히 존재하지만, 이제 reviewer-facing Markdown을 생성하지 않고 deprecation note를 출력한다.
 - output은 draft이며, 외부 공유 전에는 여전히 human review가 필요하다.
 
 ## Path 3: Codex Local Install

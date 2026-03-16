@@ -72,9 +72,9 @@ Use this shape and keep every section truthful to the evidence source you actual
 4. Prefer the smallest evidence set that still explains what changed, why it changed, what was validated, and what reviewers should watch.
 5. Link back to canonical decision records or derived summaries when they exist instead of copying raw logs into the PR rationale.
 6. Use helper commands only when they save time:
-   - `python -m mimir_skills write-pr-rationale --repo <path>` for the optional shared helper path
-   - `scripts/collect_pr_context.py --repo <path> --output <context.json>` when the branch snapshot should be inspected or reused before rendering
-   - `scripts/generate_pr_rationale.py --repo <path>` when you want the direct helper-script path
+   - `scripts/collect_pr_context.py --repo <path> --output <context.json>` when the branch snapshot should be inspected or reused before drafting
+   - `python -m mimir_skills write-pr-rationale --repo <path>` only when you need the deprecated shared helper note from an older workflow
+   - `scripts/generate_pr_rationale.py --repo <path>` only when you need the deprecated direct-helper note from an older workflow
 7. Treat the generated Markdown as a first draft to review and tighten before sharing in a pull request.
 
 ## Output Focus
@@ -105,8 +105,8 @@ Use this shape and keep every section truthful to the evidence source you actual
 - Read [`../pr-rationale/references/pr-playbook.md`](../pr-rationale/references/pr-playbook.md) first for the local signal map, default section patterns, and compact fallback examples behind this skill.
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) only when a missing canonical record should be created before drafting the rationale.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) only when shared validation, evidence, and safety constraints need to be checked.
-- Optionally run `python -m mimir_skills write-pr-rationale --repo <path>` when the shared helper path is faster than assembling the draft manually from the skill.
 - Optionally run [`scripts/collect_pr_context.py`](scripts/collect_pr_context.py) when you need a reusable JSON snapshot of branch, diff, changed files, and recent-commit context.
-- Optionally run [`scripts/generate_pr_rationale.py`](scripts/generate_pr_rationale.py) when you want the direct helper-script path, and add `--output <path>` when you want to persist the Markdown draft to disk.
+- The old `python -m mimir_skills write-pr-rationale --repo <path>` path now emits a deprecation note that points older helper-based flows back to this skill.
+- The old [`scripts/generate_pr_rationale.py`](scripts/generate_pr_rationale.py) path also emits a deprecation note instead of generating reviewer-facing Markdown.
 - Inspect the public summaries under [`../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md`](../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md) and [`../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md`](../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md) only when you need concrete reviewer-facing rationale shapes.
 - Read [`../../evaluations/reviewer-comprehension.md`](../../evaluations/reviewer-comprehension.md) only when checking whether the generated rationale is likely to answer a reviewer’s core questions quickly.

@@ -15,7 +15,7 @@ def load_manifest() -> dict:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m mimir_skills",
-        description="Shared CLI surface for Mimir-Skills workflow drafts.",
+        description="Shared helper surface for Mimir-Skills workflows.",
     )
     subparsers = parser.add_subparsers(dest="command")
 
@@ -37,14 +37,14 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "write-pr-rationale",
         add_help=False,
-        help="Generate a reviewer-facing PR rationale draft from local repository context.",
+        help="Show the deprecated write-pr-rationale helper note and point back to the skill-first path.",
     )
 
     return parser
 
 
 def render_manifest_lines(manifest: dict) -> list[str]:
-    lines = ["Mimir-Skills shared CLI workflows:", ""]
+    lines = ["Mimir-Skills workflows and helper surfaces:", ""]
     for workflow in manifest.get("workflows", []):
         if not isinstance(workflow, dict):
             continue
@@ -77,4 +77,3 @@ def main(argv: list[str] | None = None) -> int:
 
     parser.print_help()
     return 0
-
