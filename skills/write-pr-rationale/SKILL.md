@@ -16,13 +16,15 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 5. Link back to canonical decision records or derived summaries when they exist instead of copying raw logs into the PR rationale.
 6. When the working tree is already clean, surface committed branch-range context or recent committed work instead of defaulting to a nearly empty reviewer draft.
 7. Provide `--why`, `--validation`, `--reviewer-note`, or `--evidence` whenever local branch data alone would underspecify why the change matters to reviewers.
-8. State uncertainty plainly when the branch context is incomplete or validation evidence is missing.
-9. Treat the generated Markdown as a first draft to review and tighten before sharing in a pull request.
+8. When explicit `--why` notes are missing, treat the generated rationale and reviewer focus as tentative inferences from local branch evidence rather than as confirmed intent.
+9. State uncertainty plainly when the branch context is incomplete or validation evidence is missing.
+10. Treat the generated Markdown as a first draft to review and tighten before sharing in a pull request.
 
 ## Output Focus
 
 - what changed in the current branch
 - why the change happened
+- what the local branch evidence tentatively suggests when explicit rationale is missing
 - what validation ran or is still missing
 - what reviewers should pay attention to
 - what risks or follow-up remain
@@ -33,6 +35,7 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 - Do not present the PR rationale as canonical truth; the canonical decision records remain the source of truth.
 - Do not claim rationale, validation, or confidence that cannot be tied to local evidence or existing records.
 - Do not assume branch-only context is enough to explain why a change happened; add explicit rationale notes when intent is not recoverable from local state.
+- Do not treat inferred rationale from file paths or commit subjects as stronger than an explicit user-provided `--why` note.
 - Do not paste raw logs, hidden reasoning, or sensitive output into reviewer-facing text.
 - Do not hide incomplete validation, uncertainty, or remaining risks to make the PR sound cleaner.
 - Do not let reviewer-facing text drift away from the branch state or the canonical records behind it.
