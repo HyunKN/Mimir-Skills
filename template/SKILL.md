@@ -1,6 +1,6 @@
 # Skill Template
 
-Use this file as the starting point for a public `decision-skills` skill.
+Use this file as the starting point for a public `Mimir-Skills` skill.
 
 ## Template
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify public examples and derived summaries for decision-skills."""
+"""Verify public examples and derived summaries for Mimir-Skills."""
 
 from __future__ import annotations
 
@@ -142,7 +142,7 @@ def check_memory_artifacts() -> bool:
 def check_rendered_summaries(records: list[Path]) -> bool:
     success = True
 
-    with tempfile.TemporaryDirectory(prefix="decision-skills-render-") as temp_dir:
+    with tempfile.TemporaryDirectory(prefix="mimir-skills-render-") as temp_dir:
         temp_root = Path(temp_dir)
 
         for record_path in records:

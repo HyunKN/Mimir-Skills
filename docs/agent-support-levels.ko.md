@@ -12,7 +12,7 @@
 
 ### `shared CLI support`
 
-- 기대 경로: 저장소 루트에서 `python -m decision_skills ...`를 실행한다
+- 기대 경로: 저장소 루트에서 `python -m mimir_skills ...`를 실행한다
 - 약속 범위: shared workflow entry point가 dedicated install 또는 discovery layer 없이도 project-root CLI agent에서 계속 usable해야 한다
 - 약속하지 않는 것: native discovery, agent-local registration, target-specific install path
 

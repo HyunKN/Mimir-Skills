@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "decision-skills Memory Artifact v0.1",
+  "title": "Mimir-Skills Memory Artifact v0.1",
   "description": "Machine-readable companion schema for public candidate and validated memory JSON artifacts. Structural validation lives here; helper validators may enforce stricter semantic checks such as calendar-valid IDs, UTC-only timestamps, and candidate-to-validated pairing.",
   "type": "object",
   "required": [

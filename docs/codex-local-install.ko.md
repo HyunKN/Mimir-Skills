@@ -4,7 +4,7 @@
 
 ## 목적
 
-이 문서는 `decision-skills`의 첫 번째 runtime adapter를 설명한다.
+이 문서는 `Mimir-Skills`의 첫 번째 runtime adapter를 설명한다.
 
 remote registry, hosted installer, full multi-agent packaging을 약속하지 않으면서도, Codex에서 실제로 사용할 수 있는 로컬 install path를 제공한다.
 
@@ -24,7 +24,7 @@ installer는 현재 outward-facing workflow와 그 internal dependency를 `$CODE
 - `decision-capture`
 - `decision-core`
 
-또한 install 뒤에도 example과 evaluation reference가 계속 해석되고, 설치된 direct-use script가 shared `decision_skills` runtime package를 계속 import할 수 있도록, 공개 가능한 support asset을 `$CODEX_HOME/skills/decision-skills-support/` 아래로 복사한다.
+또한 install 뒤에도 example과 evaluation reference가 계속 해석되고, 설치된 direct-use script가 shared `mimir_skills` runtime package를 계속 import할 수 있도록, 공개 가능한 support asset을 `$CODEX_HOME/skills/mimir-skills-support/` 아래로 복사한다.
 
 ## 설치
 
@@ -46,7 +46,7 @@ python adapters/codex/scripts/install_codex_skills.py --workflows prepare-handof
 python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --force
 ```
 
-이제 `--force`는 기존 경로가 이전 `decision-skills` 설치처럼 보이는 경우에만 교체를 허용한다. 관련 없는 디렉터리처럼 보이면 overwrite를 거부하고 수동 정리를 요구한다.
+이제 `--force`는 기존 경로가 이전 `Mimir-Skills` 설치처럼 보이는 경우에만 교체를 허용한다. 관련 없는 디렉터리처럼 보이면 overwrite를 거부하고 수동 정리를 요구한다.
 
 ## Quick Start
 

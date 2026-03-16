@@ -4,7 +4,7 @@ English | [한국어](adapter-feedback-loop.ko.md)
 
 ## Purpose
 
-This document defines how `decision-skills` should evaluate the first real adapter experiences.
+This document defines how `Mimir-Skills` should evaluate the first real adapter experiences.
 
 The goal is not to add heavy telemetry.
 The goal is to keep a small, repeatable feedback loop so the project can tell whether a workflow draft is actually saving time.

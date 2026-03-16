@@ -31,4 +31,4 @@ The current internal packages stay important, but they are now treated as buildi
 `prepare-handoff` and `write-pr-rationale` are now the first direct-use public wrappers on top of that internal engine.
 Right now they should not be described as equally mature: `prepare-handoff` is closer to guidance-ready, while `write-pr-rationale` still needs stronger rationale capture before it should be treated as stable public guidance for clean-state runs.
 `capture-ci-investigation` is intentionally narrower: a beta wrapper that stays best-effort until stronger examples justify a direct-use script layer.
-A first shared CLI-friendly surface now exists under `decision_skills/` for `prepare-handoff` and `write-pr-rationale`, while the Codex-local install path via `adapters/codex/scripts/install_codex_skills.py` remains a separate install and discovery layer on top.
+A first shared CLI-friendly surface now exists under `mimir_skills/` for `prepare-handoff` and `write-pr-rationale`, while the Codex-local install path via `adapters/codex/scripts/install_codex_skills.py` remains a separate install and discovery layer on top.

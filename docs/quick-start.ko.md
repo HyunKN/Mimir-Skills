@@ -4,7 +4,7 @@
 
 ## 목적
 
-이 문서는 지금 시점에서 `decision-skills`를 가장 짧고 실용적인 경로로 바로 써보는 방법을 정리한다.
+이 문서는 지금 시점에서 `Mimir-Skills`를 가장 짧고 실용적인 경로로 바로 써보는 방법을 정리한다.
 
 현재 지원되는 진입 경로는 두 가지다:
 
@@ -26,26 +26,26 @@
 사용 가능한 shared workflow를 확인:
 
 ```bash
-python -m decision_skills list
+python -m mimir_skills list
 ```
 
 현재 저장소 상태로부터 handoff 초안 생성:
 
 ```bash
-python -m decision_skills prepare-handoff --repo .
+python -m mimir_skills prepare-handoff --repo .
 ```
 
 현재 브랜치로부터 reviewer-facing PR rationale 초안 생성:
 
 ```bash
-python -m decision_skills write-pr-rationale --repo .
+python -m mimir_skills write-pr-rationale --repo .
 ```
 
 실제로 파일이 필요할 때만 Markdown draft를 디스크에 남긴다:
 
 ```bash
-python -m decision_skills prepare-handoff --repo . --output handoff.md
-python -m decision_skills write-pr-rationale --repo . --output pr-rationale.md
+python -m mimir_skills prepare-handoff --repo . --output handoff.md
+python -m mimir_skills write-pr-rationale --repo . --output pr-rationale.md
 ```
 
 ### 기대할 수 있는 것

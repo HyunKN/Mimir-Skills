@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create draft decision record JSON files for decision-skills."""
+"""Create draft decision record JSON files for Mimir-Skills."""
 
 from __future__ import annotations
 

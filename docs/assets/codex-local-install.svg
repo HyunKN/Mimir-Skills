@@ -6,7 +6,7 @@
   <circle cx="56" cy="52" r="7" fill="#ff5f56"/>
   <circle cx="78" cy="52" r="7" fill="#ffbd2e"/>
   <circle cx="100" cy="52" r="7" fill="#27c93f"/>
-  <text x="128" y="57" fill="#8b949e" font-size="18" font-family="Consolas, 'Courier New', monospace">decision-skills / Codex local install</text>
+  <text x="128" y="57" fill="#8b949e" font-size="18" font-family="Consolas, 'Courier New', monospace">Mimir-Skills / Codex local install</text>
   <text x="48" y="98" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python adapters/codex/scripts/install_codex_skills.py</text>
   <text x="72" y="126" fill="#58a6ff" font-size="18" font-family="Consolas, 'Courier New', monospace"># installs outward-facing workflows into $CODEX_HOME/skills</text>
   <text x="48" y="176" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">&gt; Prepare a handoff from my current changes.</text>

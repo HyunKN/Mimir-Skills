@@ -3,14 +3,14 @@
     {
       "name": "prepare-handoff",
       "availability": "shared-cli",
-      "entrypoint": "python -m decision_skills prepare-handoff",
+      "entrypoint": "python -m mimir_skills prepare-handoff",
       "skill_path": "skills/prepare-handoff/SKILL.md",
       "summary": "Draft a handoff from the current branch or working tree with optional validation, blocker, risk, next-step, and evidence notes."
     },
     {
       "name": "write-pr-rationale",
       "availability": "shared-cli",
-      "entrypoint": "python -m decision_skills write-pr-rationale",
+      "entrypoint": "python -m mimir_skills write-pr-rationale",
       "skill_path": "skills/write-pr-rationale/SKILL.md",
       "summary": "Draft reviewer-facing PR rationale from local branch context with optional why, validation, reviewer-note, risk, and evidence inputs."
     },

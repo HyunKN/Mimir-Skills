@@ -4,7 +4,7 @@ English | [한국어](quick-start.ko.md)
 
 ## Purpose
 
-This guide gives the shortest practical path to try `decision-skills` today.
+This guide gives the shortest practical path to try `Mimir-Skills` today.
 
 There are two supported entry paths:
 
@@ -26,26 +26,26 @@ Use it when you want the lowest-friction way to try the workflow outputs directl
 List the available shared workflows:
 
 ```bash
-python -m decision_skills list
+python -m mimir_skills list
 ```
 
 Draft a handoff from the current repository state:
 
 ```bash
-python -m decision_skills prepare-handoff --repo .
+python -m mimir_skills prepare-handoff --repo .
 ```
 
 Draft reviewer-facing PR rationale from the current branch:
 
 ```bash
-python -m decision_skills write-pr-rationale --repo .
+python -m mimir_skills write-pr-rationale --repo .
 ```
 
 Persist the Markdown draft to disk only when you actually want a file:
 
 ```bash
-python -m decision_skills prepare-handoff --repo . --output handoff.md
-python -m decision_skills write-pr-rationale --repo . --output pr-rationale.md
+python -m mimir_skills prepare-handoff --repo . --output handoff.md
+python -m mimir_skills write-pr-rationale --repo . --output pr-rationale.md
 ```
 
 ### What to Expect

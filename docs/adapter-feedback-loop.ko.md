@@ -4,7 +4,7 @@
 
 ## 목적
 
-이 문서는 `decision-skills`의 첫 실제 adapter 경험을 어떻게 평가할지 정의한다.
+이 문서는 `Mimir-Skills`의 첫 실제 adapter 경험을 어떻게 평가할지 정의한다.
 
 목표는 무거운 telemetry를 넣는 것이 아니다.
 작고 반복 가능한 feedback loop를 유지해서, workflow draft가 실제로 시간을 줄여주고 있는지 판단할 수 있게 하는 것이 목표다.

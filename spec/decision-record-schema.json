@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "decision-skills Decision Record v0.1",
+  "title": "Mimir-Skills Decision Record v0.1",
   "description": "Machine-readable companion schema for canonical decision record JSON files. Structural validation lives here; helper validators may enforce stricter semantic checks such as calendar-valid IDs and UTC-only timestamps.",
   "type": "object",
   "required": [

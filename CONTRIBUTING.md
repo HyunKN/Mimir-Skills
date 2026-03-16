@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping build `decision-skills`.
+Thanks for helping build `Mimir-Skills`.
 
 This repository is documentation-first. Contributions should make decision records, examples, skills, and evaluation assets easier to understand, validate, and reuse.
 

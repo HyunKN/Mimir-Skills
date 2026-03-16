@@ -1,10 +1,10 @@
 English | [한국어](README.ko.md)
 
-# decision-skills
+# Mimir-Skills
 
 Draft handoffs, PR rationale, and CI investigation context from local project state.
 
-`decision-skills` is shifting toward an output-first workflow skill pack for AI coding agents.
+`Mimir-Skills` is shifting toward an output-first workflow skill pack for AI coding agents.
 The product direction is simple: stop reconstructing engineering context by hand when a skill can read local signals and draft the first useful version for you.
 
 ## Who This Is For
@@ -32,7 +32,7 @@ What teams still lose is the context around that work:
 - what remains risky or uncertain
 - what the next agent or reviewer should know before continuing
 
-`decision-skills` exists to lower the cost of preserving that context.
+`Mimir-Skills` exists to lower the cost of preserving that context.
 
 ## Quality Boundary
 
@@ -51,7 +51,7 @@ The output-first direction above is the next layer being built on top of the cur
 What is available now:
 
 - a public project one-pager
-- a shared CLI-friendly surface under `decision_skills/`, including `python -m decision_skills list`, `python -m decision_skills prepare-handoff`, and `python -m decision_skills write-pr-rationale`
+- a shared CLI-friendly surface under `mimir_skills/`, including `python -m mimir_skills list`, `python -m mimir_skills prepare-handoff`, and `python -m mimir_skills write-pr-rationale`
 - a first Codex-local install path under `adapters/codex/scripts/install_codex_skills.py`, documented in `docs/codex-local-install.md`
 - a public support-level definition for Claude Code, OpenAI / Codex and GPT-facing coding-agent surfaces, Gemini CLI, and Qwen Code under `shared CLI support`, `documented support`, and `thin adapter support`
 - a compact always-loaded rules baseline for shared CLI runs and future adapters
@@ -90,11 +90,11 @@ What comes next:
 ## Repository Layout
 
 ```text
-decision-skills/
+Mimir-Skills/
   README.md
   README.ko.md
   adapters/
-  decision_skills/
+  mimir_skills/
   docs/
   spec/
   template/

@@ -4,7 +4,7 @@ English | [한국어](codex-local-install.ko.md)
 
 ## Purpose
 
-This is the first runtime adapter for `decision-skills`.
+This is the first runtime adapter for `Mimir-Skills`.
 
 It provides a real local install path for Codex without claiming a remote registry, hosted installer, or full multi-agent packaging story.
 
@@ -24,7 +24,7 @@ The installer copies the current outward-facing workflows and their internal dep
 - `decision-capture`
 - `decision-core`
 
-It also copies publishable support assets into `$CODEX_HOME/skills/decision-skills-support/` so example and evaluation references still resolve after install, and so the installed direct-use scripts can still import the shared `decision_skills` runtime package.
+It also copies publishable support assets into `$CODEX_HOME/skills/mimir-skills-support/` so example and evaluation references still resolve after install, and so the installed direct-use scripts can still import the shared `mimir_skills` runtime package.
 
 ## Install
 
@@ -46,7 +46,7 @@ Install into a specific Codex home and replace existing installed copies:
 python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --force
 ```
 
-With `--force`, the installer now replaces only paths that already look like a previous `decision-skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.
+With `--force`, the installer now replaces only paths that already look like a previous `Mimir-Skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.
 
 ## Quick Start
 

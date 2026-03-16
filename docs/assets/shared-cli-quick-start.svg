@@ -6,13 +6,13 @@
   <circle cx="56" cy="52" r="7" fill="#ff5f56"/>
   <circle cx="78" cy="52" r="7" fill="#ffbd2e"/>
   <circle cx="100" cy="52" r="7" fill="#27c93f"/>
-  <text x="128" y="57" fill="#8b949e" font-size="18" font-family="Consolas, 'Courier New', monospace">decision-skills / shared CLI</text>
-  <text x="48" y="98" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python -m decision_skills list</text>
+  <text x="128" y="57" fill="#8b949e" font-size="18" font-family="Consolas, 'Courier New', monospace">Mimir-Skills / shared CLI</text>
+  <text x="48" y="98" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python -m mimir_skills list</text>
   <text x="72" y="128" fill="#c9d1d9" font-size="18" font-family="Consolas, 'Courier New', monospace">prepare-handoff</text>
   <text x="72" y="154" fill="#c9d1d9" font-size="18" font-family="Consolas, 'Courier New', monospace">write-pr-rationale</text>
   <text x="72" y="180" fill="#c9d1d9" font-size="18" font-family="Consolas, 'Courier New', monospace">capture-ci-investigation (beta)</text>
-  <text x="48" y="224" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python -m decision_skills prepare-handoff --repo .</text>
+  <text x="48" y="224" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python -m mimir_skills prepare-handoff --repo .</text>
   <text x="72" y="252" fill="#58a6ff" font-size="18" font-family="Consolas, 'Courier New', monospace"># emits a handoff draft to stdout by default</text>
-  <text x="48" y="292" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python -m decision_skills write-pr-rationale --repo .</text>
+  <text x="48" y="292" fill="#7ee787" font-size="20" font-family="Consolas, 'Courier New', monospace">$ python -m mimir_skills write-pr-rationale --repo .</text>
   <text x="72" y="320" fill="#58a6ff" font-size="18" font-family="Consolas, 'Courier New', monospace"># add --output only when you actually want a file</text>
 </svg>

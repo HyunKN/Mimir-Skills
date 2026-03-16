@@ -2,9 +2,9 @@ English | [한국어](project-one-pager.ko.md)
 
 # Project One-Pager
 
-## What `decision-skills` Is
+## What `Mimir-Skills` Is
 
-`decision-skills` is an open documentation and skill-design project for AI-agent decision traceability.
+`Mimir-Skills` is an open documentation and skill-design project for AI-agent decision traceability.
 
 It helps teams preserve why meaningful engineering changes were made, not just what changed.
 

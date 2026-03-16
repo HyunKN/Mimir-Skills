@@ -1,11 +1,11 @@
 ---
 name: decision-core
-description: Shared policy and schema guidance for decision-skills. Use when deciding whether work should produce a decision record, validating decision record contents against the public schema, checking evidence quality, applying safety constraints, or reviewing whether memory promotion is allowed.
+description: Shared policy and schema guidance for Mimir-Skills. Use when deciding whether work should produce a decision record, validating decision record contents against the public schema, checking evidence quality, applying safety constraints, or reviewing whether memory promotion is allowed.
 ---
 
 # decision-core
 
-Use this skill as the common policy layer before creating, editing, reviewing, or promoting `decision-skills` artifacts.
+Use this skill as the common policy layer before creating, editing, reviewing, or promoting `Mimir-Skills` artifacts.
 
 ## Workflow
 

@@ -2,7 +2,7 @@
 
 ## Scope
 
-`decision-skills` is a decision-recording tool first.
+`Mimir-Skills` is a decision-recording tool first.
 
 This repository may include limited automation such as scripts or hooks, but only when that automation:
 

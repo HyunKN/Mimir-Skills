@@ -8,8 +8,8 @@ import shutil
 from pathlib import Path
 
 
-SUPPORT_DIR_NAME = "decision-skills-support"
-INSTALL_MARKER_NAME = ".decision-skills-install.json"
+SUPPORT_DIR_NAME = "mimir-skills-support"
+INSTALL_MARKER_NAME = ".mimir-skills-install.json"
 WORKFLOW_DEPENDENCIES = {
     "prepare-handoff": [
         "prepare-handoff",
@@ -34,7 +34,7 @@ WORKFLOW_DEPENDENCIES = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Install decision-skills public workflows into a local Codex skills directory."
+        description="Install Mimir-Skills public workflows into a local Codex skills directory."
     )
     parser.add_argument(
         "--codex-home",
@@ -122,7 +122,7 @@ def looks_like_managed_support_dir(destination: Path) -> bool:
         )
 
     manifest_file = destination / "install-manifest.json"
-    runtime_root = destination / "decision_skills"
+    runtime_root = destination / "mimir_skills"
     return manifest_file.exists() and runtime_root.exists()
 
 
@@ -145,7 +145,7 @@ def ensure_safe_force_replace(
 
     if not looks_managed:
         raise RuntimeError(
-            f"Refusing to replace {destination} with --force because it does not look like a previous decision-skills installation. "
+            f"Refusing to replace {destination} with --force because it does not look like a previous Mimir-Skills installation. "
             "Remove it manually or choose a different --codex-home if this path is intentional."
         )
 
@@ -177,7 +177,7 @@ def install_support_assets(repo_root: Path, skills_root: Path, force: bool) -> P
         for destination in [
             support_root / "examples",
             support_root / "evaluations",
-            support_root / "decision_skills",
+            support_root / "mimir_skills",
         ]
     ):
         ensure_safe_force_replace(
@@ -189,7 +189,7 @@ def install_support_assets(repo_root: Path, skills_root: Path, force: bool) -> P
 
     copy_tree(repo_root / "examples", support_root / "examples", force)
     copy_tree(repo_root / "evaluations", support_root / "evaluations", force)
-    copy_tree(repo_root / "decision_skills", support_root / "decision_skills", force)
+    copy_tree(repo_root / "mimir_skills", support_root / "mimir_skills", force)
     write_install_marker(support_root, repo_root, "support", SUPPORT_DIR_NAME)
 
     return support_root
@@ -232,7 +232,7 @@ def main() -> int:
         "workflows": selected_workflows,
         "installed_skills": skill_names,
         "support_root": str(support_root),
-        "shared_runtime_root": str(support_root / "decision_skills"),
+        "shared_runtime_root": str(support_root / "mimir_skills"),
     }
     (support_root / "install-manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n",
@@ -240,7 +240,7 @@ def main() -> int:
         newline="\n",
     )
 
-    print(f"Installed decision-skills workflows into {skills_root}")
+    print(f"Installed Mimir-Skills workflows into {skills_root}")
     print("Installed workflows:")
     for workflow in selected_workflows:
         print(f"- {workflow}")

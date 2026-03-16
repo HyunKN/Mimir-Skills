@@ -2,9 +2,9 @@
 
 # Project One-Pager
 
-## `decision-skills`란 무엇인가
+## `Mimir-Skills`란 무엇인가
 
-`decision-skills`는 AI 에이전트의 decision traceability를 위한 공개 문서 및 스킬 설계 프로젝트다.
+`Mimir-Skills`는 AI 에이전트의 decision traceability를 위한 공개 문서 및 스킬 설계 프로젝트다.
 
 이 프로젝트는 단순히 무엇이 바뀌었는지가 아니라, 의미 있는 엔지니어링 변화가 왜 일어났는지를 남기도록 돕는다.
 

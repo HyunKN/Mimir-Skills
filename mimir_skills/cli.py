@@ -14,8 +14,8 @@ def load_manifest() -> dict:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="python -m decision_skills",
-        description="Shared CLI surface for decision-skills workflow drafts.",
+        prog="python -m mimir_skills",
+        description="Shared CLI surface for Mimir-Skills workflow drafts.",
     )
     subparsers = parser.add_subparsers(dest="command")
 
@@ -44,7 +44,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def render_manifest_lines(manifest: dict) -> list[str]:
-    lines = ["decision-skills shared CLI workflows:", ""]
+    lines = ["Mimir-Skills shared CLI workflows:", ""]
     for workflow in manifest.get("workflows", []):
         if not isinstance(workflow, dict):
             continue

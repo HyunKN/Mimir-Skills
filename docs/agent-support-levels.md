@@ -12,7 +12,7 @@ The goal is to avoid implying that every target has the same install, discovery,
 
 ### `shared CLI support`
 
-- expected path: run `python -m decision_skills ...` from the repository root
+- expected path: run `python -m mimir_skills ...` from the repository root
 - promise: the shared workflow entry points should remain usable from project-root CLI agents without a dedicated install or discovery layer
 - does not promise native discovery, agent-local registration, or a target-specific install path
 
