@@ -92,6 +92,8 @@ Current status:
 - public workflow name is defined
 - an initial beta user-facing skill now exists under `skills/capture-ci-investigation/`
 - the beta skill, examples, and boundary notes are the primary public surface today
+- the beta skill now carries explicit evidence-tier wording rules, shared-workflow blast-radius checks, and monitor-first output guidance directly in the skill plus boundary note
+- a dedicated beta review anchor now exists at `evaluations/capture-ci-investigation-beta-review.md` so uncertainty separation and anti-overclaiming can be re-checked later
 - the workflow still appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
 - the first Codex-local install path can still include this workflow through `adapters/codex/scripts/install_codex_skills.py`, but that remains optional and secondary
 - the beta guidance now points at both a stronger config-backed CI example and a weaker rerun-only monitoring example, so the overclaim boundary is more explicit

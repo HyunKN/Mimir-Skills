@@ -7,11 +7,28 @@ description: Draft a bounded CI investigation summary when failing jobs, flaky t
 
 Use this skill to draft a narrow, best-effort CI investigation summary from the available failure context.
 
+## Decision Rules
+
+1. Keep four lanes separate in the draft:
+   - observed evidence
+   - the current best explanation
+   - unknowns or remaining uncertainty
+   - the temporary decision, mitigation, or next check
+2. Let evidence strength control the wording:
+   - strong evidence can support likely-cause language when the failure shape, relevant change, and validating check all line up
+   - medium evidence should stay hypothesis-shaped and say what would confirm or falsify the explanation
+   - weak evidence should stay monitor-first, avoid root-cause or fixed language, and say explicitly that the issue is not yet explained
+3. Treat rerun-only success or partial validation as a signal reducer, not proof of root cause or proof that the issue is fixed.
+4. If the current best action would touch shared workflow behavior such as retries, timeouts, quarantines, cache policy, base image, or job sequencing, call out the blast radius and the follow-up needed before describing the change as safe.
+5. If there is no concrete code, workflow, or environment cause yet, prefer monitoring, evidence collection, rollback, or escalation language over speculative tuning.
+6. Escalate to a canonical decision record or deeper CI investigation when the issue changes shared policy, repeats across platforms, blocks release or deploy gates, or still lacks enough evidence for a bounded summary.
+7. Keep human review in the loop. This workflow drafts a bounded incident summary; it does not replace canonical approval or final root-cause analysis.
+
 ## Workflow
 
 1. Start from the concrete failure context that already exists: job links, workflow files, rerun results, local reproduction, timing notes, and recent config changes.
-2. Read [`../ci-rationale/SKILL.md`](../ci-rationale/SKILL.md) for CI-specific evidence and action framing.
-3. Read [`references/beta-boundaries.md`](references/beta-boundaries.md) when you need to decide how strong the current evidence really is or whether the summary should stay at a monitoring-only conclusion.
+2. Read [`../ci-rationale/SKILL.md`](../ci-rationale/SKILL.md) first for CI-specific evidence and option framing.
+3. Read [`references/beta-boundaries.md`](references/beta-boundaries.md) when you need the wording ladder, blast-radius checklist, or a stronger rule for monitor-only conclusions.
 4. Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when a canonical decision record should be created before or alongside the summary.
 5. Distill what failed, what evidence exists, what the current best explanation is, and what action was taken, deferred, or still needs review.
 6. Keep uncertainty explicit whenever logs, reruns, or reproduction evidence are incomplete.
@@ -26,6 +43,29 @@ Use this skill to draft a narrow, best-effort CI investigation summary from the 
 - what action was taken or deferred
 - what is still only being monitored rather than confirmed fixed
 - what risk, uncertainty, or monitoring remains
+
+## Output Template
+
+Use a compact summary with these sections when the incident needs a written draft:
+
+1. `Failure Summary`
+   - state the failing job, stage, and immediate symptom
+   - if the signal is weak, say so here rather than implying a confirmed break
+2. `Observed Evidence`
+   - list the concrete CI artifacts, reruns, workflow files, timing notes, or reproduction checks that actually exist
+3. `Current Explanation`
+   - strong evidence: explain the likely cause and why the evidence supports it
+   - medium evidence: explain the leading hypothesis and what would confirm or falsify it
+   - weak evidence: say that the issue is not yet explained and keep the explanation tentative
+4. `Current Action`
+   - state whether the team changed something, chose monitoring, reverted, quarantined, or deferred
+   - if a shared workflow change is involved, mention the blast radius and follow-up window
+5. `Unknowns / Risks`
+   - name what is still uncertain, what could recur, or what this mitigation might hide
+6. `Next Check`
+   - say what evidence, rerun, duration sample, owner, or trigger would reopen deeper investigation
+
+Omit filler. If a section has no real content, compress it into a shorter sentence rather than padding the draft.
 
 ## Guardrails
 
@@ -47,9 +87,10 @@ Keep this workflow beta until all of the following are true:
 
 ## Load References As Needed
 
-- Read [`../ci-rationale/SKILL.md`](../ci-rationale/SKILL.md) for CI-specific evidence handling, option framing, and safety constraints.
-- Read [`references/beta-boundaries.md`](references/beta-boundaries.md) when the available evidence is thin, rerun-only, or still too weak for root-cause language.
-- Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when the CI issue should be captured in a canonical record.
-- Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when shared validation, evidence, and safety constraints need to be checked.
+- Read [`../ci-rationale/SKILL.md`](../ci-rationale/SKILL.md) first for CI-specific evidence handling, option framing, and safety constraints.
+- Read [`references/beta-boundaries.md`](references/beta-boundaries.md) next when the available evidence is thin, rerun-only, or still too weak for root-cause language, or when a shared workflow change would affect more than the current failing job.
+- Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) only when the CI issue should be captured in a canonical record.
+- Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) only when shared validation, evidence, and safety constraints need to be checked.
 - Inspect the public examples under [`../../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json`](../../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json) and [`../../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json`](../../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json) when you need concrete CI investigation shapes for both validated-change and monitor-only cases.
+- Read [`../../evaluations/capture-ci-investigation-beta-review.md`](../../evaluations/capture-ci-investigation-beta-review.md) when checking whether the draft keeps evidence, explanation, uncertainty, and temporary action clearly separated.
 - Keep this workflow script-light for now; add direct-use collectors or generators only after stronger examples and reliability boundaries exist.
