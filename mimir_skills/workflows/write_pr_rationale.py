@@ -735,6 +735,11 @@ def infer_signals(files: list[str], subjects: list[str]) -> set[str]:
     for path in files:
         lower = path.lower()
         name = lower.rsplit("/", 1)[-1]
+        is_ci_path = (
+            lower.startswith(".github/")
+            or lower.startswith(".circleci/")
+            or lower.startswith(".gitlab/")
+        )
         if (
             lower.startswith("docs/")
             or name in {"readme.md", "readme.ko.md", "contributing.md", "security.md"}
@@ -746,7 +751,7 @@ def infer_signals(files: list[str], subjects: list[str]) -> set[str]:
         if lower.startswith("mimir_skills/") or lower.startswith("skills/") or lower.startswith("scripts/"):
             signals.add("workflow")
             signals.add("runtime")
-        if lower.startswith(".github/") or lower.startswith(".circleci/") or lower.startswith(".gitlab/"):
+        if is_ci_path:
             signals.add("ci")
         if lower.startswith("examples/"):
             signals.add("examples")
@@ -767,7 +772,11 @@ def infer_signals(files: list[str], subjects: list[str]) -> set[str]:
             "go.sum",
         }:
             signals.add("dependency")
-        if name.endswith((".yaml", ".yml", ".json", ".toml")) and not lower.startswith("examples/"):
+        if (
+            name.endswith((".yaml", ".yml", ".json", ".toml"))
+            and not lower.startswith("examples/")
+            and not is_ci_path
+        ):
             signals.add("config")
 
     for subject in subjects:
