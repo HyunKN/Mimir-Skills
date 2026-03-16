@@ -39,6 +39,13 @@
 | Google / Gemini CLI | `shared CLI support` | shared CLI only | dedicated evaluation pass, install path, target-specific public guidance가 아직 없다. |
 | Qwen / Qwen Code | `shared CLI support` | shared CLI only | dedicated evaluation pass, install path, target-specific public guidance가 아직 없다. |
 
+## 현재 adapter 결정
+
+- 지금은 다른 agent-specific adapter를 추가하지 않는다.
+- 가까운 범위 target family의 기본 baseline은 shared CLI surface로 유지한다.
+- 현재의 Codex 로컬 adapter는 유용한 thin-adapter proof point로 유지하되, 그렇다고 모든 target이 각자 adapter를 가져야 한다는 뜻으로 해석하지 않는다.
+- `shared CLI support`나 `documented support`를 넘는 분명한 UX 이득이 반복적으로 확인되기 전에는 두 번째 thin adapter를 다시 검토하지 않는다.
+
 ## 승격 규칙
 
 - 어떤 target을 `shared CLI support`에서 `documented support`로 올리려면, 최소 한 번 이상의 concrete usage pass, review, 또는 재현 가능한 invocation pattern이 문서화 가능해야 한다.

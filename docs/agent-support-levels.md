@@ -39,6 +39,13 @@ The goal is to avoid implying that every target has the same install, discovery,
 | Google / Gemini CLI | `shared CLI support` | shared CLI only | No dedicated evaluation pass, install path, or target-specific public guidance exists yet. |
 | Qwen / Qwen Code | `shared CLI support` | shared CLI only | No dedicated evaluation pass, install path, or target-specific public guidance exists yet. |
 
+## Current Adapter Decision
+
+- Do not add another agent-specific adapter yet.
+- Treat the shared CLI surface as the default baseline for the near-term target families.
+- Keep the current Codex-local adapter as a useful thin-adapter proof point, not as a signal that every target now needs its own adapter.
+- Reconsider a second thin adapter only after repeated usage shows a clear UX gain beyond `shared CLI support` or `documented support`.
+
 ## Upgrade Rules
 
 - Move a target from `shared CLI support` to `documented support` only after at least one concrete usage pass, review, or reproducible invocation pattern is available to document.

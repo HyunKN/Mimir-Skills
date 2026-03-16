@@ -65,7 +65,7 @@ What is available now:
 
 What comes next:
 
-- use the published support-level policy to decide whether future agent work should stop at shared CLI support, documented support, or thin adapter support
+- do not add another agent-specific adapter yet; keep the shared CLI as the baseline and only revisit a second thin adapter when repeated usage shows a clear UX gain beyond shared CLI or documented support
 - treat `prepare-handoff` as the stronger current workflow and confirm it once more on an in-progress, non-clean task state before freezing it as stable public guidance
 - keep `write-pr-rationale` in active output shaping until it can capture stronger `why` context for clean-state runs without depending on generic placeholders or heavy manual rewrite
 - keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries justify any direct-use script layer
