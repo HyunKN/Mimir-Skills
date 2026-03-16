@@ -4,7 +4,9 @@ import unittest
 
 from mimir_skills.workflows.write_pr_rationale import (
     analysis_inputs,
+    default_evidence_lines,
     default_reviewer_notes,
+    default_risk_lines,
     default_validation_lines,
     default_why_lines,
     infer_change_goal,
@@ -135,6 +137,35 @@ class AnalysisInputsTests(unittest.TestCase):
 
 
 class DefaultSectionTests(unittest.TestCase):
+    def test_default_evidence_lines_for_recent_commit_fallback_include_subject_preview(self) -> None:
+        context = make_context(
+            recent_commit_details=[
+                {
+                    "short_hash": "abc1234",
+                    "subject": "docs: add temporary validation note",
+                    "files": ["README.md"],
+                }
+            ]
+        )
+
+        lines = default_evidence_lines(context["diff"], context["branch_range"], context)
+
+        self.assertIn(
+            "- The working tree and branch-range diff are both clean, so this draft is falling back to recent committed work as evidence.",
+            lines,
+        )
+        self.assertIn(
+            "- The most relevant recent commit signals are `docs: add temporary validation note`.",
+            lines,
+        )
+
+    def test_default_evidence_lines_without_any_context_stay_generic(self) -> None:
+        context = make_context()
+
+        lines = default_evidence_lines(context["diff"], context["branch_range"], context)
+
+        self.assertEqual(lines, ["- No extra branch evidence was provided for this draft."])
+
     def test_default_why_lines_flag_inference_as_tentative(self) -> None:
         context = make_context(
             branch_range={
@@ -217,6 +248,50 @@ class DefaultSectionTests(unittest.TestCase):
             lines,
         )
 
+    def test_default_risk_lines_respect_explicit_why(self) -> None:
+        context = make_context(
+            branch_range={
+                "base_ref": "origin/main@abc1234",
+                "changed_files": ["README.md"],
+                "name_status": ["M\tREADME.md"],
+                "diff_stat": ["README.md | 2 ++"],
+                "commits": ["bd4ac73 docs: add temporary validation note"],
+            }
+        )
+
+        lines = default_risk_lines(
+            context["diff"],
+            context["branch_range"],
+            context,
+            has_explicit_why=True,
+        )
+
+        self.assertNotIn(
+            "- The reviewer-facing draft still needs an explicit tradeoff or motivation note if approval depends on more than the local branch evidence.",
+            lines,
+        )
+        self.assertIn(
+            "- Stale docs or examples would mislead reviewers and future agents even if the underlying code change is correct.",
+            lines,
+        )
+
+    def test_default_risk_lines_for_minimal_context_stay_safe_and_generic(self) -> None:
+        context = make_context()
+
+        lines = default_risk_lines(
+            context["diff"],
+            context["branch_range"],
+            context,
+            has_explicit_why=False,
+        )
+
+        self.assertEqual(
+            lines,
+            [
+                "- The local branch evidence is still too thin to describe the main risk confidently; add an explicit risk or follow-up note before sharing externally."
+            ],
+        )
+
 
 class RenderPrRationaleTests(unittest.TestCase):
     def test_render_pr_rationale_prefers_explicit_why_over_inference(self) -> None:
@@ -270,6 +345,26 @@ class RenderPrRationaleTests(unittest.TestCase):
             "this branch appears to tighten the published guidance around the current behavior or product direction",
             markdown,
         )
+
+    def test_render_pr_rationale_handles_minimal_context(self) -> None:
+        markdown = render_pr_rationale(
+            {},
+            title=None,
+            why_items=[],
+            validations=[],
+            reviewer_notes=[],
+            risks=[],
+            evidence=[],
+        )
+
+        self.assertIn("# PR Rationale: repository", markdown)
+        self.assertIn("- Repository: `repository`", markdown)
+        self.assertIn("- No extra branch evidence was provided for this draft.", markdown)
+        self.assertIn(
+            "- Local repository context shows what changed, but the motivating `why` is still missing; add an explicit `--why` note before external sharing.",
+            markdown,
+        )
+        self.assertIn("- No recent commit history was available.", markdown)
 
 
 if __name__ == "__main__":
