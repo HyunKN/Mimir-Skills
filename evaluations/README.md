@@ -13,6 +13,7 @@ Current public evaluation docs:
 - `replay-evaluation.md`
 - `reviewer-comprehension.md`
 - `memory-promotion-evaluation.md`
+- `write-pr-rationale-agent-validation.md`
 
 These evaluations currently use the public-safe synthetic examples under:
 
@@ -22,3 +23,4 @@ These evaluations currently use the public-safe synthetic examples under:
 
 `reviewer-comprehension.md` also serves as the evaluation anchor for the `pr-rationale` workflow-specific skill.
 `memory-promotion-evaluation.md` serves as the evaluation anchor for the `memory-promote` workflow-specific skill.
+`write-pr-rationale-agent-validation.md` serves as the runtime-reduction gate for the `write-pr-rationale` wrapper skill.

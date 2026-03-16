@@ -68,6 +68,7 @@ Current status:
 - the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
 - the current clean-state rationale still needs heavier rewrite than `prepare-handoff`, especially when explicit `why` context is missing
 - the first skill-first codification pass now exists, with the epistemic guardrail placed ahead of the local signal map so inferred intent is treated as tentative by default
+- the first local agent-validation gate also passed across dirty-tree, clean branch-range, recent-commit fallback, and explicit-`why` override cases without needing extra runtime-only rules
 - this workflow should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
