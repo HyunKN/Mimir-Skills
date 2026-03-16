@@ -4,14 +4,15 @@
 
 ## 목적
 
-이 문서는 `Mimir-Skills`의 첫 실제 adapter 경험을 어떻게 평가할지 정의한다.
+이 문서는 `Mimir-Skills`의 현재 skill-first baseline과 선택적 helper/adapter surface 전반에서 실제 workflow 사용 경험을 어떻게 평가할지 정의한다.
 
 목표는 무거운 telemetry를 넣는 것이 아니다.
 작고 반복 가능한 feedback loop를 유지해서, workflow draft가 실제로 시간을 줄여주고 있는지 판단할 수 있게 하는 것이 목표다.
 
 ## 현재 범위
 
-이 feedback loop는 현재 구현된 로컬 adapter 경로를 기준으로 정의하며, 나중에 추가될 다른 agent adapter에도 재사용할 수 있다.
+현재의 주 baseline은 skill-first workflow guidance와 얇은 local collector다.
+선택적인 helper stub나 adapter path도 계속 관찰할 수 있지만, 더 이상 주된 제품 스토리는 아니다.
 
 지금 우선적으로 볼 workflow는 다음과 같다:
 
@@ -93,9 +94,9 @@ workflow를 사용한 뒤에는 다음 질문에 답한다:
 - 실행 날짜
 - 테스트한 workflow
 - 테스트한 execution surface:
-  - shared CLI
-  - 현재 adapter path
-  - 또는 둘 다
+  - skill-first reading only
+  - local helper collector 또는 deprecation stub
+  - optional adapter path
 - 저장소와 작업 context
 - 저장소 상태:
   - dirty 또는 clean
@@ -124,7 +125,7 @@ workflow를 사용한 뒤에는 다음 질문에 답한다:
 2. 빠진 local context 수집
 3. workflow skill 내부의 domain knowledge
 4. 더 명확한 uncertainty 처리
-5. adapter 설치 또는 invocation 마찰
+5. helper 또는 adapter 설치/invocation 마찰
 
 ## 아직 하지 말아야 할 것
 
@@ -137,4 +138,7 @@ workflow를 사용한 뒤에는 다음 질문에 답한다:
 
 이 feedback loop는 나중의 failure-mode tracking으로 이어져야 한다.
 
-같은 약한 output pattern, stale reference 문제, missing context 문제가 반복되면 이를 failure mode로 기록하고, workflow, 문서, adapter rule 중 무엇을 바꿔야 하는지 검토한다.
+같은 약한 output pattern, stale reference 문제, missing context 문제가 반복되면 이를 failure mode로 기록하고, workflow, 문서, helper rule 중 무엇을 바꿔야 하는지 검토한다.
+
+workflow surface가 바뀐 뒤에는 명시적인 stale-doc / stale-example 점검용으로 `../evaluations/staleness-review.md`를 함께 사용한다.
+반복되는 패턴은 관련 없는 메모에 흩어 적지 말고 내부 `.workspace/failure-modes.md` tracker에 기록한다.

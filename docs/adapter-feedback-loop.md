@@ -4,14 +4,15 @@ English | [한국어](adapter-feedback-loop.ko.md)
 
 ## Purpose
 
-This document defines how `Mimir-Skills` should evaluate the first real adapter experiences.
+This document defines how `Mimir-Skills` should evaluate real workflow usage across its current skill-first baseline and any optional helper or adapter surface.
 
 The goal is not to add heavy telemetry.
 The goal is to keep a small, repeatable feedback loop so the project can tell whether a workflow draft is actually saving time.
 
 ## Current Scope
 
-This feedback loop is defined for the currently implemented local adapter path and can later be reused for additional agent adapters.
+The current primary baseline is skill-first workflow guidance plus thin local collectors.
+Optional helper stubs and adapter paths can still be observed, but they are no longer the lead product story.
 
 Right now, the primary workflows to watch are:
 
@@ -93,9 +94,9 @@ Before running a comparison pass, prepare a small checklist that captures at lea
 - date of the run
 - workflow under test
 - execution surface under test:
-  - shared CLI
-  - current adapter path
-  - or both
+  - skill-first reading only
+  - local helper collector or deprecation stub
+  - optional adapter path
 - repository and task context
 - repository state:
   - dirty or clean
@@ -124,7 +125,7 @@ If the metrics are weak, improve in this order:
 2. missing local context collection
 3. domain knowledge inside the workflow skill
 4. clearer uncertainty handling
-5. adapter install or invocation friction
+5. helper or adapter install/invocation friction
 
 ## What Not To Do Yet
 
@@ -137,4 +138,7 @@ If the metrics are weak, improve in this order:
 
 This feedback loop should feed later failure-mode tracking.
 
-If the same weak output pattern, stale reference problem, or missing context problem repeats, record it as a failure mode and consider whether the workflow, docs, or adapter rules should change.
+If the same weak output pattern, stale reference problem, or missing context problem repeats, record it as a failure mode and consider whether the workflow, docs, or helper rules should change.
+
+Use `../evaluations/staleness-review.md` for the explicit stale-doc / stale-example pass after workflow-surface changes.
+Record repeated patterns in the internal `.workspace/failure-modes.md` tracker instead of scattering them across unrelated notes.

@@ -14,6 +14,7 @@ Current public evaluation docs:
 - `reviewer-comprehension.md`
 - `memory-promotion-evaluation.md`
 - `write-pr-rationale-agent-validation.md`
+- `staleness-review.md`
 
 These evaluations currently use the public-safe synthetic examples under:
 
@@ -24,3 +25,4 @@ These evaluations currently use the public-safe synthetic examples under:
 `reviewer-comprehension.md` also serves as the evaluation anchor for the `pr-rationale` workflow-specific skill.
 `memory-promotion-evaluation.md` serves as the evaluation anchor for the `memory-promote` workflow-specific skill.
 `write-pr-rationale-agent-validation.md` serves as the runtime-reduction gate for the `write-pr-rationale` wrapper skill.
+`staleness-review.md` serves as the Phase 2 maintenance anchor for checking doc/example drift against the current skill-first baseline.
