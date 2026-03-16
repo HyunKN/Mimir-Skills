@@ -75,6 +75,7 @@ AI coding agent는 이미 코드를 수정하고, 테스트를 실행하고, CI�
 - [Project One-Pager](docs/project-one-pager.ko.md)
 - [Glossary](docs/glossary.ko.md)
 - [Always-Loaded Rules](docs/always-loaded-rules.ko.md)
+- [Quick Start](docs/quick-start.ko.md)
 - [Codex Local Install](docs/codex-local-install.ko.md)
 - [Agent Support Levels](docs/agent-support-levels.ko.md)
 - [Adapter 피드백 루프](docs/adapter-feedback-loop.ko.md)

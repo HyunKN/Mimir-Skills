@@ -48,6 +48,10 @@ python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --fo
 
 ## Quick Start
 
+See [Quick Start](quick-start.md) for the broader side-by-side guidance between the shared CLI baseline and this Codex-local install path.
+
+![Codex local install snapshot](assets/codex-local-install.svg)
+
 After install, ask Codex with direct workflow language such as:
 
 - `Prepare a handoff from my current changes.`

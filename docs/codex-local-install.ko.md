@@ -48,6 +48,10 @@ python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --fo
 
 ## Quick Start
 
+shared CLI baseline과 이 Codex-local install path를 나란히 보는 더 넓은 안내는 [Quick Start](quick-start.ko.md)를 참고한다.
+
+![Codex local install snapshot](assets/codex-local-install.svg)
+
 설치 후에는 Codex에게 다음과 같이 직접 workflow 언어로 요청할 수 있다:
 
 - `Prepare a handoff from my current changes.`

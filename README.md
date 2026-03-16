@@ -75,6 +75,7 @@ What comes next:
 - [Project One-Pager](docs/project-one-pager.md)
 - [Glossary](docs/glossary.md)
 - [Always-Loaded Rules](docs/always-loaded-rules.md)
+- [Quick Start](docs/quick-start.md)
 - [Codex Local Install](docs/codex-local-install.md)
 - [Agent Support Levels](docs/agent-support-levels.md)
 - [Adapter Feedback Loop](docs/adapter-feedback-loop.md)

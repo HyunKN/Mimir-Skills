@@ -4,3 +4,4 @@
 !examples/**/.ai/
 !examples/**/.ai/**
 __pycache__/
+.obsidian/
