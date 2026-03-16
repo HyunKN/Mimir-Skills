@@ -8,6 +8,8 @@ This is the first runtime adapter for `decision-skills`.
 
 It provides a real local install path for Codex without claiming a remote registry, hosted installer, or full multi-agent packaging story.
 
+See [Agent Support Levels](agent-support-levels.md) for how this Codex path fits relative to Claude Code, Gemini CLI, Qwen Code, and the shared CLI baseline.
+
 ## What It Installs
 
 The installer copies the current outward-facing workflows and their internal dependencies into `$CODEX_HOME/skills/`:
