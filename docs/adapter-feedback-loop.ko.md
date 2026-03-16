@@ -86,6 +86,36 @@ workflow를 사용한 뒤에는 다음 질문에 답한다:
 
 이 기록은 로컬 팀 메모, 비공개 evaluation log, 또는 나중에 재사용 가능한 case가 되면 public-safe example로 남길 수 있다.
 
+## 구조화된 Observation Checklist
+
+비교 목적의 observation pass를 실행하기 전에는, 최소한 아래를 기록하는 작은 checklist를 준비한다:
+
+- 실행 날짜
+- 테스트한 workflow
+- 테스트한 execution surface:
+  - shared CLI
+  - 현재 adapter path
+  - 또는 둘 다
+- 저장소와 작업 context
+- 저장소 상태:
+  - dirty 또는 clean
+  - external clone 또는 현재 로컬 workspace
+  - synthetic sample 또는 실제 로컬 작업
+- 사용한 정확한 command
+- output mode:
+  - stdout
+  - file write
+  - 또는 둘 다
+- 첫 useful draft까지의 시간
+- usefulness bucket
+- 예상 수동 편집 시간
+- 같은 사용자가 이 workflow를 다시 사용할지 여부
+- path, import, discovery, stdout surface 관련 마찰
+- 실행 중 발견된 stale-doc 또는 stale-example mismatch
+
+이 checklist는 가볍게 유지해야 한다.
+목적은 다음 observation pass가 또 하나의 일회성 메모가 아니라, 이후 run과 비교 가능한 기록이 되게 하는 것이다.
+
 ## 무엇부터 개선할 것인가
 
 지표가 약하면 다음 순서로 개선한다:

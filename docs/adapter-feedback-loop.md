@@ -86,6 +86,36 @@ Use a short manual note with:
 
 This can live in local team notes, a private evaluation log, or later public-safe examples if the case becomes reusable.
 
+## Structured Observation Checklist
+
+Before running a comparison pass, prepare a small checklist that captures at least:
+
+- date of the run
+- workflow under test
+- execution surface under test:
+  - shared CLI
+  - current adapter path
+  - or both
+- repository and task context
+- repository state:
+  - dirty or clean
+  - external clone or active local workspace
+  - synthetic sample or real local work
+- exact command used
+- output mode:
+  - stdout
+  - file write
+  - or both
+- time to first useful draft
+- usefulness bucket
+- estimated manual edit time
+- whether the same user would reuse the workflow again
+- path, import, discovery, or stdout-surface friction
+- any stale-doc or stale-example mismatch discovered during the run
+
+The checklist should stay lightweight.
+It exists so the next observation pass is comparable to later ones instead of becoming another one-off note.
+
 ## What To Improve First
 
 If the metrics are weak, improve in this order:
