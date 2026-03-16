@@ -6,16 +6,34 @@
 
 이 문서는 지금 시점에서 `Mimir-Skills`를 가장 짧고 실용적인 경로로 바로 써보는 방법을 정리한다.
 
-현재 지원되는 진입 경로는 두 가지다:
+에이전트가 로컬 파일을 읽고 shell 명령을 실행할 수 있다면, 이제 primary path는 관련 `SKILL.md`를 직접 읽는 것이다.
+아래 명령 경로는 repo 주도 수집이나 draft generation이 필요할 때 쓰는 optional local helper다.
 
-1. project-root workflow에 가장 마찰이 적은 `shared CLI`
-2. Codex가 설치된 workflow skill을 직접 읽게 만들고 싶을 때의 `Codex local install`
+현재 실용적인 진입 경로는 세 가지다:
+
+1. 로컬 파일을 직접 읽는 에이전트를 위한 `skill-first reading`
+2. repo-root helper command를 위한 `shared CLI`
+3. Codex가 설치된 workflow skill을 직접 읽게 만들고 싶을 때의 `Codex local install`
 
 이 경로들이 현재 target agent family와 어떻게 연결되는지는 [Agent Support Levels](agent-support-levels.ko.md)를 참고한다.
 
-## Path 1: Shared CLI
+## Path 1: Skill-First Reading
 
-오늘 기준 기본 추천 경로는 이것이다.
+이제 기본 추천 경로는 이것이다.
+
+에이전트가 저장소 파일을 직접 열고 shell 명령을 실행할 수 있다면 이 경로를 사용한다.
+
+시작점:
+
+- `skills/prepare-handoff/SKILL.md`
+- `skills/write-pr-rationale/SKILL.md`
+- `skills/capture-ci-investigation/SKILL.md`
+
+그 다음 필요한 reference만 추가로 읽고, 수집이나 검증 도움이 필요할 때만 optional local script를 사용한다.
+
+## Path 2: Shared CLI
+
+이제 이것은 main product story가 아니라 기본 helper path다.
 
 저장소 루트에서 workflow output을 가장 적은 마찰로 직접 써보고 싶을 때 사용한다.
 
@@ -54,7 +72,7 @@ python -m mimir_skills write-pr-rationale --repo . --output pr-rationale.md
 - `write-pr-rationale`도 사용 가능하지만, 로컬 branch context가 얇을 때는 더 강한 `why` capture가 아직 필요하다.
 - output은 draft이며, 외부 공유 전에는 여전히 human review가 필요하다.
 
-## Path 2: Codex Local Install
+## Path 3: Codex Local Install
 
 Codex가 outward-facing workflow를 설치된 로컬 skill로 읽게 만들고 싶다면 이 경로를 사용한다.
 
@@ -86,13 +104,19 @@ python adapters/codex/scripts/install_codex_skills.py --workflows prepare-handof
 - 설치된 wrapper도 shared CLI 경로와 같은 shared workflow core를 사용한다
 - 설치된 Codex skill이 꼭 필요한 경우가 아니면, shared CLI 경로가 여전히 더 낮은 마찰의 기본 경로다
 
-## 두 경로 중 무엇을 고를까
+## 어떤 경로를 고를까
+
+다음과 같다면 `skill-first reading`을 고른다:
+
+- 에이전트가 로컬 파일을 직접 읽을 수 있다
+- generated helper output보다 skill rule과 playbook이 더 중요하다
+- 저장소를 adapter-light하게 유지하고 싶다
 
 다음과 같다면 `shared CLI`를 고른다:
 
-- workflow를 가장 빨리 시험해보고 싶다
+- 저장소 루트에서 command-driven helper path를 가장 빨리 시험해보고 싶다
 - project-root CLI agent를 사용한다
-- agent-specific install이나 discovery 동작이 꼭 필요하지 않다
+- 일반적인 file access 외의 agent-specific install이나 discovery 동작이 꼭 필요하지 않다
 
 다음과 같다면 `Codex local install`을 고른다:
 
@@ -105,3 +129,4 @@ python adapters/codex/scripts/install_codex_skills.py --workflows prepare-handof
 - hosted multi-agent install story는 아직 없다
 - agent family마다 support level이 다르며, 모든 target이 thin adapter를 갖고 있는 것은 아니다
 - 더 자세한 동작과 safety constraint는 [Always-Loaded Rules](always-loaded-rules.ko.md), [Workflow Surface](workflow-surface.ko.md), 각 workflow `SKILL.md`에 남아 있다
+- helper command는 secondary이며, primary workflow source of truth는 skill과 reference다

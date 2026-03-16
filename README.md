@@ -2,10 +2,10 @@ English | [한국어](README.ko.md)
 
 # Mimir-Skills
 
-Draft handoffs, PR rationale, and CI investigation context from local project state.
+Skill-first workflow guidance, playbooks, and validators for AI coding agents working from local files.
 
-`Mimir-Skills` is shifting toward an output-first workflow skill pack for AI coding agents.
-The product direction is simple: stop reconstructing engineering context by hand when a skill can read local signals and draft the first useful version for you.
+`Mimir-Skills` is shifting toward a skill-first repository for local-file AI coding agents.
+The direction is simple: put workflow judgment rules, safety constraints, and output patterns into `SKILL.md` and companion references so agents can read them directly, while keeping only deterministic validation and thin local collection helpers in Python.
 
 ## Who This Is For
 
@@ -17,9 +17,9 @@ It is also being shaped to help individual developers who use AI coding agents d
 
 ## What v1 Is Being Built To Do
 
-- `prepare-handoff`: read the current branch context and draft a handoff that explains what changed, what remains, and where to continue
-- `write-pr-rationale`: read the branch diff and validation context and draft a reviewer-facing explanation of why the change happened
-- `capture-ci-investigation`: draft a bounded CI investigation summary from the available failure context, without promising perfect root-cause analysis
+- `prepare-handoff`: give local-file agents a repeatable handoff pattern that explains what changed, what remains, and where to continue
+- `write-pr-rationale`: give local-file agents a reviewer-facing pattern for explaining what changed, why it changed, what was validated, and what reviewers should watch
+- `capture-ci-investigation`: give local-file agents a bounded CI investigation pattern that stays explicit about uncertainty and avoids overclaiming root cause
 
 ## Why This Exists
 
@@ -45,19 +45,20 @@ This repository should help generate strong drafts, not pretend to replace engin
 
 ## Current Status
 
-The repository is still in a documentation-first public v0.1 phase today.
-The output-first direction above is the next layer being built on top of the current internal engine.
+The repository is now in a skill-first direction reset.
+The public value centers on `SKILL.md`, references, examples, schemas, and deterministic validators first; local Python helpers remain available, but they are now secondary to the skill documents rather than the main product story.
 
 What is available now:
 
 - a public project one-pager
-- a shared CLI-friendly surface under `mimir_skills/`, including `python -m mimir_skills list`, `python -m mimir_skills prepare-handoff`, and `python -m mimir_skills write-pr-rationale`
-- a first Codex-local install path under `adapters/codex/scripts/install_codex_skills.py`, documented in `docs/codex-local-install.md`
+- user-facing workflow skills under `skills/prepare-handoff/`, `skills/write-pr-rationale/`, and the narrower beta `skills/capture-ci-investigation/`
+- internal support skills such as `decision-core`, `decision-capture`, `handoff-context`, `pr-rationale`, `ci-rationale`, `dependency-upgrade-decision`, and `memory-promote`
+- local helper surfaces under `mimir_skills/` and `skills/*/scripts/` for repository-root collection or draft generation when you explicitly want command-driven help
+- a first Codex-local install path under `adapters/codex/scripts/install_codex_skills.py`, now treated as an optional thin-adapter proof point rather than the main public path
 - a public support-level definition for Claude Code, OpenAI / Codex and GPT-facing coding-agent surfaces, Gemini CLI, and Qwen Code under `shared CLI support`, `documented support`, and `thin adapter support`
-- a compact always-loaded rules baseline for shared CLI runs and future adapters
+- a compact always-loaded rules baseline for shared CLI runs and any future adapters that remain worth supporting
 - a shared glossary
 - v0.1 specs for triggers, decision records, and memory promotion, plus machine-readable companion schemas for decision records and memory artifacts
-- starter skill templates plus `decision-core`, `decision-capture`, `dependency-upgrade-decision`, `ci-rationale`, `handoff-context`, `pr-rationale`, `memory-promote`, and the public workflow wrappers `prepare-handoff`, `write-pr-rationale`, and the narrower beta `capture-ci-investigation`
 - public-safe end-to-end examples for CI, dependency/config, and memory-promotion flows
 - evaluation prompts for replay, reviewer comprehension, and memory promotion
 - minimal CI for schema-helper consistency checks, example validation, public memory artifact validation, and derived-summary drift checks
@@ -65,10 +66,10 @@ What is available now:
 
 What comes next:
 
-- do not add another agent-specific adapter yet; keep the shared CLI as the baseline and only revisit a second thin adapter when repeated usage shows a clear UX gain beyond shared CLI or documented support
-- treat `prepare-handoff` as the stronger current workflow and confirm it once more on an in-progress, non-clean task state before freezing it as stable public guidance
-- keep `write-pr-rationale` in active output shaping until it can capture stronger `why` context for clean-state runs without depending on generic placeholders or heavy manual rewrite
-- keep `capture-ci-investigation` narrower and best-effort until stronger examples and reliability boundaries justify any direct-use script layer
+- keep the repository skill-first and move the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus reference playbooks
+- keep deterministic validators and example verification, but shrink workflow runtime code toward thin collectors instead of growing a larger Python engine
+- do not add another agent-specific adapter yet; only revisit adapter growth if a real UX gain remains after the skill-first reset
+- keep `write-pr-rationale` as the next skill-first codification target and keep `capture-ci-investigation` narrow until stronger examples justify anything more
 
 ## Documentation
 
@@ -93,15 +94,29 @@ What comes next:
 Mimir-Skills/
   README.md
   README.ko.md
-  adapters/
-  mimir_skills/
   docs/
-  spec/
-  template/
   skills/
+  spec/
   examples/
   evaluations/
+  scripts/
+  template/
+  mimir_skills/
+  adapters/
 ```
+
+Primary public surface:
+
+- `skills/`
+- `docs/`
+- `spec/`
+- `examples/`
+
+Secondary helper surface:
+
+- `scripts/`
+- `mimir_skills/`
+- `adapters/`
 
 The intended runtime artifact layout inside a user repository is:
 
@@ -137,4 +152,4 @@ The intended runtime artifact layout inside a user repository is:
 
 ## Near-Term Goal
 
-Ship a credible public v1 direction that lets teams see immediate workflow value, while keeping the current documentation, schema, and validation base intact underneath.
+Ship a credible public v1 direction where local-file agents can use the skills directly, while deterministic validators and thin local helpers remain available without becoming the main product.

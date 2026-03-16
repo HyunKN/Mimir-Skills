@@ -6,16 +6,34 @@ English | [한국어](quick-start.ko.md)
 
 This guide gives the shortest practical path to try `Mimir-Skills` today.
 
-There are two supported entry paths:
+If your agent can read local files and run shell commands, the primary path is now to read the relevant `SKILL.md` directly.
+The command paths below are optional local helpers for when you explicitly want repo-driven collection or draft generation.
 
-1. `shared CLI` for the lowest-friction project-root workflow
-2. `Codex local install` when you specifically want Codex to load installed workflow skills
+There are three practical entry paths:
+
+1. `skill-first reading` for agents that can open local files directly
+2. `shared CLI` for repo-root helper commands
+3. `Codex local install` when you specifically want Codex to load installed workflow skills
 
 See [Agent Support Levels](agent-support-levels.md) for how these paths map to the current target agent families.
 
-## Path 1: Shared CLI
+## Path 1: Skill-First Reading
 
-This is the default recommendation today.
+This is the primary recommendation for local-file agents.
+
+Use it when your agent can open repository files and run shell commands directly.
+
+Start from:
+
+- `skills/prepare-handoff/SKILL.md`
+- `skills/write-pr-rationale/SKILL.md`
+- `skills/capture-ci-investigation/SKILL.md`
+
+Then load only the references you need and use the optional local scripts only when collection or validation help is useful.
+
+## Path 2: Shared CLI
+
+This is now the default helper path, not the main product story.
 
 Use it when you want the lowest-friction way to try the workflow outputs directly from the repository root.
 
@@ -54,7 +72,7 @@ python -m mimir_skills write-pr-rationale --repo . --output pr-rationale.md
 - `write-pr-rationale` is usable, but still needs stronger `why` capture when local branch context is thin.
 - outputs are drafts and still require human review before external sharing.
 
-## Path 2: Codex Local Install
+## Path 3: Codex Local Install
 
 Use this when you want Codex to load the outward-facing workflows as installed local skills.
 
@@ -86,13 +104,19 @@ Then ask Codex with direct workflow language such as:
 - the installed wrappers use the same shared workflow core as the shared CLI path
 - the shared CLI path is still the lower-friction baseline when you do not specifically need installed Codex skills
 
-## Choosing Between the Two
+## Choosing Between the Paths
+
+Choose `skill-first reading` when:
+
+- your agent can read local files directly
+- you want the skill rules and playbooks, not just generated helper output
+- you want the repository to stay adapter-light
 
 Choose `shared CLI` when:
 
-- you want the fastest way to try the workflows
+- you want the fastest command-driven helper path from the repository root
 - you are using a project-root CLI agent
-- you do not need agent-specific install or discovery behavior
+- you do not need agent-specific install or discovery behavior beyond normal file access
 
 Choose `Codex local install` when:
 
@@ -105,3 +129,4 @@ Choose `Codex local install` when:
 - there is no hosted multi-agent install story yet
 - support levels differ by agent family, and not every target has a thin adapter
 - deeper behavior and safety constraints still live in [Always-Loaded Rules](always-loaded-rules.md), [Workflow Surface](workflow-surface.md), and the workflow `SKILL.md` files
+- helper commands are secondary; the skills and references are the primary workflow source of truth

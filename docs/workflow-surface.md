@@ -4,20 +4,21 @@ English | [한국어](workflow-surface.ko.md)
 
 ## Purpose
 
-This document defines the outward-facing workflow surface being built for `Mimir-Skills` v1.
+This document defines the outward-facing skill surface being built for `Mimir-Skills` v1.
 
-The repository already contains internal building blocks and workflow-specific skills.
-This document explains how those current internals map to the simpler public workflow story.
+The repository already contains internal building blocks, workflow-specific skills, and optional local helper code.
+This document explains how those pieces map to the simpler public skill story and which surfaces are now primary versus secondary.
 
 ## Public Workflow Surface
 
-The first public workflow surface centers on three user-facing workflows:
+The first public skill surface centers on three user-facing workflows:
 
 - `prepare-handoff`
 - `write-pr-rationale`
 - `capture-ci-investigation`
 
 These names describe the visible output a user wants, not the current internal package names.
+The primary source of truth should move toward `SKILL.md` and companion references, with runtime helpers treated as optional local utilities.
 
 ## Workflow Mapping
 
@@ -37,13 +38,12 @@ Current internal building blocks:
 Current status:
 
 - public workflow name is defined
-- an initial user-facing skill skeleton now exists under `skills/prepare-handoff/`
-- a shared CLI entry now exists under `python -m mimir_skills prepare-handoff`
-- the first local context collectors and direct Markdown output scripts now exist under `skills/prepare-handoff/scripts/`
-- a first Codex-local install path now exists under `adapters/codex/scripts/install_codex_skills.py`
-- the second observation pass showed that the shared CLI path is lower-friction than the current Codex-local path for this workflow
-- the current clean-state checkpoint shape is approaching guidance-ready status, but one more non-clean task-state confirmation is still planned before calling it stable public guidance
-- broader multi-agent packaging is still not implemented
+- the primary user-facing skill now exists under `skills/prepare-handoff/`
+- the skill and handoff playbook now carry the main dirty-tree, clean branch-range, and recent-commit fallback rules directly
+- docs-only reproduction now succeeds for the three representative branch-state cases above, so the runtime is no longer the only source of truth for this workflow's decision rules
+- local helper commands still exist under `python -m mimir_skills prepare-handoff` and `skills/prepare-handoff/scripts/`, but they are now secondary to the skill documents
+- the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
+- broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `write-pr-rationale`
 
@@ -62,13 +62,12 @@ Current status:
 
 - public workflow name is defined
 - an initial user-facing skill now exists under `skills/write-pr-rationale/`
-- a shared CLI entry now exists under `python -m mimir_skills write-pr-rationale`
-- the first local PR-context collectors and direct Markdown output scripts now exist under `skills/write-pr-rationale/scripts/`
-- a first Codex-local install path now exists under `adapters/codex/scripts/install_codex_skills.py`
-- the second observation pass showed that the shared CLI path is lower-friction than the current Codex-local path for this workflow
+- the current skill still depends more heavily on runtime-backed logic than `prepare-handoff`
+- local helper commands still exist under `python -m mimir_skills write-pr-rationale` and `skills/write-pr-rationale/scripts/`
+- the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
 - the current clean-state rationale still needs heavier rewrite than `prepare-handoff`, especially when explicit `why` context is missing
-- this workflow remains in active output shaping and should not yet be treated as stable public guidance for clean-state runs
-- broader multi-agent packaging is still not implemented
+- this workflow remains the next skill-first codification target and should not yet be treated as stable public guidance for clean-state runs
+- broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `capture-ci-investigation`
 
@@ -87,8 +86,9 @@ Current status:
 
 - public workflow name is defined
 - an initial beta user-facing skill now exists under `skills/capture-ci-investigation/`
-- the workflow now appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
-- the first Codex-local install path can now include this workflow through `adapters/codex/scripts/install_codex_skills.py`
+- the beta skill, examples, and boundary notes are the primary public surface today
+- the workflow still appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
+- the first Codex-local install path can still include this workflow through `adapters/codex/scripts/install_codex_skills.py`, but that remains optional and secondary
 - the beta guidance now points at both a stronger config-backed CI example and a weaker rerun-only monitoring example, so the overclaim boundary is more explicit
 - dedicated direct-use scripts are intentionally not implemented yet
 - this remains a narrower best-effort direction until stronger examples and reliability boundaries exist
@@ -108,12 +108,23 @@ Some current skills stay important but are not part of the first outward-facing 
 
 These should stay in the repository, but they should not lead the first public product story.
 
+## Helper Surface Note
+
+Secondary helper surfaces still exist and remain useful for local experimentation:
+
+- `mimir_skills/` shared CLI commands
+- `skills/*/scripts/` direct collectors or generators
+- `adapters/codex/scripts/install_codex_skills.py` as an optional thin-adapter proof point
+
+These helper surfaces should support the skills, not define them. The intended direction is for workflow judgment to live in `SKILL.md` and references first, with runtime code shrinking toward thin collectors or deterministic helpers.
+
 ## Transition Rule
 
 During the v0.1 to v1 transition:
 
-- public docs should describe the user-facing workflow outputs
-- internal skills may keep their current implementation-oriented names
-- new user-facing skills can be added on top of the current internals instead of replacing them immediately
+- public docs should describe user-facing workflow outputs through the skill documents first
+- internal skills may keep their current implementation-oriented names while the public story moves toward skill-first naming
+- local helper code may remain temporarily, but it should become secondary to the skill docs rather than the main product surface
+- new user-facing skills can still be added on top of the current internals instead of replacing them immediately
 
-The goal is to simplify adoption without throwing away the current internal engine.
+The goal is to simplify adoption without losing the current validation and collection utilities that still add deterministic value.

@@ -4,20 +4,21 @@
 
 ## Purpose
 
-이 문서는 `Mimir-Skills` v1을 위해 만들고 있는 outward-facing workflow surface를 정의한다.
+이 문서는 `Mimir-Skills` v1을 위해 만들고 있는 outward-facing skill surface를 정의한다.
 
-이 저장소에는 이미 internal building block과 workflow-specific skill이 들어 있다.
-이 문서는 현재의 internal 요소가 어떻게 더 단순한 public workflow story로 매핑되는지 설명한다.
+이 저장소에는 이미 internal building block, workflow-specific skill, optional local helper code가 들어 있다.
+이 문서는 그 요소들이 어떻게 더 단순한 public skill story로 매핑되는지, 그리고 어떤 surface가 이제 primary이고 어떤 것이 secondary인지 설명한다.
 
 ## Public Workflow Surface
 
-첫 번째 public workflow surface는 다음 세 user-facing workflow를 중심으로 한다:
+첫 번째 public skill surface는 다음 세 user-facing workflow를 중심으로 한다:
 
 - `prepare-handoff`
 - `write-pr-rationale`
 - `capture-ci-investigation`
 
 이 이름들은 현재 internal package 이름이 아니라, 사용자가 원하는 눈에 보이는 output을 설명한다.
+앞으로의 primary source of truth는 runtime helper보다 `SKILL.md`와 companion reference 쪽으로 이동해야 한다.
 
 ## Workflow Mapping
 
@@ -37,13 +38,12 @@ Current internal building blocks:
 Current status:
 
 - public workflow 이름은 정의되어 있다
-- 초기 user-facing skill skeleton이 이제 `skills/prepare-handoff/` 아래에 존재한다
-- 이제 `python -m mimir_skills prepare-handoff` 아래에 shared CLI entry가 존재한다
-- 첫 번째 로컬 context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/prepare-handoff/scripts/` 아래에 존재한다
-- 첫 Codex 전용 로컬 install path가 이제 `adapters/codex/scripts/install_codex_skills.py` 아래에 존재한다
-- 두 번째 observation pass 결과, 이 workflow에서는 shared CLI 경로가 현재 Codex-local path보다 마찰이 적었다
-- 현재 clean-state checkpoint shape는 guidance-ready 상태에 가까워졌지만, stable public guidance라고 부르기 전에는 진행 중인 non-clean task state에서 한 번 더 확인할 예정이다
-- 더 넓은 multi-agent packaging은 아직 구현되지 않았다
+- 이제 primary user-facing skill이 `skills/prepare-handoff/` 아래에 존재한다
+- skill과 handoff playbook이 이제 dirty-tree, clean branch-range, recent-commit fallback 규칙의 중심을 직접 담고 있다
+- 위 세 representative branch-state 케이스에 대한 docs-only 재현도 통과했으므로, 이 workflow의 판단 규칙은 더 이상 runtime만의 source of truth가 아니다
+- `python -m mimir_skills prepare-handoff`와 `skills/prepare-handoff/scripts/` 아래의 local helper command는 여전히 존재하지만, 이제는 skill 문서보다 secondary다
+- `adapters/codex/scripts/install_codex_skills.py` 아래의 Codex-local install path는 optional thin-adapter proof point로만 유지된다
+- 더 넓은 multi-agent packaging은 아직 구현되지 않았고, 더 이상 main short-term story도 아니다
 
 ### `write-pr-rationale`
 
@@ -62,13 +62,12 @@ Current status:
 
 - public workflow 이름은 정의되어 있다
 - 초기 user-facing skill이 이제 `skills/write-pr-rationale/` 아래에 존재한다
-- 이제 `python -m mimir_skills write-pr-rationale` 아래에 shared CLI entry가 존재한다
-- 첫 번째 로컬 PR-context collector와 직접 Markdown를 생성하는 output script가 이제 `skills/write-pr-rationale/scripts/` 아래에 존재한다
-- 첫 Codex 전용 로컬 install path가 이제 `adapters/codex/scripts/install_codex_skills.py` 아래에 존재한다
-- 두 번째 observation pass 결과, 이 workflow에서도 shared CLI 경로가 현재 Codex-local path보다 마찰이 적었다
+- 현재 skill은 `prepare-handoff`보다 runtime-backed logic 의존이 더 크다
+- `python -m mimir_skills write-pr-rationale`와 `skills/write-pr-rationale/scripts/` 아래의 local helper command는 여전히 존재한다
+- `adapters/codex/scripts/install_codex_skills.py` 아래의 Codex-local install path는 optional thin-adapter proof point로만 유지된다
 - 현재 clean-state rationale은 `prepare-handoff`보다 더 큰 재작성이 필요하며, 특히 명시적 `why` context가 없을 때 그 차이가 더 크다
-- 이 workflow는 여전히 active output shaping 단계에 있으며, clean-state run에 대해서는 아직 stable public guidance로 취급하면 안 된다
-- 더 넓은 multi-agent packaging은 아직 구현되지 않았다
+- 이 workflow는 다음 skill-first codification 대상이며, clean-state run에 대해서는 아직 stable public guidance로 취급하면 안 된다
+- 더 넓은 multi-agent packaging은 아직 구현되지 않았고, 더 이상 main short-term story도 아니다
 
 ### `capture-ci-investigation`
 
@@ -87,8 +86,9 @@ Current status:
 
 - public workflow 이름은 정의되어 있다
 - 초기 beta user-facing skill이 이제 `skills/capture-ci-investigation/` 아래에 존재한다
+- beta skill, example, boundary note가 현재의 primary public surface다
 - 이 workflow는 이제 `python -m mimir_skills list`에 beta wrapper로 보이지만, direct shared CLI generation command는 아직 없다
-- 첫 Codex 전용 로컬 install path는 이제 `adapters/codex/scripts/install_codex_skills.py`를 통해 이 workflow도 포함할 수 있다
+- 첫 Codex 전용 로컬 install path는 여전히 `adapters/codex/scripts/install_codex_skills.py`를 통해 이 workflow도 포함할 수 있지만, 그 경로는 optional하고 secondary다
 - beta guidance가 이제 더 강한 config-backed CI example과 더 약한 rerun-only monitoring example을 함께 가리키도록 되어, overclaim boundary가 더 명확해졌다
 - 전용 direct-use script는 의도적으로 아직 구현하지 않았다
 - 더 강한 example과 reliability boundary가 생길 때까지 더 좁고 best-effort인 방향으로 유지된다
@@ -108,12 +108,23 @@ Beta graduation 메모:
 
 이 요소들은 저장소 안에 계속 남아야 하지만, 첫 public product story의 전면에는 오지 않아야 한다.
 
+## Helper Surface Note
+
+로컬 실험을 위한 secondary helper surface는 여전히 존재하고 유용하다:
+
+- `mimir_skills/` shared CLI command
+- `skills/*/scripts/` 아래의 direct collector / generator
+- optional thin-adapter proof point로서의 `adapters/codex/scripts/install_codex_skills.py`
+
+다만 이 helper surface는 skill을 보조해야지 정의하면 안 된다. 의도하는 방향은 workflow 판단이 먼저 `SKILL.md`와 reference에 살고, runtime code는 점점 thin collector나 deterministic helper 쪽으로 줄어드는 것이다.
+
 ## Transition Rule
 
 v0.1에서 v1로 넘어가는 전환기에는:
 
-- public docs는 user-facing workflow output을 설명해야 한다
-- internal skill은 현재 implementation-oriented 이름을 유지해도 된다
+- public docs는 user-facing workflow output을 먼저 skill 문서 기준으로 설명해야 한다
+- internal skill은 public story가 skill-first naming으로 옮겨가는 동안에도 현재 implementation-oriented 이름을 유지해도 된다
+- local helper code는 당분간 남아 있어도 되지만, skill 문서보다 앞서는 main product surface가 되면 안 된다
 - 새로운 user-facing skill은 현재 internal 요소를 즉시 대체하기보다, 그 위에 추가될 수 있다
 
-목표는 현재 internal engine을 버리지 않으면서 adoption을 단순하게 만드는 것이다.
+목표는 현재의 validation 및 collection utility를 버리지 않으면서도 adoption을 단순하게 만드는 것이다.

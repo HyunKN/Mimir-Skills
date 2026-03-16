@@ -4,9 +4,9 @@ English | [한국어](project-one-pager.ko.md)
 
 ## What `Mimir-Skills` Is
 
-`Mimir-Skills` is an open documentation and skill-design project for AI-agent decision traceability.
+`Mimir-Skills` is a skill-first repository for AI-agent decision traceability.
 
-It helps teams preserve why meaningful engineering changes were made, not just what changed.
+It helps teams preserve why meaningful engineering changes were made, not just what changed, by giving local-file agents reusable workflow skills, playbooks, examples, and deterministic validators.
 
 ## The Problem
 
@@ -24,29 +24,34 @@ This creates a gap between activity logging and reusable decision context.
 
 ## Product Thesis
 
-The project is built on five claims:
+The project is built on six claims:
 
 1. Logs alone are not enough.
 2. High-impact decisions should be captured in a structured form.
 3. The canonical record should be AI-readable first.
 4. Human-readable summaries should be rendered from the same source.
 5. Long-term memory should be promoted from validated records, not written directly as truth.
+6. Workflow judgment rules should live in `SKILL.md` and references whenever local-file agents can read them directly; code should be reserved for deterministic validation or thin collection helpers.
 
 ## What Ships in Public v0.1
 
 - bilingual root README and `docs/` guides
+- skill-first workflow packages under `skills/`
 - a glossary for shared terminology
 - a trigger taxonomy for deciding what to record
 - a canonical decision record schema
 - a memory promotion policy
-- starter template and directory structure for future skills and examples
+- public-safe examples and evaluations
+- deterministic validation helpers for schemas, examples, and memory artifacts
+- optional local helper surfaces under `mimir_skills/` and `skills/*/scripts/`
 
 ## What Does Not Ship Yet
 
 - hosted services or central coordination
 - automatic memory promotion from every observation
-- support for every agent platform
+- adapter coverage for every agent platform
 - storage of hidden reasoning or unsafe private details
+- a large workflow runtime that tries to own judgment instead of the skill docs
 
 ## Initial Use Cases
 
@@ -63,11 +68,11 @@ The project is built on five claims:
 
 ## Near-Term Roadmap
 
-1. Stabilize the core docs and terms.
-2. Publish `decision-core` and `decision-capture` scaffolding.
-3. Add one end-to-end example using canonical JSON and rendered Markdown.
-4. Add replay-style evaluations for handoff quality.
-5. Expand into workflow-specific skills only after the core record model proves useful.
+1. Finish the skill-first direction reset in the public docs.
+2. Move the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus references, starting with `write-pr-rationale`.
+3. Keep deterministic validators and example verification stable while runtime code shrinks toward thin collectors.
+4. Treat adapter paths as optional proof points, not as the main product story.
+5. Expand workflow-specific skills only when the skill docs and examples stay stronger than the runtime they replace.
 
 ## What Success Looks Like
 
@@ -78,3 +83,4 @@ A new contributor or agent should be able to open this repository, read a small 
 - how summaries are derived
 - how memory is promoted safely
 - where the first skills and examples should be added
+- which parts are primary skill guidance and which parts are only optional local helpers

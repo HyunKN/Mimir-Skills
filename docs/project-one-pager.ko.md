@@ -4,9 +4,9 @@
 
 ## `Mimir-Skills`란 무엇인가
 
-`Mimir-Skills`는 AI 에이전트의 decision traceability를 위한 공개 문서 및 스킬 설계 프로젝트다.
+`Mimir-Skills`는 AI 에이전트의 decision traceability를 위한 skill-first 저장소다.
 
-이 프로젝트는 단순히 무엇이 바뀌었는지가 아니라, 의미 있는 엔지니어링 변화가 왜 일어났는지를 남기도록 돕는다.
+이 프로젝트는 단순히 무엇이 바뀌었는지가 아니라, 의미 있는 엔지니어링 변화가 왜 일어났는지를 남기도록 돕고, 로컬 파일을 읽는 에이전트가 재사용 가능한 workflow skill, playbook, example, deterministic validator를 직접 참조하도록 만든다.
 
 ## 문제 정의
 
@@ -24,29 +24,34 @@
 
 ## 제품 논지
 
-이 프로젝트는 다섯 가지 주장 위에 서 있다.
+이 프로젝트는 여섯 가지 주장 위에 서 있다.
 
 1. 로그만으로는 충분하지 않다.
 2. 영향도가 높은 결정은 구조화된 형태로 기록해야 한다.
 3. canonical record는 먼저 AI가 읽기 쉬워야 한다.
 4. 사람용 요약은 같은 원본에서 렌더링되어야 한다.
 5. 장기 메모리는 직접 쓰는 것이 아니라 검증된 기록에서 승격되어야 한다.
+6. 로컬 파일 기반 에이전트가 직접 읽을 수 있다면 workflow 판단 규칙은 `SKILL.md`와 reference에 살아야 하며, 코드는 결정론적 검증이나 얇은 수집 helper에만 남아야 한다.
 
 ## 공개 v0.1에 포함되는 것
 
 - 영문/국문 루트 README와 `docs/` 문서
+- `skills/` 아래의 skill-first workflow package
 - 공통 용어를 위한 glossary
 - 무엇을 기록할지 정하는 trigger taxonomy
 - canonical decision record schema
 - memory promotion policy
-- 이후 스킬과 example 확장을 위한 시작용 템플릿과 디렉터리 구조
+- public-safe example과 evaluation
+- schema, example, memory artifact를 위한 deterministic validation helper
+- `mimir_skills/`와 `skills/*/scripts/` 아래의 optional local helper surface
 
 ## 아직 포함하지 않는 것
 
 - 호스팅 서비스나 중앙 조정 계층
 - 모든 관찰을 자동으로 메모리로 승격하는 기능
-- 모든 에이전트 플랫폼 지원
+- 모든 에이전트 플랫폼에 대한 adapter coverage
 - hidden reasoning이나 안전하지 않은 비공개 정보 저장
+- 판단을 skill 문서 대신 런타임이 떠맡는 큰 workflow engine
 
 ## 초기 사용 사례
 
@@ -63,11 +68,11 @@
 
 ## 단기 로드맵
 
-1. 핵심 문서와 용어를 안정화한다.
-2. `decision-core`와 `decision-capture` 골격을 공개한다.
-3. canonical JSON과 Markdown 렌더링을 함께 보여주는 end-to-end example을 추가한다.
-4. handoff 품질을 검증하는 replay-style evaluation을 추가한다.
-5. 코어 record 모델의 유용성이 검증된 뒤 워크플로별 스킬로 확장한다.
+1. 공개 문서에서 skill-first direction reset을 마무리한다.
+2. 남아 있는 workflow 판단 규칙도 runtime code에서 `SKILL.md`와 reference로 옮긴다. 다음 대상은 `write-pr-rationale`다.
+3. 결정론적 validator와 example verification은 유지하면서, runtime code는 thin collector 쪽으로 축소한다.
+4. adapter path는 main product story가 아니라 optional proof point로 취급한다.
+5. skill 문서와 example이 그것이 대체하는 runtime보다 더 강하게 유지될 때만 workflow-specific skill을 확장한다.
 
 ## 성공 기준
 
@@ -78,3 +83,4 @@
 - 요약은 어떻게 파생되는지
 - 메모리는 어떻게 안전하게 승격되는지
 - 첫 스킬과 example을 어디에 추가해야 하는지
+- 무엇이 primary skill guidance이고 무엇이 optional local helper인지
