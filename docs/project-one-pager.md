@@ -35,7 +35,7 @@ The project is built on six claims:
 
 ## What Ships in Public v0.1
 
-- bilingual root README and `docs/` guides
+- English-first public docs, plus Korean companions for the root README and a small overview subset under `docs/`
 - skill-first workflow packages under `skills/`
 - a glossary for shared terminology
 - a trigger taxonomy for deciding what to record
@@ -63,8 +63,8 @@ The project is built on six claims:
 ## Why the Repository Is Bilingual
 
 - GitHub needs a clear default entry point for global readers.
-- Korean companions are kept for the root README and `docs/` guides.
-- English remains the source of truth so specs, schemas, skills, and future packaging can stay consistent.
+- Korean companions are kept only for the root README and a small entry or overview subset under `docs/`, currently `project-one-pager`, `quick-start`, and `glossary`.
+- English remains the source of truth so detailed docs, specs, schemas, skills, evaluations, and future packaging can stay consistent.
 
 ## Near-Term Roadmap
 

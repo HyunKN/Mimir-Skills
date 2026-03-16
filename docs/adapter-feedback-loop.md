@@ -1,5 +1,3 @@
-English | [한국어](adapter-feedback-loop.ko.md)
-
 # Adapter Feedback Loop
 
 ## Purpose

@@ -1,5 +1,3 @@
-English | [한국어](always-loaded-rules.ko.md)
-
 # Always-Loaded Rules
 
 ## Purpose

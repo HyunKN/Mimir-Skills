@@ -1,5 +1,3 @@
-English | [한국어](agent-support-levels.ko.md)
-
 # Agent Support Levels
 
 ## Purpose

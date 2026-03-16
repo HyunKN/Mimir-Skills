@@ -1,5 +1,3 @@
-English | [한국어](workflow-surface.ko.md)
-
 # Workflow Surface
 
 ## Purpose

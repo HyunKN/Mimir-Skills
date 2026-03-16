@@ -35,7 +35,7 @@
 
 ## 공개 v0.1에 포함되는 것
 
-- 영문/국문 루트 README와 `docs/` 문서
+- 영문 중심 공개 문서와, 루트 README 및 `docs/` 아래의 소수 입구/개요 문서에 대한 한국어 동반 문서
 - `skills/` 아래의 skill-first workflow package
 - 공통 용어를 위한 glossary
 - 무엇을 기록할지 정하는 trigger taxonomy
@@ -63,8 +63,8 @@
 ## 왜 이중 언어 저장소인가
 
 - GitHub에는 글로벌 독자를 위한 명확한 기본 진입점이 필요하다.
-- 한국어 동반 문서는 루트 README와 `docs/` 문서에만 유지한다.
-- 다만 스펙, 스키마, skill, 이후 패키징 일관성을 위해 영어를 기준 원문으로 유지한다.
+- 한국어 동반 문서는 루트 README와 `docs/` 아래의 소수 입구/개요 문서(`project-one-pager`, `quick-start`, `glossary`)에만 유지한다.
+- 상세 문서, 스펙, 스키마, skill, evaluation, 이후 패키징 일관성은 영어 기준 원문으로 유지한다.
 
 ## 단기 로드맵
 

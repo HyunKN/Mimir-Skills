@@ -62,7 +62,7 @@ What is available now:
 - public-safe end-to-end examples for CI, dependency/config, and memory-promotion flows
 - evaluation prompts for replay, reviewer comprehension, and memory promotion
 - minimal CI for schema-helper consistency checks, example validation, public memory artifact validation, and derived-summary drift checks
-- Korean companion docs for the root README and `docs/`, plus mirrored local workspace notes outside the published repository surface
+- Korean companion docs for the root README plus a small overview subset under `docs/` (`project-one-pager`, `quick-start`, and `glossary`)
 
 What comes next:
 
@@ -135,8 +135,8 @@ The intended runtime artifact layout inside a user repository is:
 
 - `README.md` is the default GitHub entry point.
 - English files are the source of truth for meaning.
-- Korean files are maintained only for the root README and files under `docs/`, alongside the English source as `*.ko.md`.
-- Local `.workspace/` notes may also be mirrored in Korean, but they are gitignored and not part of the public repository surface.
+- Korean files are maintained only for the root README and a small entry or overview subset under `docs/`, currently `project-one-pager`, `quick-start`, and `glossary`.
+- Detailed workflow docs, helper docs, skills, references, evaluations, contributor workflow files, and local planning notes stay English-first.
 - Public technical specs, skills, examples, evaluations, and contributor workflow files stay English-only.
 - JSON keys, schema names, and file paths stay in English across both languages.
 

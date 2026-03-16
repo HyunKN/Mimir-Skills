@@ -15,7 +15,7 @@
 2. collector, discovery, deprecation-note compatibility path를 위한 `local helpers`
 3. Codex가 설치된 workflow skill을 직접 읽게 만들고 싶을 때의 `Codex local install`
 
-이 경로들이 현재 target agent family와 어떻게 연결되는지는 [Agent Support Levels](agent-support-levels.ko.md)를 참고한다.
+이 경로들이 현재 target agent family와 어떻게 연결되는지는 [Agent Support Levels (English)](agent-support-levels.md)를 참고한다.
 
 ## Path 1: Skill-First Reading
 
@@ -130,5 +130,5 @@ python adapters/codex/scripts/install_codex_skills.py --workflows prepare-handof
 - `capture-ci-investigation`은 여전히 더 좁은 beta wrapper다
 - hosted multi-agent install story는 아직 없다
 - agent family마다 support level이 다르며, 모든 target이 thin adapter를 갖고 있는 것은 아니다
-- 더 자세한 동작과 safety constraint는 [Always-Loaded Rules](always-loaded-rules.ko.md), [Workflow Surface](workflow-surface.ko.md), 각 workflow `SKILL.md`에 남아 있다
+- 더 자세한 동작과 safety constraint는 [Always-Loaded Rules (English)](always-loaded-rules.md), [Workflow Surface (English)](workflow-surface.md), 각 workflow `SKILL.md`에 남아 있다
 - helper command는 secondary이며, primary workflow source of truth는 skill과 reference다

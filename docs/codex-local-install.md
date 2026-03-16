@@ -1,5 +1,3 @@
-English | [한국어](codex-local-install.ko.md)
-
 # Codex Local Install
 
 ## Purpose
