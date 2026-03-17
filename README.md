@@ -75,7 +75,24 @@ python -m mimir_skills install --target codex
 
 The installer auto-detects the target when `.claude/` or `.codex/` exists in the project directory. Use `--target` to be explicit.
 
+After install, you can usually just tell your agent one of these:
+
+```text
+Prepare a handoff from my current changes.
+Write PR rationale for this branch.
+Summarize this CI failure as a bounded investigation note.
+```
+
+If routing is weak or inconsistent, use the explicit fallback form:
+
+```text
+Use the prepare-handoff workflow. Prepare a handoff from my current changes.
+Use the write-pr-rationale workflow. Write PR rationale for this branch.
+Use the capture-ci-investigation workflow. Summarize this CI failure as a bounded investigation note.
+```
+
 See [Local Install](docs/codex-local-install.md) for full options and details.
+See [Prompt Macros](docs/prompt-macros.md) for the portable copy-paste prompt pack.
 
 ### 3. Local Helpers
 
@@ -93,6 +110,7 @@ Start here:
 
 - [Project One-Pager](docs/project-one-pager.md)
 - [Quick Start](docs/quick-start.md)
+- [Prompt Macros](docs/prompt-macros.md)
 - [Workflow Trigger Table](docs/workflow-trigger-table.md)
 - [Workflow Surface](docs/workflow-surface.md)
 - [Agent Support Levels](docs/agent-support-levels.md)
