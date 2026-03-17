@@ -194,6 +194,95 @@
         "additionalProperties": true
       }
     },
+    "ai_assistance": {
+      "type": "object",
+      "properties": {
+        "used": {
+          "type": "boolean"
+        },
+        "summary": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "tools": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "human_verification": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      },
+      "additionalProperties": true
+    },
+    "approval": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_required",
+            "pending",
+            "approved",
+            "rejected"
+          ]
+        },
+        "approver": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "scope": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "timestamp": {
+          "$ref": "#/$defs/utcTimestamp"
+        }
+      },
+      "additionalProperties": true
+    },
+    "change_scope": {
+      "type": "object",
+      "properties": {
+        "risk_tier": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "blast_radius": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "deployment_stage": {
+          "type": "string",
+          "enum": [
+            "local",
+            "ci",
+            "staging",
+            "canary",
+            "production",
+            "other"
+          ]
+        },
+        "rollback_plan": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "post_deploy_status": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "monitoring",
+            "stable",
+            "incident"
+          ]
+        },
+        "post_deploy_summary": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      },
+      "additionalProperties": true
+    },
     "remaining_risks": {
       "$ref": "#/$defs/nonEmptyStringArray"
     },
