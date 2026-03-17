@@ -22,6 +22,13 @@ They help an agent choose the right public workflow before loading the detailed 
 - `write-pr-rationale` is for reviewer-facing explanation, not canonical truth. If explicit `why` context is thin, keep the rationale tentative.
 - `capture-ci-investigation` is for bounded incident summaries. Keep observed evidence, current explanation, unknowns, and temporary action separate.
 
+## Governance Threshold Hint
+
+- When a workflow also needs a canonical decision record, use `spec/trigger-taxonomy.md` as the single threshold for optional governance fields.
+- Prefer `ai_assistance` when AI-assisted tooling or stale guidance materially shaped the path under review.
+- Prefer `approval` and `change_scope` when approval boundaries, blast radius, rollout stage, rollback posture, or post-deploy monitoring changed what could safely ship.
+- Leave those fields absent for low-risk local work so the record stays skill-first and lightweight.
+
 ## Local Signal Hints
 
 - Prefer `prepare-handoff` when the strongest signal is branch state:
