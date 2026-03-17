@@ -17,6 +17,7 @@ The first public skill surface centers on three user-facing workflows:
 
 These names describe the visible output a user wants, not the current internal package names.
 The primary source of truth should move toward `SKILL.md` and companion references, with runtime helpers treated as optional local utilities.
+Use [`workflow-trigger-table.md`](workflow-trigger-table.md) when the first question is which public workflow should be loaded at all.
 
 ## Workflow Mapping
 
@@ -124,6 +125,15 @@ Secondary helper surfaces still exist and remain useful for local experimentatio
 - `adapters/codex/scripts/install_codex_skills.py` as an optional thin-adapter proof point
 
 These helper surfaces should support the skills, not define them. The intended direction is for workflow judgment to live in `SKILL.md` and references first, with runtime code shrinking toward thin collectors or deterministic helpers.
+
+## Routing Note
+
+The public routing order is now:
+
+1. choose the visible workflow through [`workflow-trigger-table.md`](workflow-trigger-table.md)
+2. load that workflow's `SKILL.md`
+3. load the companion reference only when the draft needs more detailed output or boundary guidance
+4. use thin collectors or validators only when deterministic local evidence still adds value
 
 ## Transition Rule
 

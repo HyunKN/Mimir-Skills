@@ -67,6 +67,7 @@ What is available now:
 What comes next:
 
 - keep the repository skill-first and move the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus reference playbooks
+- make workflow selection clearer through a public trigger table before considering any machine-readable routing layer
 - keep deterministic validators and example verification, but shrink workflow runtime code toward thin collectors instead of growing a larger Python engine
 - do not add another agent-specific adapter yet; only revisit adapter growth if a real UX gain remains after the skill-first reset
 - keep `write-pr-rationale` in first-pass skill-first form while stronger explicit `why` capture is still being gathered, and keep `capture-ci-investigation` narrow until stronger examples justify anything more
@@ -76,6 +77,7 @@ What comes next:
 - [Project One-Pager](docs/project-one-pager.md)
 - [Glossary](docs/glossary.md)
 - [Always-Loaded Rules](docs/always-loaded-rules.md)
+- [Workflow Trigger Table](docs/workflow-trigger-table.md)
 - [Quick Start](docs/quick-start.md)
 - [Codex Local Install](docs/codex-local-install.md)
 - [Agent Support Levels](docs/agent-support-levels.md)
