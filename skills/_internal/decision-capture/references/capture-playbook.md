@@ -5,6 +5,7 @@
 - CI failure triage
 - architecture or interface changes
 - dependency, config, or security-sensitive updates
+- risky AI-assisted changes on shared or production-facing paths
 - handoff preparation
 
 ## Capture Sequence
@@ -15,10 +16,11 @@
 4. Write the decision statement in one sentence.
 5. Record the chosen option and why it won over alternatives.
 6. List affected paths.
-7. Record validation, remaining risks, and follow-up if they exist.
-8. Validate the completed JSON record.
-9. Save the JSON record.
-10. Render Markdown with `../scripts/render_summary.py <record-path>` only if another human or agent needs a summary.
+7. Check the governance-field threshold matrix in `../../../../spec/trigger-taxonomy.md`, then add only the optional governance context that passes that threshold.
+8. Record validation, remaining risks, and follow-up if they exist.
+9. Validate the completed JSON record.
+10. Save the JSON record.
+11. Render Markdown with `../scripts/render_summary.py <record-path>` only if another human or agent needs a summary.
 
 ## Draft Workflow
 
@@ -39,6 +41,13 @@
 
 - Link the failing job, relevant file or config, and the validating rerun.
 - Focus on the root cause and chosen remediation.
+
+### Risky AI-Assisted Change
+
+- Record what AI-assisted tooling contributed only when it materially shaped the proposed path.
+- Capture how a human verified or overruled that guidance rather than copying hidden reasoning.
+- Add approval and change-scope fields when blast radius, rollout stage, or rollback posture would matter during review or incident follow-up.
+- Leave governance fields absent for low-risk local work where they would not change a later review.
 
 ### Multi-File Refactor
 
