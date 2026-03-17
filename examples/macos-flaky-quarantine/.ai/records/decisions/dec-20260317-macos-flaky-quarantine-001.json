@@ -1,0 +1,93 @@
+{
+  "id": "dec-20260317-macos-flaky-quarantine-001",
+  "timestamp": "2026-03-17T05:20:00Z",
+  "task_ref": {
+    "source": "ci",
+    "id": "build-1852",
+    "title": "Quarantine flaky macOS visual snapshot test"
+  },
+  "decision": "Quarantine the flaky macOS avatar snapshot spec from the required visual workflow, keep it running in a nightly-only lane, and reopen full triage before re-enabling it.",
+  "problem_context": "The release-required macOS visual job started failing on the same avatar snapshot assertion across multiple reruns and two branches after a browser patch. Linux and Windows visual lanes stayed green.",
+  "alternatives_considered": [
+    {
+      "name": "Increase retries for the macOS visual workflow",
+      "status": "rejected",
+      "reason": "Would blur whether the macOS-only snapshot failure is stable and make the required lane harder to interpret."
+    },
+    {
+      "name": "Disable the full macOS visual job",
+      "status": "deferred",
+      "reason": "Would unblock merges faster but would remove broader visual coverage for unrelated macOS cases."
+    },
+    {
+      "name": "Quarantine the failing spec and keep nightly coverage",
+      "status": "selected",
+      "reason": "Narrows the blast radius while preserving a visible signal for the flaky test in a separate lane."
+    }
+  ],
+  "selected_option": {
+    "name": "Quarantine the failing spec and keep nightly coverage",
+    "summary": "Exclude the single flaky avatar snapshot spec from the required macOS visual lane, keep it in a nightly quarantine lane, and review re-enable criteria after five nightly runs."
+  },
+  "rationale": "Repeated failures on the same macOS-only snapshot plus stable Linux and Windows results point to a narrow flaky rendering path, not a suite-wide regression. Quarantining one spec preserves most release gating while keeping the failing test visible in a separate lane.",
+  "evidence_refs": [
+    {
+      "kind": "ci",
+      "ref": "build-1852/macos-visual",
+      "summary": "The required macOS visual job failed three times on the same account-avatar snapshot diff across two PR reruns.",
+      "captured_at": "2026-03-17T04:11:00Z"
+    },
+    {
+      "kind": "ci",
+      "ref": "build-1855/macos-visual",
+      "summary": "A fresh rerun on the latest commit failed on the same spec again, which reduced the chance of a one-off CI interruption.",
+      "captured_at": "2026-03-17T04:28:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": ".github/workflows/e2e-visual.yml",
+      "summary": "The macOS visual lane is part of the required merge gate, so any quarantine changes affect a shared workflow path.",
+      "captured_at": "2026-03-17T04:34:00Z"
+    },
+    {
+      "kind": "file",
+      "ref": "tests/visual/account-avatar.spec.ts",
+      "summary": "The failing assertion is isolated to the macOS avatar snapshot spec; adjacent visual specs in the same suite continued to pass.",
+      "captured_at": "2026-03-17T04:39:00Z"
+    },
+    {
+      "kind": "command",
+      "ref": "pnpm test:visual --project=macos --grep \"account avatar\"",
+      "summary": "A targeted local macOS rerun reproduced the same snapshot diff while the Linux baseline remained unchanged.",
+      "captured_at": "2026-03-17T04:47:00Z"
+    }
+  ],
+  "affected_paths": [
+    ".github/workflows/e2e-visual.yml",
+    "tests/visual/account-avatar.spec.ts"
+  ],
+  "validation_run": [
+    {
+      "type": "build",
+      "command": "Run required macOS visual workflow with avatar spec quarantined",
+      "result": "passed",
+      "summary": "The required macOS visual lane passed once after excluding the flaky spec from the merge-gating job."
+    },
+    {
+      "type": "manual",
+      "command": "Nightly quarantined avatar snapshot lane",
+      "result": "partial",
+      "summary": "The isolated nightly lane still failed on the same snapshot diff, preserving the signal while the required lane recovered."
+    }
+  ],
+  "remaining_risks": [
+    "The quarantine could linger and normalize reduced macOS coverage if re-enable criteria are not enforced.",
+    "The flaky avatar snapshot may reflect a broader rendering issue that could spread to other visual specs after future browser updates."
+  ],
+  "confidence": 0.74,
+  "follow_up": [
+    "Collect five nightly quarantine runs before deciding whether to rewrite the snapshot, pin the browser version, or re-enable the spec in the required lane.",
+    "Re-open broader CI triage immediately if another macOS visual spec starts failing on the same browser patch line."
+  ],
+  "supersedes": []
+}

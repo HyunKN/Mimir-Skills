@@ -95,3 +95,4 @@ In those cases, the summary should still say:
 
 - `examples/windows-ci-timeout/` shows a stronger config-backed CI decision with a validating rerun.
 - `examples/linux-ci-rerun-watch/` shows a weaker rerun-only signal where monitoring is the selected action and the issue is not described as fixed.
+- `examples/macos-flaky-quarantine/` shows a repeated flaky-test case where a narrow quarantine changes shared workflow behavior and therefore requires explicit blast-radius and follow-up language.

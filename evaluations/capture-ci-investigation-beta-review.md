@@ -9,12 +9,11 @@ The goal is to confirm that the draft keeps observed evidence, current explanati
 
 ## Suggested Cases
 
-Review at least these two public-safe CI shapes:
+Review at least these public-safe CI shapes:
 
 - `../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json`
 - `../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json`
-
-Add a third case later when a new public-safe CI example lands.
+- `../examples/macos-flaky-quarantine/.ai/records/decisions/dec-20260317-macos-flaky-quarantine-001.json`
 
 ## Review Questions
 

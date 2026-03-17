@@ -20,6 +20,8 @@ Current public evaluation docs:
 These evaluations currently use the public-safe synthetic examples under:
 
 - `../examples/windows-ci-timeout/`
+- `../examples/linux-ci-rerun-watch/`
+- `../examples/macos-flaky-quarantine/`
 - `../examples/cache-client-pin/`
 - `../examples/cache-client-tls-memory/`
 
