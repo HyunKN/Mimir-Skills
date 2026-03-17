@@ -45,6 +45,7 @@ Use this skill to draft a reviewer-facing PR rationale from the current local pr
 ## Load References As Needed
 
 - Read [`references/decision-rules.md`](references/decision-rules.md) for decision rules and the output template.
+- Read [`references/invocation-prompts.md`](references/invocation-prompts.md) when you want copy-paste prompt macros for installed-agent use.
 - Read [`../_internal/pr-rationale/SKILL.md`](../_internal/pr-rationale/SKILL.md) for the reviewer-facing summary shape and PR-specific guardrails.
 - Read [`../_internal/pr-rationale/references/pr-playbook.md`](../_internal/pr-rationale/references/pr-playbook.md) for the local signal map, default section patterns, and compact fallback examples.
 - Read [`../_internal/decision-capture/SKILL.md`](../_internal/decision-capture/SKILL.md) only when a missing canonical record should be created before drafting the rationale.
