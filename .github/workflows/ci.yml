@@ -45,11 +45,5 @@ jobs:
           test -f "$RUNNER_TEMP/generic-project/.skills/capture-ci-investigation/SKILL.md"
           test -f "$RUNNER_TEMP/generic-project/.skills/mimir-skills-support/install-manifest.json"
 
-      - name: Smoke-test legacy install_codex_skills.py
-        run: |
-          python adapters/codex/scripts/install_codex_skills.py --codex-home "$RUNNER_TEMP/legacy-codex-home" --workflows write-pr-rationale
-          test -f "$RUNNER_TEMP/legacy-codex-home/skills/write-pr-rationale/SKILL.md"
-          test -f "$RUNNER_TEMP/legacy-codex-home/skills/mimir-skills-support/install-manifest.json"
-
       - name: Verify examples, summaries, and schema
         run: python scripts/verify_examples.py

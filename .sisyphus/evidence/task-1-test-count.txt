@@ -1,0 +1,19 @@
+Test Count Verification
+=======================
+
+Total test methods in test_install.py: 9 methods
+Total test cases executed: 18 (includes parametrized/inherited tests)
+Occurrences of legacy test (should be 0): 0
+
+Test methods in test_install.py:
+1. test_cli_install_defaults_to_codex_target
+2. test_cli_install_accepts_explicit_codex_target
+3. test_cli_install_accepts_target_flag
+4. test_cli_install_claude_target
+5. test_cli_install_generic_target
+6. test_auto_detect_claude_target
+7. test_auto_detect_codex_target
+8. test_auto_detect_ambiguous_raises
+9. test_rewrite_replaces_example_paths
+
+Legacy test 'test_legacy_script_main_still_installs' successfully removed.

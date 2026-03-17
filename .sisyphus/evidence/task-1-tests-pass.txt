@@ -1,0 +1,7 @@
+..................
+----------------------------------------------------------------------
+Ran 18 tests in 0.590s
+
+OK
+Wrote prepare-handoff deprecation note: C:/Users/Public/Documents/ESTsoft/CreatorTemp/tmp9wfi2nhd/note.md
+Wrote write-pr-rationale deprecation note: C:/Users/Public/Documents/ESTsoft/CreatorTemp/tmpjpr1_5e9/note.md

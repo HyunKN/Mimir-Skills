@@ -1,0 +1,9 @@
+Installed Mimir-Skills workflows into C:/Users/hi/AppData/Local/Temp/qa-codex/skills (target: codex)
+Installed workflows:
+  prepare-handoff
+Installed skill directories:
+  C:/Users/hi/AppData/Local/Temp/qa-codex/skills/decision-capture
+  C:/Users/hi/AppData/Local/Temp/qa-codex/skills/decision-core
+  C:/Users/hi/AppData/Local/Temp/qa-codex/skills/handoff-context
+  C:/Users/hi/AppData/Local/Temp/qa-codex/skills/prepare-handoff
+Support assets: C:/Users/hi/AppData/Local/Temp/qa-codex/skills/mimir-skills-support

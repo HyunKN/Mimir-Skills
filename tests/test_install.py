@@ -9,7 +9,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from mimir_skills.cli import main as cli_main
-from mimir_skills.install_codex import main as install_main
 
 
 class InstallCommandTests(unittest.TestCase):
@@ -127,34 +126,13 @@ class InstallCommandTests(unittest.TestCase):
                         "--workflows",
                         "write-pr-rationale",
                     ]
-                )
+                 )
 
             self.assertEqual(exit_code, 0)
             skills_root = Path(tempdir) / ".skills"
             self.assertTrue((skills_root / "write-pr-rationale" / "SKILL.md").exists())
             self.assertTrue((skills_root / "pr-rationale" / "SKILL.md").exists())
             self.assertIn("target: generic", stdout.getvalue())
-
-    def test_legacy_script_main_still_installs(self) -> None:
-        with TemporaryDirectory() as tempdir:
-            stdout = io.StringIO()
-            with redirect_stdout(stdout):
-                exit_code = install_main(
-                    [
-                        "--codex-home",
-                        tempdir,
-                        "--workflows",
-                        "capture-ci-investigation",
-                    ]
-                )
-
-            self.assertEqual(exit_code, 0)
-            skills_root = Path(tempdir) / "skills"
-            self.assertTrue(
-                (skills_root / "capture-ci-investigation" / "SKILL.md").exists()
-            )
-            self.assertTrue((skills_root / "ci-rationale" / "SKILL.md").exists())
-            self.assertIn("Support assets:", stdout.getvalue())
 
     def test_auto_detect_claude_target(self) -> None:
         with TemporaryDirectory() as tempdir:
