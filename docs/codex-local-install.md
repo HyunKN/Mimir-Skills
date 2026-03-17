@@ -79,16 +79,6 @@ When `--target` is not specified, the installer detects the target from the proj
 
 If both `.claude/` and `.codex/` exist, `--target` is required.
 
-## Legacy Codex Install
-
-The older direct script path still works as a backward-compatibility entrypoint:
-
-```bash
-python adapters/codex/scripts/install_codex_skills.py
-```
-
-The `python -m mimir_skills install` command without `--target` also defaults to `codex` when `$CODEX_HOME` is set, preserving backward compatibility.
-
 ## Force Replace
 
 With `--force`, the installer replaces only paths that already look like a previous `Mimir-Skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.

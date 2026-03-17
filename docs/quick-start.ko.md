@@ -137,12 +137,6 @@ python -m mimir_skills install
 python -m mimir_skills install --workflows prepare-handoff write-pr-rationale
 ```
 
-예전 direct script 경로도 명시적으로 원하면 계속 사용할 수 있다:
-
-```bash
-python adapters/codex/scripts/install_codex_skills.py
-```
-
 그 다음 Codex에게 다음과 같이 직접 workflow 언어로 요청한다:
 
 - `Prepare a handoff from my current changes.`

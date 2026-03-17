@@ -116,12 +116,12 @@ Mimir-Skills/
   docs/
   skills/
   spec/
-  examples/
-  evaluations/
-  scripts/
-  template/
-  mimir_skills/
-  adapters/
+   examples/
+   evaluations/
+   scripts/
+   template/
+   mimir_skills/
+
 ```
 
 기본 public surface:
@@ -135,7 +135,6 @@ Mimir-Skills/
 
 - `scripts/`
 - `mimir_skills/`
-- `adapters/`
 
 사용자 저장소 내부에서 의도하는 runtime artifact 구조는 다음과 같습니다.
 

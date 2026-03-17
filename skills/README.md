@@ -25,4 +25,4 @@ They include bounded local automation only where deterministic behavior still ad
 
 The public story is now centered on the skills themselves.
 Internal packages still matter, but they are building blocks rather than the final outward-facing surface.
-Helper code under `mimir_skills/`, `skills/*/scripts/`, and `adapters/` remains secondary: useful for local collection, validation, or proof points, but no longer the intended source of workflow judgment.
+Helper code under `mimir_skills/` and `skills/*/scripts/` remains secondary: useful for local collection, validation, or proof points, but no longer the intended source of workflow judgment.

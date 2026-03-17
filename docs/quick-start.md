@@ -137,12 +137,6 @@ Install only the main direct-use workflows:
 python -m mimir_skills install --workflows prepare-handoff write-pr-rationale
 ```
 
-The older direct script path still works when you explicitly want it:
-
-```bash
-python adapters/codex/scripts/install_codex_skills.py
-```
-
 Then ask Codex with direct workflow language such as:
 
 - `Prepare a handoff from my current changes.`

@@ -116,12 +116,12 @@ Mimir-Skills/
   docs/
   skills/
   spec/
-  examples/
-  evaluations/
-  scripts/
-  template/
-  mimir_skills/
-  adapters/
+   examples/
+   evaluations/
+   scripts/
+   template/
+   mimir_skills/
+
 ```
 
 Primary public surface:
@@ -135,7 +135,6 @@ Secondary helper surface:
 
 - `scripts/`
 - `mimir_skills/`
-- `adapters/`
 
 The intended runtime artifact layout inside a user repository is:
 
