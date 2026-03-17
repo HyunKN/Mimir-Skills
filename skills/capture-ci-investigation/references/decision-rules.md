@@ -20,6 +20,15 @@ Treat rerun-only success or partial validation as a signal reducer, not proof of
 
 If the current best action would touch shared workflow behavior such as retries, timeouts, quarantines, cache policy, base image, or job sequencing, call out the blast radius and the follow-up needed before describing the change as safe.
 
+## Governance Context
+
+If stale guidance, AI-assisted suggestions, approval scope, or rollout stage materially affected the incident path, mention that context explicitly instead of collapsing it into a generic fix note.
+
+- Say whether the risky path was AI-assisted only when that provenance changes how the event should be reviewed later.
+- Say what approval or deployment boundary limited the response when it affected the chosen action.
+- Prefer bounded wording such as canary, rollback-ready, monitor-first, or escalation-required over vague safety language.
+- When a canonical record is needed, use the governance-field threshold matrix in `../../../spec/trigger-taxonomy.md` to decide which optional governance fields are worth filling.
+
 ## Escalation
 
 Escalate to a canonical decision record or deeper CI investigation when the issue changes shared policy, repeats across platforms, blocks release or deploy gates, or still lacks enough evidence for a bounded summary.
