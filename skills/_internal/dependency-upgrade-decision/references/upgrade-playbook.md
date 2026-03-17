@@ -57,5 +57,5 @@
 
 ## Example Mapping
 
-- The public synthetic example under `../../examples/cache-client-pin/` shows a dependency-and-config trigger where pinning was chosen over immediate adoption.
+- The public synthetic example under `../../../examples/cache-client-pin/` shows a dependency-and-config trigger where pinning was chosen over immediate adoption.
 - Use that example when you need a compact reference for `decision`, `selected_option`, `evidence_refs`, `validation_run`, and `remaining_risks` in this workflow.

@@ -9,7 +9,7 @@ Use this skill when dependency or config changes need a canonical decision recor
 
 ## Workflow
 
-1. Confirm that the task qualifies under `../../spec/trigger-taxonomy.md`, especially the dependency or config change trigger.
+1. Confirm that the task qualifies under `../../../spec/trigger-taxonomy.md`, especially the dependency or config change trigger.
 2. Read `../decision-capture/SKILL.md` if a new decision record must be created or updated from scratch.
 3. Gather only the dependency-specific evidence needed for the choice: manifest diff, lockfile or config changes, release notes, validation runs, and risk notes.
 4. Compare the real options, such as upgrade now, pin the current version, roll back, defer, or add a compatibility change.
@@ -37,6 +37,6 @@ Use this skill when dependency or config changes need a canonical decision recor
 - Read [`references/upgrade-playbook.md`](references/upgrade-playbook.md) when capturing upgrade, pin, rollback, or defer decisions.
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when creating or updating a canonical record.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when checking shared validation and safety rules.
-- Read [`../../spec/decision-record-schema.md`](../../spec/decision-record-schema.md) when filling or reviewing fields.
-- Read [`../../spec/trigger-taxonomy.md`](../../spec/trigger-taxonomy.md) when deciding whether a dependency change crosses a capture trigger.
-- Inspect the public example under [`../../examples/cache-client-pin/.ai/records/decisions/dec-20260312-cache-client-pin-001.json`](../../examples/cache-client-pin/.ai/records/decisions/dec-20260312-cache-client-pin-001.json) when you need a concrete dependency/config record shape.
+- Read [`../../../spec/decision-record-schema.md`](../../../spec/decision-record-schema.md) when filling or reviewing fields.
+- Read [`../../../spec/trigger-taxonomy.md`](../../../spec/trigger-taxonomy.md) when deciding whether a dependency change crosses a capture trigger.
+- Inspect the public example under [`../../../examples/cache-client-pin/.ai/records/decisions/dec-20260312-cache-client-pin-001.json`](../../../examples/cache-client-pin/.ai/records/decisions/dec-20260312-cache-client-pin-001.json) when you need a concrete dependency/config record shape.

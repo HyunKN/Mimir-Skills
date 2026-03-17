@@ -9,10 +9,10 @@ Use this skill to capture high-impact engineering decisions close to the moment 
 
 ## Workflow
 
-1. Confirm that the task qualifies under `../../spec/trigger-taxonomy.md`.
+1. Confirm that the task qualifies under `../../../spec/trigger-taxonomy.md`.
 2. Run `scripts/create_decision_record.py <slug>` when you need a bounded draft record scaffold.
 3. Gather the minimum evidence needed to support the decision.
-4. Fill the draft using the required fields in `../../spec/decision-record-schema.md`.
+4. Fill the draft using the required fields in `../../../spec/decision-record-schema.md`.
 5. Redact sensitive values before writing or rendering anything.
 6. Validate the completed JSON with `../decision-core/scripts/validate_decision_record.py <path>`.
 7. Save the canonical record under `.ai/records/decisions/<id>.json`.
@@ -40,5 +40,5 @@ Use this skill to capture high-impact engineering decisions close to the moment 
 - Run [`scripts/create_decision_record.py`](scripts/create_decision_record.py) to generate a bounded draft record before filling evidence and rationale.
 - Run [`scripts/render_summary.py`](scripts/render_summary.py) when a validated JSON record needs a derived Markdown summary.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when checking shared guardrails or promotion limits.
-- Read [`../../spec/decision-record-schema.md`](../../spec/decision-record-schema.md) when filling or reviewing fields.
-- Read [`../../spec/trigger-taxonomy.md`](../../spec/trigger-taxonomy.md) when deciding whether a record is required.
+- Read [`../../../spec/decision-record-schema.md`](../../../spec/decision-record-schema.md) when filling or reviewing fields.
+- Read [`../../../spec/trigger-taxonomy.md`](../../../spec/trigger-taxonomy.md) when deciding whether a record is required.

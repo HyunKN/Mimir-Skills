@@ -27,7 +27,7 @@
 
 ## Inference Boundary
 
-- This boundary mirrors [`../../write-pr-rationale/SKILL.md`](../../write-pr-rationale/SKILL.md) Decision Rule #1 and should stay aligned with it.
+- This boundary mirrors [`../../../write-pr-rationale/SKILL.md`](../../../write-pr-rationale/SKILL.md) Decision Rule #1 and should stay aligned with it.
 - When explicit rationale is missing, inferred goals are temporary substitutes, not confirmed author intent.
 - Prefer wording such as `this branch appears to...`, `local evidence suggests...`, and `review should check...`.
 - Avoid wording such as `this branch does...`, `the author intended...`, or `reviewers can assume...` unless that claim is backed by explicit rationale input or canonical records.
@@ -170,6 +170,6 @@ Always name which layer you used so reviewers know whether they are reading live
 
 ## Example Mapping
 
-- `../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md` shows a concise reviewer-facing explanation for a CI workflow adjustment.
-- `../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md` shows the same pattern for a dependency and config decision.
-- `../../evaluations/reviewer-comprehension.md` provides the five core questions a reviewer should be able to answer from the rationale.
+- `../../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md` shows a concise reviewer-facing explanation for a CI workflow adjustment.
+- `../../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md` shows the same pattern for a dependency and config decision.
+- `../../../evaluations/reviewer-comprehension.md` provides the five core questions a reviewer should be able to answer from the rationale.

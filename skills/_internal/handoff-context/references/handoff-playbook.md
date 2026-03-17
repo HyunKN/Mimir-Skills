@@ -141,5 +141,5 @@ Use this priority order when explicit evidence notes are missing:
 
 ## Example Mapping
 
-- `../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md` shows a compact CI handoff derived from one canonical record.
-- `../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md` shows the same pattern for a dependency and config decision.
+- `../../../examples/windows-ci-timeout/.ai/records/reports/windows-ci-timeout-summary.md` shows a compact CI handoff derived from one canonical record.
+- `../../../examples/cache-client-pin/.ai/records/reports/cache-client-pin-summary.md` shows the same pattern for a dependency and config decision.

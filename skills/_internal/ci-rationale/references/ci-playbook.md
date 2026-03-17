@@ -57,5 +57,5 @@
 
 ## Example Mapping
 
-- The public synthetic example under `../../examples/windows-ci-timeout/` shows a CI timeout decision where increasing the threshold was chosen over increasing retries.
+- The public synthetic example under `../../../examples/windows-ci-timeout/` shows a CI timeout decision where increasing the threshold was chosen over increasing retries.
 - Use that example when you need a compact reference for `decision`, `alternatives_considered`, `validation_run`, `remaining_risks`, and `follow_up` in this workflow.

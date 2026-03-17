@@ -2,28 +2,23 @@
 
 This directory holds the primary public skill packages for the repository.
 
-Current internal entries:
+## Outward-Facing Workflows
 
-- `decision-core`
-- `decision-capture`
-- `dependency-upgrade-decision`
-- `ci-rationale`
-- `handoff-context`
-- `pr-rationale`
-- `memory-promote`
-
-Current outward-facing workflow entries:
-
-- `prepare-handoff` -> user-facing workflow skill built from `handoff-context`, `decision-capture`, and `decision-core`, now with its main decision rules living in the skill and playbook docs
-- `write-pr-rationale` -> user-facing workflow skill built from `pr-rationale`, `decision-capture`, and `decision-core`, now carrying a first-pass skill-first rule set while clean-state rationale capture still needs stronger explicit `why` support
-- `capture-ci-investigation` -> narrow beta workflow skill built from `ci-rationale`, `decision-capture`, and `decision-core`, intentionally kept best-effort, wrapper-only, and script-light at the current scale
+- `prepare-handoff` — user-facing workflow skill built from `_internal/handoff-context`, `_internal/decision-capture`, and `_internal/decision-core`
+- `write-pr-rationale` — user-facing workflow skill built from `_internal/pr-rationale`, `_internal/decision-capture`, and `_internal/decision-core`
+- `capture-ci-investigation` — narrow beta workflow skill built from `_internal/ci-rationale`, `_internal/decision-capture`, and `_internal/decision-core`
 
 If routing is unclear before loading one of those skills, start with `docs/workflow-trigger-table.md`.
 
-Specialized supporting workflows:
+## Internal Building Blocks (`_internal/`)
 
-- `dependency-upgrade-decision`
-- `memory-promote`
+- `_internal/decision-core`
+- `_internal/decision-capture`
+- `_internal/dependency-upgrade-decision`
+- `_internal/ci-rationale`
+- `_internal/handoff-context`
+- `_internal/pr-rationale`
+- `_internal/memory-promote`
 
 These skills are instruction-first by design.
 They include bounded local automation only where deterministic behavior still adds value: schema validation in `decision-core`, draft record scaffolding and summary rendering in `decision-capture`, memory artifact validation in `memory-promote`, and a small number of optional local workflow helpers.
