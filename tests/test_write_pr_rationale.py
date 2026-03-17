@@ -24,6 +24,7 @@ class CollectContextTests(unittest.TestCase):
         mock_collect_branch_range,
     ) -> None:
         repo_path = Path("C:/repo")
+        repo_root = repo_path.resolve()
 
         mock_detect_base_ref.return_value = {
             "candidate": "origin/main",
@@ -49,7 +50,7 @@ class CollectContextTests(unittest.TestCase):
 
         def run_git_side_effect(_repo_path: Path, *args: str) -> str:
             mapping = {
-                ("rev-parse", "--show-toplevel"): "C:/repo",
+                ("rev-parse", "--show-toplevel"): str(repo_root),
                 ("branch", "--show-current"): "feature/test",
                 ("rev-parse", "--short", "HEAD"): "deadbee",
                 ("rev-parse", "HEAD"): "deadbeefcafebabe",
@@ -67,7 +68,7 @@ class CollectContextTests(unittest.TestCase):
 
         context = collect_context(repo_path, commit_limit=3)
 
-        self.assertEqual(Path(context["repo_root"]), Path("C:/repo"))
+        self.assertEqual(Path(context["repo_root"]), repo_root)
         self.assertEqual(context["branch"], "feature/test")
         self.assertEqual(context["head_short"], "deadbee")
         self.assertEqual(context["base_ref"], "origin/main@abc1234")

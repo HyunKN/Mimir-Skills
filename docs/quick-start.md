@@ -85,13 +85,19 @@ Use this when you want Codex to load the outward-facing workflows as installed l
 Install the current outward-facing workflows into the default Codex home:
 
 ```bash
-python adapters/codex/scripts/install_codex_skills.py
+python -m mimir_skills install
 ```
 
 Install only the main direct-use workflows:
 
 ```bash
-python adapters/codex/scripts/install_codex_skills.py --workflows prepare-handoff write-pr-rationale
+python -m mimir_skills install --workflows prepare-handoff write-pr-rationale
+```
+
+The older direct script path still works when you explicitly want it:
+
+```bash
+python adapters/codex/scripts/install_codex_skills.py
 ```
 
 Then ask Codex with direct workflow language such as:

@@ -67,7 +67,7 @@ The old `prepare-handoff` and `write-pr-rationale` generate commands now exist a
 Use this when you specifically want Codex to load the outward-facing workflows as installed local skills.
 
 ```bash
-python adapters/codex/scripts/install_codex_skills.py
+python -m mimir_skills install
 ```
 
 This is a real local install path, but it is still an optional thin-adapter proof point rather than the primary baseline.

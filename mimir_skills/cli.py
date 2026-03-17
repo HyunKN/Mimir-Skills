@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from . import install_codex
 from .workflows import prepare_handoff, write_pr_rationale
 
 
@@ -27,6 +28,36 @@ def build_parser() -> argparse.ArgumentParser:
         "--json",
         action="store_true",
         help="Emit the lightweight workflow manifest as JSON.",
+    )
+
+    install_parser = subparsers.add_parser(
+        "install",
+        help="Install the current outward-facing workflows into a local Codex skills directory.",
+    )
+    install_parser.add_argument(
+        "adapter",
+        nargs="?",
+        default="codex",
+        choices=["codex"],
+        help="Install target. Currently only `codex` is supported.",
+    )
+    install_parser.add_argument(
+        "--codex-home",
+        type=Path,
+        default=None,
+        help="Override CODEX_HOME. Defaults to $CODEX_HOME or ~/.codex.",
+    )
+    install_parser.add_argument(
+        "--workflows",
+        nargs="+",
+        choices=sorted(install_codex.WORKFLOW_DEPENDENCIES),
+        default=sorted(install_codex.WORKFLOW_DEPENDENCIES),
+        help="Install only the selected outward-facing workflows and their dependencies.",
+    )
+    install_parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Replace existing installed folders for the selected workflows and support assets.",
     )
 
     subparsers.add_parser(
@@ -74,6 +105,13 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "write-pr-rationale":
         return write_pr_rationale.generate_main(remaining)
+
+    if args.command == "install":
+        return install_codex.run_install(
+            codex_home=args.codex_home,
+            workflows=args.workflows,
+            force=args.force,
+        )
 
     parser.print_help()
     return 0

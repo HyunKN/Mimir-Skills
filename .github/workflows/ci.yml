@@ -20,5 +20,15 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s tests -p "test_*.py"
 
+      - name: Smoke-test install entrypoints
+        run: |
+          export CODEX_HOME="$RUNNER_TEMP/codex-home"
+          python -m mimir_skills install --workflows prepare-handoff
+          test -f "$CODEX_HOME/skills/prepare-handoff/SKILL.md"
+          test -f "$CODEX_HOME/skills/mimir-skills-support/install-manifest.json"
+          python adapters/codex/scripts/install_codex_skills.py --codex-home "$RUNNER_TEMP/legacy-codex-home" --workflows write-pr-rationale
+          test -f "$RUNNER_TEMP/legacy-codex-home/skills/write-pr-rationale/SKILL.md"
+          test -f "$RUNNER_TEMP/legacy-codex-home/skills/mimir-skills-support/install-manifest.json"
+
       - name: Verify examples, summaries, and schema
         run: python scripts/verify_examples.py

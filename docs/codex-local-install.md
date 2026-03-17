@@ -29,19 +29,25 @@ It also copies publishable support assets into `$CODEX_HOME/skills/mimir-skills-
 Install all current outward-facing workflows into the default Codex home:
 
 ```bash
-python adapters/codex/scripts/install_codex_skills.py
+python -m mimir_skills install
 ```
 
 Install only selected workflows:
 
 ```bash
-python adapters/codex/scripts/install_codex_skills.py --workflows prepare-handoff write-pr-rationale
+python -m mimir_skills install --workflows prepare-handoff write-pr-rationale
 ```
 
 Install into a specific Codex home and replace existing installed copies:
 
 ```bash
-python adapters/codex/scripts/install_codex_skills.py --codex-home ~/.codex --force
+python -m mimir_skills install --codex-home ~/.codex --force
+```
+
+The older direct script path still works as a compatibility entrypoint:
+
+```bash
+python adapters/codex/scripts/install_codex_skills.py
 ```
 
 With `--force`, the installer now replaces only paths that already look like a previous `Mimir-Skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.
