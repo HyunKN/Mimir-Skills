@@ -4,7 +4,7 @@
 
 로컬 파일을 읽는 AI coding agent를 위한 skill-first workflow guidance, playbook, validator 모음입니다.
 
-`Mimir-Skills`는 로컬 파일 기반 AI coding agent를 위한 skill-first 저장소로 전환 중입니다.
+`Mimir-Skills`는 로컬 파일 기반 AI coding agent를 위한 skill-first 저장소로 현재 baseline이 정리된 상태입니다.
 방향은 단순합니다. workflow 판단 규칙, safety constraint, output pattern을 `SKILL.md`와 companion reference에 담아 에이전트가 직접 읽게 하고, Python 코드는 결정론적 검증과 얇은 로컬 수집 helper에만 남기자는 것입니다.
 
 ## 누구를 위한 것인가
