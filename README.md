@@ -70,7 +70,7 @@ What comes next:
 - make workflow selection clearer through a public trigger table before considering any machine-readable routing layer
 - keep deterministic validators and example verification, but shrink workflow runtime code toward thin collectors instead of growing a larger Python engine
 - do not add another agent-specific adapter yet; only revisit adapter growth if a real UX gain remains after the skill-first reset
-- keep `write-pr-rationale` in first-pass skill-first form while stronger explicit `why` capture is still being gathered, and keep `capture-ci-investigation` narrow until stronger examples justify anything more
+- keep `write-pr-rationale` in first-pass skill-first form while stronger explicit `why` capture is still being gathered, and keep `capture-ci-investigation` narrow and wrapper-only until repeated usage justifies anything more
 
 ## Documentation
 

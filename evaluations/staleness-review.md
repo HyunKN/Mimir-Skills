@@ -12,6 +12,7 @@ The goal is to catch product-level drift: stale instructions, outdated examples,
 Review at least these surfaces when a workflow or public helper surface changes:
 
 - `../README.md`
+- `README.md`
 - `../docs/project-one-pager.md`
 - `../docs/workflow-surface.md`
 - `../docs/quick-start.md`
@@ -27,7 +28,7 @@ Review at least these surfaces when a workflow or public helper surface changes:
 1. Do the public docs lead with the current primary surface (`SKILL.md` plus references) instead of an outdated generator path?
 2. Are deprecated generator or helper paths described as secondary compatibility stubs rather than the main workflow?
 3. Do the documented collector commands still exist and produce structured output?
-4. Do public-safe examples and rendered summaries still match the current schemas and intended workflow story?
+4. Do public-safe examples, derived summaries, and evaluation/example index files still match the current schemas and intended workflow story?
 5. If phase language appears in active local notes, is it clear whether it refers to the historical `v0.1 Deliverables` phases or the newer operating roadmap?
 
 ## Pass Criteria
@@ -37,7 +38,7 @@ The review passes if:
 - public docs agree that the repository is skill-first
 - helper stubs are described truthfully as deprecated or secondary
 - collector commands, manifest summaries, and help text match the docs
-- example verification passes without schema or rendered-summary drift
+- example verification passes without schema or rendered-summary drift, and the published example lists still match the actual example set
 - actively maintained local notes do not use ambiguous unlabeled phase shorthand
 
 ## Failure Signals
@@ -47,6 +48,7 @@ Treat the review as weak or failed if:
 - a doc still presents shared CLI or adapter generation as the primary workflow path
 - a public doc, skill doc, or example points at removed or renamed files
 - rendered summaries or examples drift from the canonical records or schemas
+- evaluation or example index docs lag behind the actual published example set
 - helper help text or manifest summaries contradict the docs
 - phase shorthand in active notes can be read as either the old v0.1 phases or the newer operating roadmap
 

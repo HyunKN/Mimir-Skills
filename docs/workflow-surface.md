@@ -98,7 +98,9 @@ Current status:
 - the workflow still appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
 - the first Codex-local install path can still include this workflow through `adapters/codex/scripts/install_codex_skills.py`, but that remains optional and secondary
 - the beta guidance now points at three public-safe CI shapes: a stronger config-backed timeout case, a weaker rerun-only monitoring case, and a shared-workflow quarantine case
-- the first beta graduation gate is now satisfied because the public examples cover more than one CI-failure shape, but the workflow still remains beta because the direct-use-path and repeated-observation gates are still open
+- the first beta graduation gate is now satisfied because the public examples cover more than one CI-failure shape
+- the second beta graduation gate is now also satisfied because the current product decision is to keep this workflow wrapper-only at the current scale rather than add direct-use collectors or generators without a clear UX need
+- the workflow still remains beta because the repeated-observation gate is still open
 - dedicated direct-use scripts are intentionally not implemented yet
 - this remains a narrower best-effort direction until stronger examples and reliability boundaries exist
 
@@ -107,6 +109,12 @@ Beta graduation note:
 - keep it beta until it has multiple public-safe examples across different CI failure shapes
 - keep it beta until either a direct-use path exists or wrapper-only remains an explicit product decision
 - keep it beta until repeated observations show it can separate evidence, explanation, uncertainty, and next step without repeated overclaiming
+
+Current wrapper-only decision:
+
+- local-file agents can already use the skill and boundary notes directly
+- the current CI example set is still small enough that a direct-use helper layer would add maintenance without a clear UX win
+- revisit direct-use paths only if repeated usage shows a stronger need than the current skill-first route
 
 ## Supporting Internal Skills
 
