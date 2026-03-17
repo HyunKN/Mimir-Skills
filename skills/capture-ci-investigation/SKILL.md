@@ -43,6 +43,7 @@ Use this skill to draft a bounded CI investigation summary from the available fa
 ## Load References As Needed
 
 - Read [`references/decision-rules.md`](references/decision-rules.md) for decision rules and output template.
+- Read [`references/invocation-prompts.md`](references/invocation-prompts.md) when you want copy-paste prompt macros for installed-agent use.
 - Read [`../_internal/ci-rationale/SKILL.md`](../_internal/ci-rationale/SKILL.md) first for CI-specific evidence handling, option framing, and safety constraints.
 - Read [`references/beta-boundaries.md`](references/beta-boundaries.md) for wording ladder, blast-radius checklist, or monitor-only rules.
 - Read [`../_internal/decision-capture/SKILL.md`](../_internal/decision-capture/SKILL.md) only when the CI issue should be captured in a canonical record.
