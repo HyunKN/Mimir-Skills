@@ -1,4 +1,14 @@
 .workspace/
+.sisyphus/
+.pytest_cache/
+.claude/
+.codex/
+.skills/
+.venv/
+node_modules/
+*.log
+handoff-context.json
+pr-context.json
 .ai/
 **/.ai/
 !examples/**/.ai/

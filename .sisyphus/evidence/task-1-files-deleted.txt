@@ -1,7 +1,0 @@
-Legacy Files Deletion Verification
-==================================
-
-PASS: adapters/ deleted
-PASS: mimir_skills/install_codex.py deleted
-PASS: tests/test_install_codex.py (old name) deleted
-PASS: tests/test_install.py (new name) exists
