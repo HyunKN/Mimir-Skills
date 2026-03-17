@@ -4,7 +4,7 @@
 
 ## `Mimir-Skills`란 무엇인가
 
-`Mimir-Skills`는 AI 에이전트의 decision traceability를 위한 skill-first 저장소다.
+`Mimir-Skills`는 AI 에이전트의 decision traceability와 AI-assisted change governance context를 위한 skill-first 저장소다.
 
 이 프로젝트는 단순히 무엇이 바뀌었는지가 아니라, 의미 있는 엔지니어링 변화가 왜 일어났는지를 남기도록 돕고, 로컬 파일을 읽는 에이전트가 재사용 가능한 workflow skill, playbook, example, deterministic validator를 직접 참조하도록 만든다.
 
@@ -20,11 +20,11 @@
 - 어떤 위험이 남아 있는가
 - 다음 에이전트나 엔지니어가 이어가기 위해 무엇을 알아야 하는가
 
-이 때문에 활동 로그와 재사용 가능한 결정 맥락 사이에 공백이 생긴다.
+이 때문에 활동 로그와 재사용 가능한 결정 맥락 사이에 공백이 생긴다. 특히 위험한 경로가 AI-assisted였거나, stale guidance에 기대었거나, 승인 및 rollout 경계를 넘는 경우 이 공백이 더 커진다.
 
 ## 제품 논지
 
-이 프로젝트는 여섯 가지 주장 위에 서 있다.
+이 프로젝트는 일곱 가지 주장 위에 서 있다.
 
 1. 로그만으로는 충분하지 않다.
 2. 영향도가 높은 결정은 구조화된 형태로 기록해야 한다.
@@ -32,6 +32,7 @@
 4. 사람용 요약은 같은 원본에서 렌더링되어야 한다.
 5. 장기 메모리는 직접 쓰는 것이 아니라 검증된 기록에서 승격되어야 한다.
 6. 로컬 파일 기반 에이전트가 직접 읽을 수 있다면 workflow 판단 규칙은 `SKILL.md`와 reference에 살아야 하며, 코드는 결정론적 검증이나 얇은 수집 helper에만 남아야 한다.
+7. 위험한 AI-assisted 변경은 이후 리뷰어가 전체 세션을 재구성하지 않아도 되도록 provenance, approval, blast-radius 맥락을 함께 남겨야 한다.
 
 ## 공개 v0.1에 포함되는 것
 
@@ -40,6 +41,7 @@
 - 공통 용어를 위한 glossary
 - 무엇을 기록할지 정하는 trigger taxonomy
 - canonical decision record schema
+- AI-assisted change, approval state, rollout context를 위한 optional governance field
 - memory promotion policy
 - public-safe example과 evaluation
 - schema, example, memory artifact를 위한 deterministic validation helper
@@ -56,6 +58,7 @@
 ## 초기 사용 사례
 
 - 근거와 검증 결과를 남기는 CI 실패 분석
+- provenance, approval note, rollout context가 필요한 위험한 AI-assisted shared-surface 변경
 - 지속 가능한 handoff 맥락이 필요한 다중 파일 리팩터링
 - machine-readable record에서 렌더링하는 PR용 요약
 - 반복 검증 이후에만 만들어지는 프로젝트 메모리
@@ -72,13 +75,15 @@
 2. 핵심 workflow는 계속 `SKILL.md`와 reference를 중심으로 유지하고, 결정론적 helper는 validator와 thin collector 정도로 제한한다.
 3. 결정론적 validator와 example verification은 안정적으로 유지하되, 더 큰 workflow runtime으로 되돌아가지 않는다.
 4. adapter path는 main product story가 아니라 optional proof point로 취급하고, expansion work는 기본적으로 자동으로 열지 않는다.
-5. broader helper나 adapter 확장은 반복된 usage evidence가 있을 때만 다시 검토하며, `capture-ci-investigation`은 분명한 UX 이득이 나오기 전까지 wrapper-only by design으로 유지한다.
+5. 더 무거운 runtime behavior를 추가하기 전에 public record shape를 AI-assisted change governance 방향으로 확장해 provenance, approval, blast-radius, rollout-state 맥락을 담는다.
+6. broader helper나 adapter 확장은 반복된 usage evidence가 있을 때만 다시 검토하며, `capture-ci-investigation`은 분명한 UX 이득이 나오기 전까지 wrapper-only by design으로 유지한다.
 
 ## 성공 기준
 
 새 기여자나 새 에이전트가 이 저장소를 열고 몇 개의 문서만 읽어도 바로 이해할 수 있어야 한다.
 
 - 무엇을 기록해야 하는지
+- 위험한 AI-assisted 변경에서는 provenance, approval, rollout context를 어떻게 함께 기록해야 하는지
 - 어떻게 저장해야 하는지
 - 요약은 어떻게 파생되는지
 - 메모리는 어떻게 안전하게 승격되는지

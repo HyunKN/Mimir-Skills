@@ -4,7 +4,7 @@ English | [한국어](project-one-pager.ko.md)
 
 ## What `Mimir-Skills` Is
 
-`Mimir-Skills` is a skill-first repository for AI-agent decision traceability.
+`Mimir-Skills` is a skill-first repository for AI-agent decision traceability and AI-assisted change governance context.
 
 It helps teams preserve why meaningful engineering changes were made, not just what changed, by giving local-file agents reusable workflow skills, playbooks, examples, and deterministic validators.
 
@@ -20,11 +20,11 @@ Those artifacts are useful, but they rarely capture the full operating context:
 - the remaining risk
 - the handoff context for the next agent or engineer
 
-This creates a gap between activity logging and reusable decision context.
+This creates a gap between activity logging and reusable decision context, especially when a risky path was AI-assisted, depended on stale guidance, or crossed an approval or rollout boundary.
 
 ## Product Thesis
 
-The project is built on six claims:
+The project is built on seven claims:
 
 1. Logs alone are not enough.
 2. High-impact decisions should be captured in a structured form.
@@ -32,6 +32,7 @@ The project is built on six claims:
 4. Human-readable summaries should be rendered from the same source.
 5. Long-term memory should be promoted from validated records, not written directly as truth.
 6. Workflow judgment rules should live in `SKILL.md` and references whenever local-file agents can read them directly; code should be reserved for deterministic validation or thin collection helpers.
+7. Risky AI-assisted changes should carry enough provenance, approval, and blast-radius context that a later reviewer can audit what happened without reconstructing the whole session.
 
 ## What Ships in Public v0.1
 
@@ -40,6 +41,7 @@ The project is built on six claims:
 - a glossary for shared terminology
 - a trigger taxonomy for deciding what to record
 - a canonical decision record schema
+- optional governance fields for AI-assisted changes, approval state, and rollout context
 - a memory promotion policy
 - public-safe examples and evaluations
 - deterministic validation helpers for schemas, examples, and memory artifacts
@@ -56,6 +58,7 @@ The project is built on six claims:
 ## Initial Use Cases
 
 - CI failure triage with explicit rationale and validation
+- risky AI-assisted shared-surface changes that need provenance, approval notes, and rollout context
 - multi-file refactors that need durable handoff context
 - PR-ready summaries rendered from machine-readable records
 - project memory created only after repeated validation
@@ -72,13 +75,15 @@ The project is built on six claims:
 2. Keep the core workflows centered on `SKILL.md` plus references first, with deterministic helpers limited to validators and thin collectors.
 3. Keep deterministic validators and example verification stable while avoiding a return to a larger workflow runtime.
 4. Treat adapter paths as optional proof points, not as the main product story, and do not open expansion work by default.
-5. Reconsider broader helper or adapter expansion only when repeated usage evidence justifies it, while keeping `capture-ci-investigation` wrapper-only by design unless a clear UX gain emerges.
+5. Extend the public record shape toward AI-assisted change governance with provenance, approval, blast-radius, and rollout-state context before adding heavier runtime behavior.
+6. Reconsider broader helper or adapter expansion only when repeated usage evidence justifies it, while keeping `capture-ci-investigation` wrapper-only by design unless a clear UX gain emerges.
 
 ## What Success Looks Like
 
 A new contributor or agent should be able to open this repository, read a small set of docs, and immediately understand:
 
 - what should be recorded
+- how risky AI-assisted changes should record provenance, approval, and rollout context
 - how it should be stored
 - how summaries are derived
 - how memory is promoted safely

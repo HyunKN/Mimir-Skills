@@ -10,12 +10,15 @@ The core idea is simple: put workflow judgment rules, safety constraints, and ou
 ## Why Mimir-Skills?
 
 AI coding agents can already edit code, run tests, inspect CI, and prepare pull requests.
-What teams still lose is the context around that work:
+What teams still lose is the context and governance around that work:
 
 - why a path was chosen
 - what actually changed
 - what evidence supported the choice
+- whether AI-assisted tooling shaped the change and how that guidance was verified
+- what approval or rollout boundary applied when blast radius mattered
 - what remains risky or uncertain
+- what happened after the change reached a shared workflow or operational surface
 - what the next agent or reviewer should know before continuing
 
 `Mimir-Skills` helps preserve that context with reusable workflow skills such as:
@@ -36,6 +39,7 @@ Quality boundary:
 - human review is still required before external sharing
 - CI help is best-effort and depends on the available logs and context
 - automation should stay bounded, reviewable, and secondary to explicit evidence-based records
+- the repository improves artifact-level traceability and governance context, but it is not yet a full deployment-control system
 
 ## Getting Started
 
@@ -154,6 +158,7 @@ The repository now runs on a skill-first baseline.
 
 - `prepare-handoff` and `write-pr-rationale` are skill-first workflows with live collectors and deprecated generate stubs
 - `capture-ci-investigation` is a skill-first workflow, wrapper-only by design
+- canonical decision records can optionally capture AI-assistance provenance, approval state, and change-governance context for risky shared-surface changes
 - workflow routing stays on the public trigger table until scale or ambiguity justifies anything machine-readable
 - deterministic validators and example verification remain stable and should not grow back into a larger workflow runtime
 - new agent-specific adapters stay deferred unless repeated usage shows a clear UX gain beyond the current baseline
