@@ -121,7 +121,6 @@ Mimir-Skills/
    scripts/
    template/
    mimir_skills/
-
 ```
 
 Primary public surface:

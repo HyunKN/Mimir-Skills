@@ -121,7 +121,6 @@ Mimir-Skills/
    scripts/
    template/
    mimir_skills/
-
 ```
 
 기본 public surface:
