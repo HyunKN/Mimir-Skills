@@ -9,11 +9,12 @@ This guide gives the shortest practical path to try `Mimir-Skills` today.
 If your agent can read local files and run shell commands, the primary path is now to read the relevant `SKILL.md` directly.
 The command paths below are optional local helpers for when you explicitly want repo-driven collection, discovery, or compatibility notes.
 
-There are three practical entry paths:
+There are four practical entry paths:
 
 1. `skill-first reading` for agents that can open local files directly
-2. `local helpers` for collectors, discovery, and deprecation-note compatibility paths
-3. `Codex local install` when you specifically want Codex to load installed workflow skills
+2. `one-line install` for installing skills into your project from any directory
+3. `local helpers` for collectors, discovery, and deprecation-note compatibility paths
+4. `Codex local install` when you specifically want Codex to load installed workflow skills (backward compat)
 
 See [Agent Support Levels](agent-support-levels.md) for how these paths map to the current target agent families.
 
@@ -31,7 +32,49 @@ Start from:
 
 Then load only the references you need and use the optional local scripts only when collection or validation help is useful.
 
-## Path 2: Local Helpers
+## Path 2: One-Line Install
+
+Use this when you want to install Mimir-Skills workflows into your project with a single command.
+
+This works from any project directory — no repository clone needed:
+
+```bash
+npx mimir-skills install --target claude
+npx mimir-skills install --target codex
+npx mimir-skills install --target generic
+```
+
+If you have the repository cloned:
+
+```bash
+python -m mimir_skills install --target claude
+python -m mimir_skills install --target codex --codex-home ~/.codex
+python -m mimir_skills install --target generic --project-dir /path/to/project
+```
+
+Install only specific workflows:
+
+```bash
+npx mimir-skills install --target claude --workflows prepare-handoff write-pr-rationale
+```
+
+The installer auto-detects the target when `.claude/` or `.codex/` exists in the project directory. If both exist, `--target` is required.
+
+### Target Directories
+
+| Target | Install Path |
+|--------|-------------|
+| `claude` | `<project>/.claude/skills/` |
+| `codex` | `$CODEX_HOME/skills/` (or `~/.codex/skills/`) |
+| `generic` | `<project>/.skills/` |
+
+### What to Expect
+
+- installed skills are copies, not symlinks
+- example and evaluation references are rewritten to point to a local `mimir-skills-support/` directory
+- re-run with `--force` to replace existing installations
+
+## Path 3: Local Helpers
 
 This is now a secondary helper path, not the main product story.
 
@@ -74,9 +117,9 @@ python skills/write-pr-rationale/scripts/collect_pr_context.py --repo . --output
 - `python -m mimir_skills write-pr-rationale --repo .` still exists, but now prints a deprecation note instead of generating reviewer-facing Markdown.
 - outputs are drafts and still require human review before external sharing.
 
-## Path 3: Codex Local Install
+## Path 4: Codex Local Install (Legacy)
 
-Use this when you want Codex to load the outward-facing workflows as installed local skills.
+Use this when you specifically want the older Codex-specific install path.
 
 ![Codex local install snapshot](assets/codex-local-install.svg)
 
@@ -120,21 +163,27 @@ Choose `skill-first reading` when:
 - you want the skill rules and playbooks, not just generated helper output
 - you want the repository to stay adapter-light
 
+Choose `one-line install` when:
+
+- you want skills installed locally without cloning the repository
+- you are using Claude Code, Codex, or another agent that reads from a local skills directory
+- you want a single command to set up everything
+
 Choose `local helpers` when:
 
 - you want the fastest discovery or collection path from the repository root
 - you want structured context JSON before drafting from the skill
 - you need compatibility guidance for older helper-based invocations
 
-Choose `Codex local install` when:
+Choose `Codex local install (legacy)` when:
 
-- you specifically want Codex to load the workflows as installed local skills
-- you want a proof point for thin adapter support
+- you specifically want the older Codex-specific install flow
+- you need backward compatibility with existing scripts
 
 ## Current Limits
 
 - `capture-ci-investigation` is still a narrower beta wrapper
-- there is no hosted multi-agent install story yet
+- there is no hosted multi-agent install story yet, but `npx mimir-skills install` provides a one-line install from any directory
 - support levels differ by agent family, and not every target has a thin adapter
 - deeper behavior and safety constraints still live in [Always-Loaded Rules](always-loaded-rules.md), [Workflow Surface](workflow-surface.md), and the workflow `SKILL.md` files
 - helper commands are secondary; the skills and references are the primary workflow source of truth

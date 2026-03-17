@@ -52,7 +52,28 @@ Start from the workflow `SKILL.md` files directly:
 
 This is the primary path for local-file agents that can open repository files directly.
 
-### 2. Local Helpers
+### 2. One-Line Install
+
+Install skills into your project with a single command. No repo clone needed:
+
+```bash
+npx mimir-skills install --target claude
+npx mimir-skills install --target codex
+npx mimir-skills install --target generic
+```
+
+Or from the repository:
+
+```bash
+python -m mimir_skills install --target claude
+python -m mimir_skills install --target codex
+```
+
+The installer auto-detects the target when `.claude/` or `.codex/` exists in the project directory. Use `--target` to be explicit.
+
+See [Local Install](docs/codex-local-install.md) for full options and details.
+
+### 3. Local Helpers
 
 Use repository-root helpers when you want discovery or structured context collection before drafting from the skill.
 
@@ -61,16 +82,6 @@ Use repository-root helpers when you want discovery or structured context collec
 - `python skills/write-pr-rationale/scripts/collect_pr_context.py --repo . --output pr-context.json`
 
 The old `prepare-handoff` and `write-pr-rationale` generate commands now exist as compatibility or deprecation stubs rather than the primary workflow path.
-
-### 3. Codex Local Install (Optional)
-
-Use this when you specifically want Codex to load the outward-facing workflows as installed local skills.
-
-```bash
-python -m mimir_skills install
-```
-
-This is a real local install path, but it is still an optional thin-adapter proof point rather than the primary baseline.
 
 ## Documentation
 
@@ -85,7 +96,7 @@ Start here:
 Reference:
 
 - [Always-Loaded Rules](docs/always-loaded-rules.md)
-- [Codex Local Install](docs/codex-local-install.md)
+- [Local Install](docs/codex-local-install.md)
 - [Adapter Feedback Loop](docs/adapter-feedback-loop.md)
 - [Skills Directory Notes](skills/README.md)
 - [Examples Directory Notes](examples/README.md)

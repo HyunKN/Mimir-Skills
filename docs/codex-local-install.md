@@ -1,17 +1,17 @@
-# Codex Local Install
+# Local Install
 
 ## Purpose
 
-This is the first runtime adapter for `Mimir-Skills`.
+This is the local install path for `Mimir-Skills`.
 
-It provides a real local install path for Codex without claiming a remote registry, hosted installer, or full multi-agent packaging story.
+It provides a real local install path for Claude Code, Codex, and other AI agent environments without requiring a remote registry, hosted installer, or full multi-agent packaging story.
 
-See [Agent Support Levels](agent-support-levels.md) for how this Codex path fits relative to Claude Code, Gemini CLI, Qwen Code, and the current skill-first plus helper baseline.
+See [Agent Support Levels](agent-support-levels.md) for how this install path fits relative to Claude Code, Codex, Gemini CLI, Qwen Code, and the current skill-first plus helper baseline.
 See [Always-Loaded Rules](always-loaded-rules.md) for the compact rule layer that future adapters and repository-root helper runs should keep visible.
 
 ## What It Installs
 
-The installer copies the current outward-facing workflows and their internal dependencies into `$CODEX_HOME/skills/`:
+The installer copies the current outward-facing workflows and their internal dependencies into the target skills directory:
 
 - `prepare-handoff`
 - `write-pr-rationale`
@@ -22,59 +22,96 @@ The installer copies the current outward-facing workflows and their internal dep
 - `decision-capture`
 - `decision-core`
 
-It also copies publishable support assets into `$CODEX_HOME/skills/mimir-skills-support/` so example and evaluation references still resolve after install, and so the installed helper scripts can still import the shared `mimir_skills` runtime package.
+It also copies publishable support assets into a `mimir-skills-support/` directory so example and evaluation references still resolve after install, and so the installed helper scripts can still import the shared `mimir_skills` runtime package.
 
-## Install
+## Install Targets
 
-Install all current outward-facing workflows into the default Codex home:
+| Target | Skills Directory | When to Use |
+|--------|-----------------|-------------|
+| `claude` | `<project>/.claude/skills/` | Claude Code projects |
+| `codex` | `$CODEX_HOME/skills/` (or `~/.codex/skills/`) | OpenAI Codex projects |
+| `generic` | `<project>/.skills/` | Other agents or custom setups |
+
+## One-Line Install (No Repo Clone)
 
 ```bash
-python -m mimir_skills install
+npx mimir-skills install --target claude
+npx mimir-skills install --target codex
+npx mimir-skills install --target generic
+```
+
+## Install From Repository
+
+Install all current outward-facing workflows:
+
+```bash
+python -m mimir_skills install --target claude
+python -m mimir_skills install --target codex
+python -m mimir_skills install --target generic
 ```
 
 Install only selected workflows:
 
 ```bash
-python -m mimir_skills install --workflows prepare-handoff write-pr-rationale
+python -m mimir_skills install --target claude --workflows prepare-handoff write-pr-rationale
+```
+
+Install into a specific project directory:
+
+```bash
+python -m mimir_skills install --target claude --project-dir /path/to/project
 ```
 
 Install into a specific Codex home and replace existing installed copies:
 
 ```bash
-python -m mimir_skills install --codex-home ~/.codex --force
+python -m mimir_skills install --target codex --codex-home ~/.codex --force
 ```
 
-The older direct script path still works as a compatibility entrypoint:
+## Auto-Detection
+
+When `--target` is not specified, the installer detects the target from the project directory:
+
+- `.claude/` exists → `claude`
+- `.codex/` exists → `codex`
+- `$CODEX_HOME` env var set → `codex`
+- Neither → `generic`
+
+If both `.claude/` and `.codex/` exist, `--target` is required.
+
+## Legacy Codex Install
+
+The older direct script path still works as a backward-compatibility entrypoint:
 
 ```bash
 python adapters/codex/scripts/install_codex_skills.py
 ```
 
-With `--force`, the installer now replaces only paths that already look like a previous `Mimir-Skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.
+The `python -m mimir_skills install` command without `--target` also defaults to `codex` when `$CODEX_HOME` is set, preserving backward compatibility.
+
+## Force Replace
+
+With `--force`, the installer replaces only paths that already look like a previous `Mimir-Skills` install. If a destination does not look managed by this installer, it will refuse the overwrite and ask you to remove it manually.
 
 ## Quick Start
 
-See [Quick Start](quick-start.md) for the broader side-by-side guidance between the current skill-first baseline and this Codex-local install path.
+See [Quick Start](quick-start.md) for the broader side-by-side guidance between the current skill-first baseline and the install paths.
 
-![Codex local install snapshot](assets/codex-local-install.svg)
-
-After install, ask Codex with direct workflow language such as:
+After install, ask your agent with direct workflow language such as:
 
 - `Prepare a handoff from my current changes.`
 - `Write PR rationale for this branch.`
 - `Summarize this CI failure as a bounded investigation note.`
 
-Codex can then trigger the installed workflow skills from those prompts and follow the bundled skill docs directly, using installed collectors or compatibility stubs only where they still exist.
-
 ## Feedback Loop
 
 Use the lightweight review loop in [Adapter Feedback Loop](adapter-feedback-loop.md) after real usage.
 
-The current goal is to learn whether the installed workflows produce useful drafts quickly enough to justify broader adapter work, not to claim that the first adapter path is already final.
+The current goal is to learn whether the installed workflows produce useful drafts quickly enough to justify broader adapter work, not to claim that the install path is already final.
 
 ## Current Limits
 
-- This is a local Codex install path only.
+- This is a local install path only.
 - It does not publish to a remote skill registry.
 - It does not install every internal workflow in the repository.
 - `--force` is intentionally conservative and refuses to replace unrelated-looking directories.

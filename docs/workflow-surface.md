@@ -45,6 +45,7 @@ Current status:
 - the remaining live helper path is `skills/prepare-handoff/scripts/collect_git_context.py`
 - the Codex-local install path under `adapters/codex/scripts/install_codex_skills.py` remains only an optional thin-adapter proof point
 - this workflow now follows the same skill-first plus thin-collector pattern as `write-pr-rationale`
+- the multi-target installer (`python -m mimir_skills install --target claude|codex|generic`) can install this workflow into any supported agent environment
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `write-pr-rationale`
@@ -73,6 +74,7 @@ Current status:
 - the first skill-first codification pass now exists, with the epistemic guardrail placed ahead of the local signal map so inferred intent is treated as tentative by default
 - the first local agent-validation gate also passed across dirty-tree, clean branch-range, recent-commit fallback, and explicit-`why` override cases without needing extra runtime-only rules
 - the first runtime-reduction pass is already in place, so this workflow now lives on the same thin-collector plus deprecation-stub baseline as `prepare-handoff`
+- the multi-target installer (`python -m mimir_skills install --target claude|codex|generic`) can install this workflow into any supported agent environment
 - it should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
@@ -98,6 +100,7 @@ Current status:
 - a dedicated beta review anchor now exists at `evaluations/capture-ci-investigation-beta-review.md` so uncertainty separation and anti-overclaiming can be re-checked later
 - the workflow still appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
 - the first Codex-local install path can still include this workflow through `adapters/codex/scripts/install_codex_skills.py`, but that remains optional and secondary
+- the multi-target installer (`python -m mimir_skills install --target claude|codex|generic`) can install this workflow into any supported agent environment
 - the beta guidance now points at three public-safe CI shapes: a stronger config-backed timeout case, a weaker rerun-only monitoring case, and a shared-workflow quarantine case
 - the first beta graduation gate is now satisfied because the public examples cover more than one CI-failure shape
 - the second beta graduation gate is now also satisfied because the current product decision is to keep this workflow wrapper-only at the current scale rather than add direct-use collectors or generators without a clear UX need
@@ -133,7 +136,9 @@ Secondary helper surfaces still exist and remain useful for local experimentatio
 
 - `mimir_skills/` shared CLI commands
 - `skills/*/scripts/` direct collectors or generators
-- `adapters/codex/scripts/install_codex_skills.py` as an optional thin-adapter proof point
+- `python -m mimir_skills install --target claude|codex|generic` as the multi-target local install path
+- `npx mimir-skills install --target claude` as the one-line install path (no repo clone needed)
+- `adapters/codex/scripts/install_codex_skills.py` as a backward-compatible thin-adapter proof point
 
 These helper surfaces should support the skills, not define them. The intended direction is for workflow judgment to live in `SKILL.md` and references first, with runtime code shrinking toward thin collectors or deterministic helpers.
 
