@@ -1,0 +1,119 @@
+{
+  "id": "dec-20260318-ai-release-rollback-gate-001",
+  "timestamp": "2026-03-18T14:30:00Z",
+  "task_ref": {
+    "source": "pr",
+    "id": "pr-244",
+    "title": "Gate AI-assisted checkout cache rollout behind canary approval"
+  },
+  "decision": "Reject the AI-suggested full checkout-cache rollout based on stale rollout guidance, deploy the change to a 5% canary only, and require explicit platform approval plus post-deploy monitoring before any wider promotion.",
+  "problem_context": "A local AI coding assistant proposed a direct production rollout for a checkout-cache invalidation change after reading an outdated internal-style runbook snapshot that predated the current staged-rollout policy. The change touches a shared commerce path, so a broad rollout would carry customer-visible blast radius if the cache warmup assumptions are wrong.",
+  "alternatives_considered": [
+    {
+      "name": "Ship the AI-suggested 100% rollout immediately",
+      "status": "rejected",
+      "reason": "Relied on stale rollout guidance and skipped the current canary requirement for a shared production path."
+    },
+    {
+      "name": "Pause the release entirely",
+      "status": "deferred",
+      "reason": "Would remove near-term risk but would also delay the verified cache-fix path even though a bounded canary is available."
+    },
+    {
+      "name": "Approve a 5% canary with rollback-ready monitoring",
+      "status": "selected",
+      "reason": "Preserves forward progress while keeping the blast radius bounded, the approval scope explicit, and the rollback path ready."
+    }
+  ],
+  "selected_option": {
+    "name": "Approve a 5% canary with rollback-ready monitoring",
+    "summary": "Keep the rollout at 5% production traffic, require platform approval for that limited scope, and hold wider promotion until canary telemetry stays clean for four hours."
+  },
+  "rationale": "The stale guidance made the original AI-assisted rollout plan unsafe to follow directly. A narrow canary plus explicit approval captures the real operating policy, gives reviewers a durable record of why the full rollout was rejected, and keeps rollback posture visible while the change is observed in production.",
+  "evidence_refs": [
+    {
+      "kind": "doc",
+      "ref": "docs/runbooks/checkout-cache-cutover.md",
+      "summary": "The older runbook snapshot still described a full-rollout path and did not include the newer staged-rollout approval note.",
+      "captured_at": "2026-03-18T13:42:00Z"
+    },
+    {
+      "kind": "doc",
+      "ref": "docs/policies/production-rollout-safety.md",
+      "summary": "The current policy requires canary rollout plus explicit platform approval for high-blast-radius checkout changes.",
+      "captured_at": "2026-03-18T13:48:00Z"
+    },
+    {
+      "kind": "diff",
+      "ref": "origin/main...HEAD",
+      "summary": "The branch diff shows the cache invalidation change plus a rollout manifest update that would move all production traffic at once without further gating.",
+      "captured_at": "2026-03-18T13:55:00Z"
+    },
+    {
+      "kind": "command",
+      "ref": "python scripts/check_rollout_policy.py --service checkout-cache --stage production",
+      "summary": "The synthetic policy check failed for a full rollout and passed once the plan was reduced to a 5% canary with explicit approval metadata.",
+      "captured_at": "2026-03-18T14:08:00Z"
+    },
+    {
+      "kind": "discussion",
+      "ref": "platform-review-2026-03-18",
+      "summary": "Platform review confirmed that checkout-cache invalidation is a shared customer path and must stay rollback-ready during the first production segment.",
+      "captured_at": "2026-03-18T14:18:00Z"
+    }
+  ],
+  "ai_assistance": {
+    "used": true,
+    "summary": "A local AI assistant proposed the initial rollout plan after reading stale rollout guidance that no longer matched the current production policy.",
+    "tools": [
+      "Local coding assistant",
+      "Repository runbook snapshot"
+    ],
+    "human_verification": "A platform engineer compared the stale runbook against the current rollout policy and replaced the full rollout with a canary-only plan."
+  },
+  "approval": {
+    "required": true,
+    "status": "approved",
+    "approver": "platform-oncall",
+    "scope": "5% canary only for the checkout-cache production path; wider rollout requires a new review after four hours of clean telemetry.",
+    "timestamp": "2026-03-18T14:22:00Z"
+  },
+  "change_scope": {
+    "risk_tier": "high",
+    "blast_radius": "A bad checkout-cache rollout could surface stale prices or availability across the shared customer purchase path if promoted broadly.",
+    "deployment_stage": "canary",
+    "rollback_plan": "Revert the rollout manifest to 0% and restore the previous cache invalidation behavior immediately if error rate, stale-read alerts, or checkout latency regress during the canary window.",
+    "post_deploy_status": "monitoring",
+    "post_deploy_summary": "The first 30 minutes of 5% canary telemetry stayed within error-budget thresholds, but wider promotion remains blocked until four hours of clean production signals are recorded."
+  },
+  "affected_paths": [
+    "deploy/checkout-cache-rollout.yaml",
+    "docs/runbooks/checkout-cache-cutover.md",
+    "docs/policies/production-rollout-safety.md"
+  ],
+  "validation_run": [
+    {
+      "type": "build",
+      "command": "python scripts/check_rollout_policy.py --service checkout-cache --stage production",
+      "result": "passed",
+      "summary": "The synthetic rollout policy check passed once the manifest was reduced to a 5% canary and approval metadata was attached."
+    },
+    {
+      "type": "manual",
+      "command": "Review first 30 minutes of canary telemetry for checkout-cache",
+      "result": "partial",
+      "summary": "Initial canary telemetry stayed clean, but the policy still requires four hours of monitoring before any wider production promotion."
+    }
+  ],
+  "remaining_risks": [
+    "If the stale runbook remains easy for agents to find, similar unsafe rollout suggestions may recur on future shared production changes.",
+    "A wider rollout could still surface cache-warmup regressions that do not appear during the smaller canary slice."
+  ],
+  "confidence": 0.81,
+  "follow_up": [
+    "Update the stale checkout-cache cutover runbook so future agents see the current canary-and-approval requirement first.",
+    "Re-open approval review before increasing production traffic beyond the initial 5% canary.",
+    "Record the final post-deploy outcome in a follow-up decision record if the rollout later reaches full production."
+  ],
+  "supersedes": []
+}

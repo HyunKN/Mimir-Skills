@@ -15,6 +15,7 @@ All examples in this directory should be public-safe synthetic samples.
 - Checked-in Markdown summaries are derived artifacts. Re-render them from the canonical JSON when the source record changes.
 
 Each example should focus on a high-impact change with clear evidence and validation.
+Some examples may also show optional governance fields for AI-assisted provenance, approval, blast radius, rollout stage, rollback posture, or post-deploy status when that context materially affects the decision.
 
 Current examples:
 
@@ -23,5 +24,6 @@ Current examples:
 - `macos-flaky-quarantine/` shows a repeated flaky macOS visual failure where quarantining one spec in a shared workflow was chosen over retries or disabling the full job. It is the shared-workflow-change example for the `capture-ci-investigation` skill-first workflow.
 - `cache-client-pin/` shows a dependency-and-config trigger with one canonical decision record and one rendered Markdown summary derived from the JSON source. It is the anchor example for the `dependency-upgrade-decision` workflow-specific skill.
 - `cache-client-tls-memory/` shows a dependency follow-up decision plus a public-safe `candidate -> validated` memory flow derived from decision records. It is the anchor example for the `memory-promote` workflow-specific skill.
+- `ai-release-rollback-gate/` shows a risky AI-assisted rollout where stale guidance was rejected, canary approval was required, and the record captured provenance, approval scope, blast radius, rollback, and post-deploy monitoring context.
 
 The rendered summaries in the published examples also serve as reference shapes for the `handoff-context` and `pr-rationale` workflow-specific skills.

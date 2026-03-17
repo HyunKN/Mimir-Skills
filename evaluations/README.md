@@ -25,6 +25,7 @@ These evaluations currently use the public-safe synthetic examples under:
 - `../examples/macos-flaky-quarantine/`
 - `../examples/cache-client-pin/`
 - `../examples/cache-client-tls-memory/`
+- `../examples/ai-release-rollback-gate/`
 
 `reviewer-comprehension.md` also serves as the evaluation anchor for the `pr-rationale` workflow-specific skill.
 `memory-promotion-evaluation.md` serves as the evaluation anchor for the `memory-promote` workflow-specific skill.
