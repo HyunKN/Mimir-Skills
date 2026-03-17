@@ -149,6 +149,26 @@ Then ask Codex with direct workflow language such as:
 - the installed wrappers point to the same skill-first workflow packages and local helper runtime used from the repository root
 - skill-first reading is still the lower-friction baseline when you do not specifically need installed Codex skills
 
+## Prompt Macros After Install
+
+If your agent can discover installed skills reliably, the intended happy path is to ask for the output you want in plain workflow language:
+
+```text
+Prepare a handoff from my current changes.
+Write PR rationale for this branch.
+Summarize this CI failure as a bounded investigation note.
+```
+
+If routing is weak or inconsistent, switch to the explicit workflow form:
+
+```text
+Use the prepare-handoff workflow. Prepare a handoff from my current changes.
+Use the write-pr-rationale workflow. Write PR rationale for this branch.
+Use the capture-ci-investigation workflow. Summarize this CI failure as a bounded investigation note.
+```
+
+Use the portable prompt pack in [Prompt Macros](prompt-macros.md) when you want copy-paste prompts that work across agent families.
+
 ## Choosing Between the Paths
 
 Choose `skill-first reading` when:

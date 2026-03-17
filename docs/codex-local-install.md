@@ -93,6 +93,14 @@ After install, ask your agent with direct workflow language such as:
 - `Write PR rationale for this branch.`
 - `Summarize this CI failure as a bounded investigation note.`
 
+If routing is weak or inconsistent, use the explicit workflow form instead:
+
+- `Use the prepare-handoff workflow. Prepare a handoff from my current changes.`
+- `Use the write-pr-rationale workflow. Write PR rationale for this branch.`
+- `Use the capture-ci-investigation workflow. Summarize this CI failure as a bounded investigation note.`
+
+See [Prompt Macros](prompt-macros.md) for the portable copy-paste prompt pack.
+
 ## Feedback Loop
 
 Use the lightweight review loop in [Adapter Feedback Loop](adapter-feedback-loop.md) after real usage.

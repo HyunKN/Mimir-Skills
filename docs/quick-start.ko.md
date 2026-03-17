@@ -149,6 +149,26 @@ python -m mimir_skills install --workflows prepare-handoff write-pr-rationale
 - 설치된 wrapper도 저장소 루트에서 쓰는 것과 같은 skill-first workflow package와 local helper runtime을 가리킨다
 - 설치된 Codex skill이 꼭 필요한 경우가 아니면, skill-first reading이 여전히 더 낮은 마찰의 기본 경로다
 
+## 설치 후 프롬프트 매크로
+
+설치된 skill을 에이전트가 잘 찾아간다면, 가장 편한 경로는 원하는 결과를 workflow 언어로 바로 말하는 것이다:
+
+```text
+Prepare a handoff from my current changes.
+Write PR rationale for this branch.
+Summarize this CI failure as a bounded investigation note.
+```
+
+라우팅이 약하거나 일관되지 않다면 workflow 이름을 더 명시적으로 붙인다:
+
+```text
+Use the prepare-handoff workflow. Prepare a handoff from my current changes.
+Use the write-pr-rationale workflow. Write PR rationale for this branch.
+Use the capture-ci-investigation workflow. Summarize this CI failure as a bounded investigation note.
+```
+
+agent family를 가리지 않고 복사해서 쓰려면 [Prompt Macros (English)](prompt-macros.md)를 참고한다.
+
 ## 어떤 경로를 고를까
 
 다음과 같다면 `skill-first reading`을 고른다:
