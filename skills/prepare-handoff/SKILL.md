@@ -43,6 +43,7 @@ Use this skill to draft a user-facing handoff from the current local project sta
 ## Load References As Needed
 
 - Read [`references/decision-rules.md`](references/decision-rules.md) for decision rules, override contracts, and the output template.
+- Read [`references/invocation-prompts.md`](references/invocation-prompts.md) when you want copy-paste prompt macros for installed-agent use.
 - Read [`../_internal/handoff-context/SKILL.md`](../_internal/handoff-context/SKILL.md) for the current continuation-summary structure and summary-specific guardrails.
 - Read [`../_internal/handoff-context/references/handoff-playbook.md`](../_internal/handoff-context/references/handoff-playbook.md) for dirty-tree, clean-state branch-range, and recent-commit fallback output patterns.
 - Read [`../_internal/decision-capture/SKILL.md`](../_internal/decision-capture/SKILL.md) when a missing canonical record should be created before drafting the handoff.
