@@ -4,7 +4,7 @@ English | [한국어](README.ko.md)
 
 Skill-first workflow guidance, playbooks, and validators for AI coding agents working from local files.
 
-`Mimir-Skills` is shifting toward a skill-first repository for local-file AI coding agents.
+`Mimir-Skills` now operates on a skill-first baseline for local-file AI coding agents.
 The direction is simple: put workflow judgment rules, safety constraints, and output patterns into `SKILL.md` and companion references so agents can read them directly, while keeping only deterministic validation and thin local collection helpers in Python.
 
 ## Who This Is For
@@ -45,7 +45,7 @@ This repository should help generate strong drafts, not pretend to replace engin
 
 ## Current Status
 
-The repository is now in a skill-first direction reset.
+The repository now runs on a skill-first baseline.
 The public value centers on `SKILL.md`, references, examples, schemas, and deterministic validators first; local Python helpers remain available, but they are now secondary to the skill documents rather than the main product story.
 
 What is available now:
