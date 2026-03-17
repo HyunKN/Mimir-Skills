@@ -72,7 +72,7 @@ The project is built on six claims:
 2. Keep the core workflows centered on `SKILL.md` plus references first, with deterministic helpers limited to validators and thin collectors.
 3. Keep deterministic validators and example verification stable while avoiding a return to a larger workflow runtime.
 4. Treat adapter paths as optional proof points, not as the main product story, and do not open expansion work by default.
-5. Reconsider broader helper or adapter expansion only when repeated usage evidence justifies it, especially for the remaining `capture-ci-investigation` beta gate.
+5. Reconsider broader helper or adapter expansion only when repeated usage evidence justifies it, while keeping `capture-ci-investigation` wrapper-only by design unless a clear UX gain emerges.
 
 ## What Success Looks Like
 

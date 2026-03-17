@@ -6,7 +6,7 @@ This directory holds the primary public skill packages for the repository.
 
 - `prepare-handoff` — user-facing workflow skill built from `_internal/handoff-context`, `_internal/decision-capture`, and `_internal/decision-core`
 - `write-pr-rationale` — user-facing workflow skill built from `_internal/pr-rationale`, `_internal/decision-capture`, and `_internal/decision-core`
-- `capture-ci-investigation` — narrow beta workflow skill built from `_internal/ci-rationale`, `_internal/decision-capture`, and `_internal/decision-core`
+- `capture-ci-investigation` — skill-first workflow skill, wrapper-only by design, built from `_internal/ci-rationale`, `_internal/decision-capture`, and `_internal/decision-core`
 
 If routing is unclear before loading one of those skills, start with `docs/workflow-trigger-table.md`.
 

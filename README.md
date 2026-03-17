@@ -155,7 +155,7 @@ The intended runtime artifact layout inside a user repository is:
 The repository now runs on a skill-first baseline.
 
 - `prepare-handoff` and `write-pr-rationale` are skill-first workflows with live collectors and deprecated generate stubs
-- `capture-ci-investigation` remains a narrower wrapper-only beta workflow
+- `capture-ci-investigation` is a skill-first workflow, wrapper-only by design
 - workflow routing stays on the public trigger table until scale or ambiguity justifies anything machine-readable
 - deterministic validators and example verification remain stable and should not grow back into a larger workflow runtime
 - new agent-specific adapters stay deferred unless repeated usage shows a clear UX gain beyond the current baseline

@@ -14,7 +14,7 @@ They help an agent choose the right public workflow before loading the detailed 
 | --- | --- | --- | --- | --- | --- |
 | Continue work on the current branch | `handoff`, `checkpoint`, `what changed`, `where do I continue`, dirty tree, clean branch checkpoint | `prepare-handoff` | `skills/prepare-handoff/SKILL.md` | `skills/prepare-handoff/scripts/collect_git_context.py` | the work needs a canonical decision record rather than a continuation summary |
 | Explain a change to reviewers | `PR rationale`, `why this changed`, `review notes`, `what was validated`, reviewer-facing explanation of a diff | `write-pr-rationale` | `skills/write-pr-rationale/SKILL.md` | `skills/write-pr-rationale/scripts/collect_pr_context.py` | explicit product or tradeoff intent is missing and the user must supply that `why` directly |
-| Summarize a CI or workflow incident without overclaiming | failing job, flaky test, timeout, rerun note, workflow config change, request for an incident summary | `capture-ci-investigation` | `skills/capture-ci-investigation/SKILL.md` | none yet; stay skill-first and wrapper-only | the incident changes shared retry, timeout, quarantine, or workflow policy, or needs a durable canonical record |
+| Summarize a CI or workflow incident without overclaiming | failing job, flaky test, timeout, rerun note, workflow config change, request for an incident summary | `capture-ci-investigation` | `skills/capture-ci-investigation/SKILL.md` | none; skill-first and wrapper-only by design | the incident changes shared retry, timeout, quarantine, or workflow policy, or needs a durable canonical record |
 
 ## Routing Notes
 

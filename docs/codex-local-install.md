@@ -117,4 +117,4 @@ The current goal is to learn whether the installed workflows produce useful draf
 - `--force` is intentionally conservative and refuses to replace unrelated-looking directories.
 - Outputs remain drafts and still require human review.
 - the installed `prepare-handoff` and `write-pr-rationale` helper entrypoints now mirror the repository-root baseline: collectors remain live, while old generate paths are compatibility/deprecation stubs
-- `capture-ci-investigation` remains a narrower beta wrapper and does not yet include direct-use collector or generator scripts.
+- `capture-ci-investigation` is a skill-first workflow, wrapper-only by design, and does not include direct-use collector or generator scripts.

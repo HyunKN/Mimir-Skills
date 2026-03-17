@@ -182,7 +182,7 @@ python adapters/codex/scripts/install_codex_skills.py
 
 ## 현재 한계
 
-- `capture-ci-investigation`은 여전히 더 좁은 beta wrapper다
+- `capture-ci-investigation`은 skill-first workflow이며 wrapper-only는 의도된 설계다
 - hosted multi-agent install story는 아직 없지만 `npx mimir-skills install`로 아무 디렉토리에서 한줄 설치가 가능하다
 - agent family마다 support level이 다르며, 모든 target이 thin adapter를 갖고 있는 것은 아니다
 - 더 자세한 동작과 safety constraint는 [Always-Loaded Rules (English)](always-loaded-rules.md), [Workflow Surface (English)](workflow-surface.md), 각 workflow `SKILL.md`에 남아 있다

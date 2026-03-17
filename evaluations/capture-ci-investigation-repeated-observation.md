@@ -2,12 +2,12 @@
 
 ## Purpose
 
-Use this review after real local use of the beta `capture-ci-investigation` skill.
+Use this review after real local use of the `capture-ci-investigation` skill.
 
 The goal is to decide whether repeated usage continues to keep evidence, explanation, uncertainty, and next action clearly separated without overclaiming or hidden runtime dependence.
 
 This is not a one-off example review.
-Use it as the running gate for the last open beta question: whether repeated real usage supports keeping the workflow beta, tightening it further, or reconsidering graduation later.
+Use it as the running gate for quality assurance: whether repeated real usage maintains consistent four-lane separation, or whether the workflow needs tightening.
 
 ## When To Run
 
@@ -68,3 +68,27 @@ Treat the gate as weak or regressing if:
 - Use this review together with `capture-ci-investigation-beta-review.md`.
 - If a repeated issue shows up here, record it in `../.workspace/failure-modes.md`.
 - If a new CI shape appears repeatedly, consider whether the public examples need another anchor before changing the product surface.
+
+## Graduation Assessment (2026-03-17)
+
+Summary: Three public CI examples reviewed against the observation checklist.
+
+- `windows-ci-timeout`
+  - CI shape type: config-backed
+  - 4-lane separation verdict: pass - observed evidence, current explanation, unknowns, and current action stay explicitly separated.
+  - Evidence-strength wording correctness: strong-evidence wording remains likely/validated and avoids certainty overreach.
+  - Shared workflow blast-radius coverage: not applicable for this case.
+
+- `linux-ci-rerun-watch`
+  - CI shape type: rerun-only monitoring
+  - 4-lane separation verdict: pass - rerun success is kept as urgency reduction while uncertainty and monitoring remain explicit.
+  - Evidence-strength wording correctness: weak-evidence wording avoids fixed/root-cause claims.
+  - Shared workflow blast-radius coverage: not applicable because no shared-workflow change was made.
+
+- `macos-flaky-quarantine`
+  - CI shape type: shared-workflow mitigation
+  - 4-lane separation verdict: pass - repeated evidence, leading explanation, residual uncertainty, and mitigation/follow-up are clearly split.
+  - Evidence-strength wording correctness: medium-to-strong framing stays bounded and ties claims to available checks.
+  - Shared workflow blast-radius coverage: covered with affected scope, failure-visibility risk, and follow-up/revert signals.
+
+Conclusion: All three examples pass the repeated-observation checklist. The four-lane separation is consistent across strong, medium, and weak evidence tiers. No overclaiming detected. Gate: PASS.

@@ -17,7 +17,7 @@ Use it as the minimum rule layer that should stay visible when a shared CLI run,
    - read the selected workflow `SKILL.md` before reaching for helper code
 3. Use `prepare-handoff` when the user needs a continuation summary from local branch or working-tree context.
 4. Use `write-pr-rationale` when the user needs a reviewer-facing explanation of what changed, why it changed, what was validated, and what still needs attention. Keep inferred rationale tentative unless explicit `why` context exists.
-5. Use `capture-ci-investigation` only as a narrower best-effort investigation summary. It is still beta, should keep evidence and uncertainty separate, and does not promise root-cause certainty.
+5. Use `capture-ci-investigation` as a bounded best-effort investigation summary. Keep evidence and uncertainty separate, and do not promise root-cause certainty.
 6. Canonical decision records outrank rendered summaries and workflow drafts.
 7. Do not claim rationale, validation, or confidence that cannot be tied to local evidence.
 8. If local branch context is too thin, add explicit rationale or evidence notes instead of filling the gap with generic prose.

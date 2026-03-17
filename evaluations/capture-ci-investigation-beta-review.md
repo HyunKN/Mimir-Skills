@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Use this review to check whether the beta `capture-ci-investigation` skill can produce a bounded CI summary without overclaiming.
+Use this review to check whether the `capture-ci-investigation` skill can produce a bounded CI summary without overclaiming.
 
 The goal is not polished prose.
 The goal is to confirm that the draft keeps observed evidence, current explanation, unknowns, and temporary action clearly separated.
@@ -47,3 +47,15 @@ Treat the review as weak or failed if:
 
 - Use this review alongside `skills/capture-ci-investigation/SKILL.md` and `skills/capture-ci-investigation/references/beta-boundaries.md`.
 - If the same overclaim or filler pattern repeats, record it in `../.workspace/failure-modes.md`.
+
+## Graduation Decision (2026-03-17)
+
+Beta gates reviewed against three public CI examples:
+
+- Gate 1 (multiple public-safe examples covering more than one CI shape): PASS - 3 examples across 3 distinct shapes
+- Gate 2 (wrapper-only decision documented): PASS - documented in SKILL.md and beta-boundaries.md
+- Gate 3 (repeated observation shows consistent 4-lane separation): PASS - see repeated-observation review
+
+Decision: Graduate capture-ci-investigation from beta-wrapper to skill-first.
+
+The workflow remains wrapper-only by design (no dedicated Python collector). This is an explicit architectural decision, not a beta limitation.

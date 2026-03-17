@@ -1,11 +1,11 @@
 ---
 name: capture-ci-investigation
-description: Draft a bounded CI investigation summary when failing jobs, flaky tests, build regressions, or workflow config changes need a concise best-effort explanation and next step. Use when the user wants a narrow incident summary from available failure context without promising perfect root-cause analysis.
+description: Draft a bounded CI investigation summary when failing jobs, flaky tests, build regressions, or workflow config changes need a concise best-effort explanation and next step. Use when CI failure context is available and a concise investigation summary with clear evidence separation is needed.
 ---
 
 # capture-ci-investigation
 
-Use this skill to draft a narrow, best-effort CI investigation summary from the available failure context.
+Use this skill to draft a bounded CI investigation summary from the available failure context.
 
 ## Workflow
 
@@ -16,7 +16,7 @@ Use this skill to draft a narrow, best-effort CI investigation summary from the 
 5. Read [`references/decision-rules.md`](references/decision-rules.md) for the four-lane separation rules, evidence-strength wording, and the output template.
 6. Keep uncertainty explicit whenever logs, reruns, or reproduction evidence are incomplete.
 7. Prefer mitigation and next-step language over definitive root-cause language when the evidence is thin.
-8. Treat this as a beta workflow and keep the output human-reviewed before it is shared beyond the immediate engineering loop.
+8. Keep the output human-reviewed before sharing beyond the immediate engineering loop.
 
 ## Output Focus
 
@@ -37,16 +37,6 @@ Use this skill to draft a narrow, best-effort CI investigation summary from the 
 - Do not recommend shared workflow changes without calling out their blast radius and follow-up need.
 - Do not treat the summary as canonical truth; decision records remain primary when one exists.
 
-## Beta Status
-
-Keep this workflow beta until all of the following are true:
-
-- there are multiple public-safe examples covering more than one CI failure shape
-- either a direct-use collection and generation path exists, or wrapper-only behavior remains an explicit written decision
-- repeated observation shows the workflow can consistently separate observed evidence, current explanation, unknowns, and next action without overclaiming
-
-Current decision: keep this workflow wrapper-only for now. The remaining open beta gate is tracked through `../../evaluations/capture-ci-investigation-repeated-observation.md`.
-
 ## Load References As Needed
 
 - Read [`references/decision-rules.md`](references/decision-rules.md) for decision rules and output template.
@@ -56,4 +46,4 @@ Current decision: keep this workflow wrapper-only for now. The remaining open be
 - Read [`../_internal/decision-core/SKILL.md`](../_internal/decision-core/SKILL.md) only when shared validation, evidence, and safety constraints need to be checked.
 - Inspect the public examples under [`../../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json`](../../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json), [`../../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json`](../../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json), and [`../../examples/macos-flaky-quarantine/.ai/records/decisions/dec-20260317-macos-flaky-quarantine-001.json`](../../examples/macos-flaky-quarantine/.ai/records/decisions/dec-20260317-macos-flaky-quarantine-001.json) when you need concrete CI investigation shapes.
 - Read [`../../evaluations/capture-ci-investigation-beta-review.md`](../../evaluations/capture-ci-investigation-beta-review.md) when checking whether the draft keeps evidence, explanation, uncertainty, and temporary action clearly separated.
-- Read [`../../evaluations/capture-ci-investigation-repeated-observation.md`](../../evaluations/capture-ci-investigation-repeated-observation.md) when deciding whether repeated real usage still supports the wrapper-only beta posture.
+- Read [`../../evaluations/capture-ci-investigation-repeated-observation.md`](../../evaluations/capture-ci-investigation-repeated-observation.md) when deciding whether repeated real usage still supports the current wrapper-only posture.

@@ -182,7 +182,7 @@ Choose `Codex local install (legacy)` when:
 
 ## Current Limits
 
-- `capture-ci-investigation` is still a narrower beta wrapper
+- `capture-ci-investigation` is a skill-first workflow, wrapper-only by design
 - there is no hosted multi-agent install story yet, but `npx mimir-skills install` provides a one-line install from any directory
 - support levels differ by agent family, and not every target has a thin adapter
 - deeper behavior and safety constraints still live in [Always-Loaded Rules](always-loaded-rules.md), [Workflow Surface](workflow-surface.md), and the workflow `SKILL.md` files

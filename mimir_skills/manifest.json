@@ -16,10 +16,10 @@
     },
     {
       "name": "capture-ci-investigation",
-      "availability": "beta-wrapper",
+      "availability": "skill-first",
       "entrypoint": null,
       "skill_path": "skills/capture-ci-investigation/SKILL.md",
-      "summary": "Wrapper-only beta workflow for bounded CI investigation summaries. Direct shared CLI generation is not implemented yet."
+      "summary": "Skill-first workflow for bounded CI investigation summaries. Wrapper-only by design; no dedicated Python collector."
     }
   ]
 }

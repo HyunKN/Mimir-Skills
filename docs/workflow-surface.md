@@ -94,26 +94,25 @@ Current internal building blocks:
 Current status:
 
 - public workflow name is defined
-- an initial beta user-facing skill now exists under `skills/capture-ci-investigation/`
-- the beta skill, examples, and boundary notes are the primary public surface today
-- the beta skill now carries explicit evidence-tier wording rules, shared-workflow blast-radius checks, and monitor-first output guidance directly in the skill plus boundary note
-- a dedicated beta review anchor now exists at `evaluations/capture-ci-investigation-beta-review.md` so uncertainty separation and anti-overclaiming can be re-checked later
-- the workflow still appears in `python -m mimir_skills list` as a beta wrapper, but it does not yet expose a direct shared CLI generation command
+- a skill-first user-facing skill exists under `skills/capture-ci-investigation/`
+- the skill, examples, and boundary notes are the primary public surface
+- the skill carries explicit evidence-tier wording rules, shared-workflow blast-radius checks, and monitor-first output guidance directly in the skill plus boundary note
+- a dedicated review anchor exists at `evaluations/capture-ci-investigation-beta-review.md` for uncertainty separation and anti-overclaiming checks
+- the workflow appears in `python -m mimir_skills list` as skill-first and does not expose a direct shared CLI generation command
 - the first Codex-local install path can still include this workflow through `adapters/codex/scripts/install_codex_skills.py`, but that remains optional and secondary
 - the multi-target installer (`python -m mimir_skills install --target claude|codex|generic`) can install this workflow into any supported agent environment
-- the beta guidance now points at three public-safe CI shapes: a stronger config-backed timeout case, a weaker rerun-only monitoring case, and a shared-workflow quarantine case
-- the first beta graduation gate is now satisfied because the public examples cover more than one CI-failure shape
-- the second beta graduation gate is now also satisfied because the current product decision is to keep this workflow wrapper-only at the current scale rather than add direct-use collectors or generators without a clear UX need
-- the workflow still remains beta because the repeated-observation gate is still open
-- the remaining open gate is now tracked explicitly through `evaluations/capture-ci-investigation-repeated-observation.md`
+- guidance points at three public-safe CI shapes: a stronger config-backed timeout case, a weaker rerun-only monitoring case, and a shared-workflow quarantine case
+- graduation review confirms these examples cover distinct CI-failure shapes with consistent four-lane separation
+- wrapper-only behavior remains an explicit architectural decision at the current scale rather than adding direct-use collectors or generators without a clear UX need
+- repeated-observation review now records a pass for separation consistency and anti-overclaiming
 - dedicated direct-use scripts are intentionally not implemented yet
-- this remains a narrower best-effort direction until stronger examples and reliability boundaries exist
+- this remains a bounded best-effort direction with explicit reliability boundaries
 
-Beta graduation note:
+Graduation basis:
 
-- keep it beta until it has multiple public-safe examples across different CI failure shapes
-- keep it beta until either a direct-use path exists or wrapper-only remains an explicit product decision
-- keep it beta until repeated observations, tracked through `evaluations/capture-ci-investigation-repeated-observation.md`, show it can separate evidence, explanation, uncertainty, and next step without repeated overclaiming
+- confirmed multiple public-safe examples across different CI failure shapes
+- confirmed wrapper-only remains an explicit product decision
+- confirmed repeated observations in `evaluations/capture-ci-investigation-repeated-observation.md` show consistent separation of evidence, explanation, uncertainty, and next step without overclaiming
 
 Current wrapper-only decision:
 

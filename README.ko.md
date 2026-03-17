@@ -155,7 +155,7 @@ Mimir-Skills/
 이 저장소는 현재 skill-first baseline 위에서 운영됩니다.
 
 - `prepare-handoff`와 `write-pr-rationale`는 live collector와 deprecated generate stub를 가진 skill-first workflow입니다
-- `capture-ci-investigation`은 여전히 더 좁은 wrapper-only beta workflow입니다
+- `capture-ci-investigation`은 skill-first workflow이며 wrapper-only는 의도된 설계입니다
 - workflow routing은 규모나 ambiguity가 커지기 전까지 public trigger table 기준으로 유지합니다
 - 결정론적 validator와 example verification은 안정적으로 유지하고, 더 큰 workflow runtime으로 되돌아가지 않습니다
 - 새로운 agent-specific adapter는 repeated usage가 현재 baseline을 넘는 분명한 UX 이득을 보여주기 전까지 보류합니다

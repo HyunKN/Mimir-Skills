@@ -1,6 +1,6 @@
-# capture-ci-investigation Beta Boundaries
+# capture-ci-investigation Boundaries
 
-Use this note to keep the beta CI-investigation workflow narrow, truthful, and reviewable.
+Use this note to keep the CI-investigation workflow narrow, truthful, and reviewable.
 
 This boundary note mirrors and extends the core decision rules in `skills/capture-ci-investigation/SKILL.md`.
 If the top-level wording changes there, update the framing here too.
@@ -73,7 +73,7 @@ When the summary would tune timeout, retry, quarantine, cache, runner, base imag
 - what follow-up window or owner will decide whether the mitigation should stay
 - what evidence would justify reverting or tightening the temporary change
 
-If that blast radius cannot be described yet, the safer beta outcome is usually to monitor, collect evidence, or escalate rather than tune the shared workflow immediately.
+If that blast radius cannot be described yet, the safer outcome is usually to monitor, collect evidence, or escalate rather than tune the shared workflow immediately.
 
 ## Monitoring-First Outcomes
 

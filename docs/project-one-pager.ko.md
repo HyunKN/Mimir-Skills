@@ -72,7 +72,7 @@
 2. 핵심 workflow는 계속 `SKILL.md`와 reference를 중심으로 유지하고, 결정론적 helper는 validator와 thin collector 정도로 제한한다.
 3. 결정론적 validator와 example verification은 안정적으로 유지하되, 더 큰 workflow runtime으로 되돌아가지 않는다.
 4. adapter path는 main product story가 아니라 optional proof point로 취급하고, expansion work는 기본적으로 자동으로 열지 않는다.
-5. broader helper나 adapter 확장은 반복된 usage evidence가 있을 때만 다시 검토하며, 특히 `capture-ci-investigation`의 남은 beta gate는 그 근거가 쌓일 때까지 유지한다.
+5. broader helper나 adapter 확장은 반복된 usage evidence가 있을 때만 다시 검토하며, `capture-ci-investigation`은 분명한 UX 이득이 나오기 전까지 wrapper-only by design으로 유지한다.
 
 ## 성공 기준
 
