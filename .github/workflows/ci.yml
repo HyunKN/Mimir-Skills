@@ -20,12 +20,33 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s tests -p "test_*.py"
 
-      - name: Smoke-test install entrypoints
+      - name: Smoke-test install (codex via CODEX_HOME env)
         run: |
           export CODEX_HOME="$RUNNER_TEMP/codex-home"
           python -m mimir_skills install --workflows prepare-handoff
           test -f "$CODEX_HOME/skills/prepare-handoff/SKILL.md"
           test -f "$CODEX_HOME/skills/mimir-skills-support/install-manifest.json"
+
+      - name: Smoke-test install (codex explicit target)
+        run: |
+          python -m mimir_skills install --target codex --codex-home "$RUNNER_TEMP/codex-explicit" --workflows write-pr-rationale
+          test -f "$RUNNER_TEMP/codex-explicit/skills/write-pr-rationale/SKILL.md"
+          test -f "$RUNNER_TEMP/codex-explicit/skills/mimir-skills-support/install-manifest.json"
+
+      - name: Smoke-test install (claude target)
+        run: |
+          python -m mimir_skills install --target claude --project-dir "$RUNNER_TEMP/claude-project" --workflows prepare-handoff
+          test -f "$RUNNER_TEMP/claude-project/.claude/skills/prepare-handoff/SKILL.md"
+          test -f "$RUNNER_TEMP/claude-project/.claude/skills/mimir-skills-support/install-manifest.json"
+
+      - name: Smoke-test install (generic target)
+        run: |
+          python -m mimir_skills install --target generic --project-dir "$RUNNER_TEMP/generic-project" --workflows capture-ci-investigation
+          test -f "$RUNNER_TEMP/generic-project/.skills/capture-ci-investigation/SKILL.md"
+          test -f "$RUNNER_TEMP/generic-project/.skills/mimir-skills-support/install-manifest.json"
+
+      - name: Smoke-test legacy install_codex_skills.py
+        run: |
           python adapters/codex/scripts/install_codex_skills.py --codex-home "$RUNNER_TEMP/legacy-codex-home" --workflows write-pr-rationale
           test -f "$RUNNER_TEMP/legacy-codex-home/skills/write-pr-rationale/SKILL.md"
           test -f "$RUNNER_TEMP/legacy-codex-home/skills/mimir-skills-support/install-manifest.json"
