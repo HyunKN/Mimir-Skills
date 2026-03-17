@@ -66,11 +66,11 @@ What is available now:
 
 What comes next:
 
-- keep the repository skill-first and move the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus reference playbooks
-- make workflow selection clearer through a public trigger table before considering any machine-readable routing layer
-- keep deterministic validators and example verification, but shrink workflow runtime code toward thin collectors instead of growing a larger Python engine
-- do not add another agent-specific adapter yet; only revisit adapter growth if a real UX gain remains after the skill-first reset
-- keep `write-pr-rationale` in first-pass skill-first form while stronger explicit `why` capture is still being gathered, and keep `capture-ci-investigation` narrow and wrapper-only until repeated usage justifies anything more
+- keep the repository on the current skill-first baseline and rerun lightweight staleness reviews after meaningful workflow-surface changes
+- keep workflow routing on the public trigger table until the workflow count or ambiguity justifies anything machine-readable
+- keep deterministic validators and example verification stable while avoiding a return to a larger workflow runtime
+- do not add another agent-specific adapter yet; only revisit adapter growth if repeated usage shows a clear UX gain beyond the current skill-first baseline
+- keep `write-pr-rationale` honest about missing explicit `why` context, and keep `capture-ci-investigation` narrow and wrapper-only until repeated real usage justifies anything broader
 
 ## Documentation
 

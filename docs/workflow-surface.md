@@ -72,7 +72,8 @@ Current status:
 - the current clean-state rationale still needs heavier rewrite than `prepare-handoff`, especially when explicit `why` context is missing
 - the first skill-first codification pass now exists, with the epistemic guardrail placed ahead of the local signal map so inferred intent is treated as tentative by default
 - the first local agent-validation gate also passed across dirty-tree, clean branch-range, recent-commit fallback, and explicit-`why` override cases without needing extra runtime-only rules
-- this workflow can now move toward thin-collector status, but should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
+- the first runtime-reduction pass is already in place, so this workflow now lives on the same thin-collector plus deprecation-stub baseline as `prepare-handoff`
+- it should still not yet be treated as stable public guidance for clean-state runs, because explicit product or tradeoff intent still needs a user-supplied `why` note more often than `prepare-handoff` needs extra context
 - broader multi-agent packaging is still not implemented and is no longer the main short-term story
 
 ### `capture-ci-investigation`

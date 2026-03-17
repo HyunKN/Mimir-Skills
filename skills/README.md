@@ -16,7 +16,7 @@ Current outward-facing workflow entries:
 
 - `prepare-handoff` -> user-facing workflow skill built from `handoff-context`, `decision-capture`, and `decision-core`, now with its main decision rules living in the skill and playbook docs
 - `write-pr-rationale` -> user-facing workflow skill built from `pr-rationale`, `decision-capture`, and `decision-core`, now carrying a first-pass skill-first rule set while clean-state rationale capture still needs stronger explicit `why` support
-- `capture-ci-investigation` -> narrow beta workflow skill built from `ci-rationale`, `decision-capture`, and `decision-core`, intentionally kept best-effort and script-light for now
+- `capture-ci-investigation` -> narrow beta workflow skill built from `ci-rationale`, `decision-capture`, and `decision-core`, intentionally kept best-effort, wrapper-only, and script-light at the current scale
 
 If routing is unclear before loading one of those skills, start with `docs/workflow-trigger-table.md`.
 
