@@ -246,7 +246,8 @@ def is_valid_utc_timestamp(value: str) -> bool:
         parsed = datetime.fromisoformat(normalized)
     except ValueError:
         return False
-    return parsed.utcoffset() is not None and parsed.utcoffset().total_seconds() == 0
+    offset = parsed.utcoffset()
+    return offset is not None and offset.total_seconds() == 0
 
 
 if __name__ == "__main__":
