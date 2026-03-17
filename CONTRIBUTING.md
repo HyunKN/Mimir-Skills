@@ -54,8 +54,8 @@ This repository is documentation-first. Contributions should make decision recor
 Before opening a contribution, run the checks relevant to your change.
 
 - Verify public examples end to end with `python scripts/verify_examples.py`
-- Validate canonical records with `python skills/decision-core/scripts/validate_decision_record.py <path>`
-- Render summaries with `python skills/decision-capture/scripts/render_summary.py <record-path> --output <summary-path>`
+- Validate canonical records with `python skills/_internal/decision-core/scripts/validate_decision_record.py <path>`
+- Render summaries with `python skills/_internal/decision-capture/scripts/render_summary.py <record-path> --output <summary-path>`
 - Re-read the touched bilingual doc pair to make sure the Korean file still mirrors the English source
 
 When new functionality lands, extend CI with the smallest check that proves that feature works. Do not widen CI with unrelated checks by default.
