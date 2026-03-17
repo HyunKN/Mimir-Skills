@@ -213,7 +213,7 @@ def build_deprecation_note(
         "# prepare-handoff helper deprecated",
         "",
         "- Runtime-generated handoff drafts are deprecated for this workflow.",
-        "- Draft the handoff directly from `skills/prepare-handoff/SKILL.md` and `skills/handoff-context/references/handoff-playbook.md`.",
+        "- Draft the handoff directly from `skills/prepare-handoff/SKILL.md` and `skills/_internal/handoff-context/references/handoff-playbook.md`.",
         f"- Repository under review: `{repo_path}`",
         "- Use `python skills/prepare-handoff/scripts/collect_git_context.py --repo <path> --output handoff-context.json` when you want structured git context before drafting.",
         "- The old shared CLI path (`python -m mimir_skills prepare-handoff`) and `scripts/generate_handoff.py` now exist only to point older flows back to the skill-first guidance.",

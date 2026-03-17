@@ -171,7 +171,7 @@ def build_deprecation_note(
         "# write-pr-rationale helper deprecated",
         "",
         "- Runtime-generated PR rationale drafts are deprecated for this workflow.",
-        "- Draft the rationale directly from `skills/write-pr-rationale/SKILL.md` and `skills/pr-rationale/references/pr-playbook.md`.",
+        "- Draft the rationale directly from `skills/write-pr-rationale/SKILL.md` and `skills/_internal/pr-rationale/references/pr-playbook.md`.",
         f"- Repository under review: `{repo_path}`",
         "- Use `python skills/write-pr-rationale/scripts/collect_pr_context.py --repo <path> --output pr-context.json` when you want structured git context before drafting.",
         "- The old shared CLI path (`python -m mimir_skills write-pr-rationale`) and `scripts/generate_pr_rationale.py` now exist only to point older flows back to the skill-first guidance.",

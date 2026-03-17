@@ -16,11 +16,11 @@ EXAMPLES_ROOT = REPO_ROOT / "examples"
 DECISION_SCHEMA_PATH = REPO_ROOT / "spec" / "decision-record-schema.json"
 MEMORY_SCHEMA_PATH = REPO_ROOT / "spec" / "memory-artifact-schema.json"
 SCHEMA_CONSISTENCY_PATH = REPO_ROOT / "scripts" / "check_schema_consistency.py"
-VALIDATOR_PATH = REPO_ROOT / "skills" / "decision-core" / "scripts" / "validate_decision_record.py"
+VALIDATOR_PATH = REPO_ROOT / "skills" / "_internal" / "decision-core" / "scripts" / "validate_decision_record.py"
 MEMORY_VALIDATOR_PATH = (
-    REPO_ROOT / "skills" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
+    REPO_ROOT / "skills" / "_internal" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
 )
-RENDERER_PATH = REPO_ROOT / "skills" / "decision-capture" / "scripts" / "render_summary.py"
+RENDERER_PATH = REPO_ROOT / "skills" / "_internal" / "decision-capture" / "scripts" / "render_summary.py"
 
 
 def main() -> int:

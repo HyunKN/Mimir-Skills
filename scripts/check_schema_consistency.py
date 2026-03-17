@@ -14,8 +14,8 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DECISION_SCHEMA_PATH = REPO_ROOT / "spec" / "decision-record-schema.json"
 MEMORY_SCHEMA_PATH = REPO_ROOT / "spec" / "memory-artifact-schema.json"
-DECISION_VALIDATOR_PATH = REPO_ROOT / "skills" / "decision-core" / "scripts" / "validate_decision_record.py"
-MEMORY_VALIDATOR_PATH = REPO_ROOT / "skills" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
+DECISION_VALIDATOR_PATH = REPO_ROOT / "skills" / "_internal" / "decision-core" / "scripts" / "validate_decision_record.py"
+MEMORY_VALIDATOR_PATH = REPO_ROOT / "skills" / "_internal" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
 
 
 @dataclass
