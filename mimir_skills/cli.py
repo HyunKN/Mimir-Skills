@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-from . import install_codex
+from . import install
 from .workflows import prepare_handoff, write_pr_rationale
 
 
@@ -32,26 +32,40 @@ def build_parser() -> argparse.ArgumentParser:
 
     install_parser = subparsers.add_parser(
         "install",
-        help="Install the current outward-facing workflows into a local Codex skills directory.",
+        help="Install the current outward-facing workflows into a local AI agent skills directory.",
     )
+    # Accept optional positional target for backward compatibility
+    # (e.g. `python -m mimir_skills install codex`)
     install_parser.add_argument(
         "adapter",
         nargs="?",
-        default="codex",
-        choices=["codex"],
-        help="Install target. Currently only `codex` is supported.",
+        default=None,
+        choices=list(install.VALID_TARGETS),
+        help="(deprecated positional) Install target. Prefer --target instead.",
+    )
+    install_parser.add_argument(
+        "--target",
+        choices=list(install.VALID_TARGETS),
+        default=None,
+        help="Install target: claude (.claude/skills/), codex ($CODEX_HOME/skills/), or generic (.skills/).",
     )
     install_parser.add_argument(
         "--codex-home",
         type=Path,
         default=None,
-        help="Override CODEX_HOME. Defaults to $CODEX_HOME or ~/.codex.",
+        help="Override CODEX_HOME for codex target. Defaults to $CODEX_HOME or ~/.codex.",
+    )
+    install_parser.add_argument(
+        "--project-dir",
+        type=Path,
+        default=None,
+        help="Project directory for claude/generic targets. Defaults to current working directory.",
     )
     install_parser.add_argument(
         "--workflows",
         nargs="+",
-        choices=sorted(install_codex.WORKFLOW_DEPENDENCIES),
-        default=sorted(install_codex.WORKFLOW_DEPENDENCIES),
+        choices=sorted(install.WORKFLOW_DEPENDENCIES),
+        default=sorted(install.WORKFLOW_DEPENDENCIES),
         help="Install only the selected outward-facing workflows and their dependencies.",
     )
     install_parser.add_argument(
@@ -72,6 +86,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     return parser
+
+
+def resolve_target(args: argparse.Namespace) -> str | None:
+    if args.target is not None:
+        return args.target
+    if args.adapter is not None:
+        return args.adapter
+    # No explicit target — let install.detect_target() handle auto-detection.
+    # But if --codex-home is given, default to codex for backward compat.
+    if args.codex_home is not None:
+        return "codex"
+    return None
 
 
 def render_manifest_lines(manifest: dict) -> list[str]:
@@ -107,8 +133,11 @@ def main(argv: list[str] | None = None) -> int:
         return write_pr_rationale.generate_main(remaining)
 
     if args.command == "install":
-        return install_codex.run_install(
+        target = resolve_target(args)
+        return install.run_install(
+            target=target,
             codex_home=args.codex_home,
+            project_dir=args.project_dir,
             workflows=args.workflows,
             force=args.force,
         )

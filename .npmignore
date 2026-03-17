@@ -1,0 +1,26 @@
+# dev/CI artifacts
+.github/
+.git/
+__pycache__/
+*.pyc
+*.pyo
+
+# docs and meta (not needed for install)
+docs/
+adapters/
+template/
+evaluations/*.md
+*.ko.md
+CONTRIBUTING.md
+SECURITY.md
+LICENSE
+README.md
+
+# test artifacts
+tests/
+.pytest_cache/
+
+# ide/editor
+.vscode/
+*.swp
+*.swo
