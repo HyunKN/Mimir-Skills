@@ -101,6 +101,7 @@ Current status:
 - the first beta graduation gate is now satisfied because the public examples cover more than one CI-failure shape
 - the second beta graduation gate is now also satisfied because the current product decision is to keep this workflow wrapper-only at the current scale rather than add direct-use collectors or generators without a clear UX need
 - the workflow still remains beta because the repeated-observation gate is still open
+- the remaining open gate is now tracked explicitly through `evaluations/capture-ci-investigation-repeated-observation.md`
 - dedicated direct-use scripts are intentionally not implemented yet
 - this remains a narrower best-effort direction until stronger examples and reliability boundaries exist
 
@@ -108,7 +109,7 @@ Beta graduation note:
 
 - keep it beta until it has multiple public-safe examples across different CI failure shapes
 - keep it beta until either a direct-use path exists or wrapper-only remains an explicit product decision
-- keep it beta until repeated observations show it can separate evidence, explanation, uncertainty, and next step without repeated overclaiming
+- keep it beta until repeated observations, tracked through `evaluations/capture-ci-investigation-repeated-observation.md`, show it can separate evidence, explanation, uncertainty, and next step without repeated overclaiming
 
 Current wrapper-only decision:
 

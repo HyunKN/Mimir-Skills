@@ -92,6 +92,7 @@ Current decision:
   - local-file agents can already read the skill and boundary notes directly
   - the current public CI example set is still small enough that another helper layer would add maintenance faster than it adds user value
   - repeated real usage has not yet shown a strong enough UX gain to justify dedicated direct-use collectors or generators
+- the remaining open beta gate is now tracked through `../../evaluations/capture-ci-investigation-repeated-observation.md`
 
 ## Load References As Needed
 
@@ -101,4 +102,5 @@ Current decision:
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) only when shared validation, evidence, and safety constraints need to be checked.
 - Inspect the public examples under [`../../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json`](../../examples/windows-ci-timeout/.ai/records/decisions/dec-20260311-ci-timeout-001.json), [`../../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json`](../../examples/linux-ci-rerun-watch/.ai/records/decisions/dec-20260316-linux-ci-rerun-watch-001.json), and [`../../examples/macos-flaky-quarantine/.ai/records/decisions/dec-20260317-macos-flaky-quarantine-001.json`](../../examples/macos-flaky-quarantine/.ai/records/decisions/dec-20260317-macos-flaky-quarantine-001.json) when you need concrete CI investigation shapes for validated-change, monitor-only, and shared-workflow-quarantine cases.
 - Read [`../../evaluations/capture-ci-investigation-beta-review.md`](../../evaluations/capture-ci-investigation-beta-review.md) when checking whether the draft keeps evidence, explanation, uncertainty, and temporary action clearly separated.
+- Read [`../../evaluations/capture-ci-investigation-repeated-observation.md`](../../evaluations/capture-ci-investigation-repeated-observation.md) when deciding whether repeated real usage still supports the wrapper-only beta posture without overclaiming or untracked friction.
 - Keep this workflow wrapper-only and script-light for now; only revisit dedicated direct-use collectors or generators if repeated usage shows a clear UX benefit beyond the current skill-first path.

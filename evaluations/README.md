@@ -15,6 +15,7 @@ Current public evaluation docs:
 - `memory-promotion-evaluation.md`
 - `write-pr-rationale-agent-validation.md`
 - `capture-ci-investigation-beta-review.md`
+- `capture-ci-investigation-repeated-observation.md`
 - `staleness-review.md`
 
 These evaluations currently use the public-safe synthetic examples under:
@@ -29,4 +30,5 @@ These evaluations currently use the public-safe synthetic examples under:
 `memory-promotion-evaluation.md` serves as the evaluation anchor for the `memory-promote` workflow-specific skill.
 `write-pr-rationale-agent-validation.md` serves as the runtime-reduction gate for the `write-pr-rationale` wrapper skill.
 `capture-ci-investigation-beta-review.md` serves as the beta overclaiming and uncertainty-separation review anchor for the `capture-ci-investigation` wrapper skill.
+`capture-ci-investigation-repeated-observation.md` serves as the remaining repeated-usage gate for deciding whether the `capture-ci-investigation` beta can stay narrow, tighten further, or ever justify a broader surface later.
 `staleness-review.md` serves as the Phase 2 maintenance anchor for checking doc/example drift against the current skill-first baseline.
