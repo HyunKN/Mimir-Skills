@@ -85,6 +85,9 @@ def render_summary(record: dict[str, Any]) -> str:
     add_text_section(lines, "Why", record.get("rationale"))
     add_alternatives_section(lines, record.get("alternatives_considered"))
     add_evidence_section(lines, record.get("evidence_refs"))
+    add_ai_assistance_section(lines, record.get("ai_assistance"))
+    add_approval_section(lines, record.get("approval"))
+    add_change_scope_section(lines, record.get("change_scope"))
     add_string_list_section(lines, "Affected Paths", record.get("affected_paths"), code=True)
     add_validation_section(lines, record.get("validation_run"))
     add_string_list_section(lines, "Remaining Risks", record.get("remaining_risks"))
@@ -133,7 +136,11 @@ def add_alternatives_section(lines: list[str], value: Any) -> None:
         name = item.get("name")
         status = item.get("status")
         reason = item.get("reason")
-        if not all(isinstance(part, str) and part.strip() for part in (name, status, reason)):
+        if not isinstance(name, str) or not name.strip():
+            continue
+        if not isinstance(status, str) or not status.strip():
+            continue
+        if not isinstance(reason, str) or not reason.strip():
             continue
         rendered.append(f"- {name.strip()} ({status.strip()}): {reason.strip()}")
     if not rendered:
@@ -155,7 +162,13 @@ def add_evidence_section(lines: list[str], value: Any) -> None:
         ref = item.get("ref")
         summary = item.get("summary")
         captured_at = item.get("captured_at")
-        if not all(isinstance(part, str) and part.strip() for part in (kind, ref, summary, captured_at)):
+        if not isinstance(kind, str) or not kind.strip():
+            continue
+        if not isinstance(ref, str) or not ref.strip():
+            continue
+        if not isinstance(summary, str) or not summary.strip():
+            continue
+        if not isinstance(captured_at, str) or not captured_at.strip():
             continue
         rendered.append(
             f"- [{kind.strip()}] `{ref.strip()}`: {summary.strip()} (captured {captured_at.strip()})"
@@ -179,10 +192,13 @@ def add_validation_section(lines: list[str], value: Any) -> None:
         command = item.get("command")
         result = item.get("result")
         summary = item.get("summary")
-        if not all(
-            isinstance(part, str) and part.strip()
-            for part in (record_type, command, result, summary)
-        ):
+        if not isinstance(record_type, str) or not record_type.strip():
+            continue
+        if not isinstance(command, str) or not command.strip():
+            continue
+        if not isinstance(result, str) or not result.strip():
+            continue
+        if not isinstance(summary, str) or not summary.strip():
             continue
         rendered.append(
             f"- [{record_type.strip()}] `{command.strip()}` -> {result.strip()}: {summary.strip()}"
@@ -190,6 +206,110 @@ def add_validation_section(lines: list[str], value: Any) -> None:
     if not rendered:
         return
     lines.append("## Validation")
+    lines.append("")
+    lines.extend(rendered)
+    lines.append("")
+
+
+def add_ai_assistance_section(lines: list[str], value: Any) -> None:
+    if not isinstance(value, dict):
+        return
+    rendered: list[str] = []
+
+    used = value.get("used")
+    if isinstance(used, bool):
+        rendered.append(f"- Used: {'yes' if used else 'no'}")
+
+    summary = value.get("summary")
+    if isinstance(summary, str) and summary.strip():
+        rendered.append(f"- Summary: {summary.strip()}")
+
+    tools = value.get("tools")
+    if isinstance(tools, list):
+        tool_values = [item.strip() for item in tools if isinstance(item, str) and item.strip()]
+        if tool_values:
+            rendered.append(f"- Tools: {', '.join(tool_values)}")
+
+    verification = value.get("human_verification")
+    if isinstance(verification, str) and verification.strip():
+        rendered.append(f"- Human verification: {verification.strip()}")
+
+    if not rendered:
+        return
+
+    lines.append("## AI Assistance")
+    lines.append("")
+    lines.extend(rendered)
+    lines.append("")
+
+
+def add_approval_section(lines: list[str], value: Any) -> None:
+    if not isinstance(value, dict):
+        return
+    rendered: list[str] = []
+
+    required = value.get("required")
+    if isinstance(required, bool):
+        rendered.append(f"- Required: {'yes' if required else 'no'}")
+
+    status = value.get("status")
+    if isinstance(status, str) and status.strip():
+        rendered.append(f"- Status: {status.strip()}")
+
+    approver = value.get("approver")
+    if isinstance(approver, str) and approver.strip():
+        rendered.append(f"- Approver: {approver.strip()}")
+
+    scope = value.get("scope")
+    if isinstance(scope, str) and scope.strip():
+        rendered.append(f"- Scope: {scope.strip()}")
+
+    timestamp = value.get("timestamp")
+    if isinstance(timestamp, str) and timestamp.strip():
+        rendered.append(f"- Timestamp: {timestamp.strip()}")
+
+    if not rendered:
+        return
+
+    lines.append("## Approval")
+    lines.append("")
+    lines.extend(rendered)
+    lines.append("")
+
+
+def add_change_scope_section(lines: list[str], value: Any) -> None:
+    if not isinstance(value, dict):
+        return
+    rendered: list[str] = []
+
+    risk_tier = value.get("risk_tier")
+    if isinstance(risk_tier, str) and risk_tier.strip():
+        rendered.append(f"- Risk tier: {risk_tier.strip()}")
+
+    blast_radius = value.get("blast_radius")
+    if isinstance(blast_radius, str) and blast_radius.strip():
+        rendered.append(f"- Blast radius: {blast_radius.strip()}")
+
+    deployment_stage = value.get("deployment_stage")
+    if isinstance(deployment_stage, str) and deployment_stage.strip():
+        rendered.append(f"- Deployment stage: {deployment_stage.strip()}")
+
+    rollback_plan = value.get("rollback_plan")
+    if isinstance(rollback_plan, str) and rollback_plan.strip():
+        rendered.append(f"- Rollback plan: {rollback_plan.strip()}")
+
+    post_deploy_status = value.get("post_deploy_status")
+    if isinstance(post_deploy_status, str) and post_deploy_status.strip():
+        rendered.append(f"- Post-deploy status: {post_deploy_status.strip()}")
+
+    post_deploy_summary = value.get("post_deploy_summary")
+    if isinstance(post_deploy_summary, str) and post_deploy_summary.strip():
+        rendered.append(f"- Post-deploy summary: {post_deploy_summary.strip()}")
+
+    if not rendered:
+        return
+
+    lines.append("## Change Governance")
     lines.append("")
     lines.extend(rendered)
     lines.append("")
