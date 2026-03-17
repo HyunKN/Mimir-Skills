@@ -68,11 +68,11 @@
 
 ## 단기 로드맵
 
-1. 공개 문서에서 skill-first direction reset을 마무리한다.
-2. 남아 있는 workflow 판단 규칙도 runtime code에서 `SKILL.md`와 reference로 계속 옮긴다. `write-pr-rationale`는 이제 first skill-first pass에 들어갔고, 다음은 runtime 축소다.
-3. 결정론적 validator와 example verification은 유지하면서, runtime code는 thin collector 쪽으로 축소한다.
-4. adapter path는 main product story가 아니라 optional proof point로 취급한다.
-5. skill 문서와 example이 그것이 대체하는 runtime보다 더 강하게 유지될 때만 workflow-specific skill을 확장한다.
+1. skill-first baseline을 안정적으로 유지하고, 의미 있는 workflow-surface 변경 뒤에는 lightweight staleness review를 다시 돌린다.
+2. 핵심 workflow는 계속 `SKILL.md`와 reference를 중심으로 유지하고, 결정론적 helper는 validator와 thin collector 정도로 제한한다.
+3. 결정론적 validator와 example verification은 안정적으로 유지하되, 더 큰 workflow runtime으로 되돌아가지 않는다.
+4. adapter path는 main product story가 아니라 optional proof point로 취급하고, expansion work는 기본적으로 자동으로 열지 않는다.
+5. broader helper나 adapter 확장은 반복된 usage evidence가 있을 때만 다시 검토하며, 특히 `capture-ci-investigation`의 남은 beta gate는 그 근거가 쌓일 때까지 유지한다.
 
 ## 성공 기준
 

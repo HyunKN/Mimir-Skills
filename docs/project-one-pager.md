@@ -68,11 +68,11 @@ The project is built on six claims:
 
 ## Near-Term Roadmap
 
-1. Finish the skill-first direction reset in the public docs.
-2. Continue moving the remaining workflow judgment rules out of runtime code and into `SKILL.md` plus references, with `write-pr-rationale` now on its first skill-first pass and runtime reduction still ahead.
-3. Keep deterministic validators and example verification stable while runtime code shrinks toward thin collectors.
-4. Treat adapter paths as optional proof points, not as the main product story.
-5. Expand workflow-specific skills only when the skill docs and examples stay stronger than the runtime they replace.
+1. Keep the skill-first baseline stable and rerun lightweight staleness reviews after meaningful workflow-surface changes.
+2. Keep the core workflows centered on `SKILL.md` plus references first, with deterministic helpers limited to validators and thin collectors.
+3. Keep deterministic validators and example verification stable while avoiding a return to a larger workflow runtime.
+4. Treat adapter paths as optional proof points, not as the main product story, and do not open expansion work by default.
+5. Reconsider broader helper or adapter expansion only when repeated usage evidence justifies it, especially for the remaining `capture-ci-investigation` beta gate.
 
 ## What Success Looks Like
 
