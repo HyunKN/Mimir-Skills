@@ -5,6 +5,7 @@ This directory will hold end-to-end examples that show:
 - a trigger event
 - a canonical JSON decision record
 - a rendered Markdown summary
+- optional linked Markdown companion notes for graph-friendly review
 - optional memory candidate promotion
 
 All examples in this directory should be public-safe synthetic samples.
@@ -26,4 +27,4 @@ Current examples:
 - `cache-client-tls-memory/` shows a dependency follow-up decision plus a public-safe `candidate -> validated` memory flow derived from decision records. It is the anchor example for the `memory-promote` workflow-specific skill.
 - `ai-release-rollback-gate/` shows a risky AI-assisted rollout where stale guidance was rejected, canary approval was required, and the record captured provenance, approval scope, blast radius, rollback, and post-deploy monitoring context.
 
-The rendered summaries in the published examples also serve as reference shapes for the `handoff-context` and `pr-rationale` workflow-specific skills.
+The rendered summaries and linked companion notes in the published examples also serve as reference shapes for the `handoff-context` and `pr-rationale` workflow-specific skills.
