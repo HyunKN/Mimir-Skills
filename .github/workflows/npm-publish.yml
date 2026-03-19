@@ -49,7 +49,5 @@ jobs:
             exit 1
           fi
 
-      - name: Publish to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npm via trusted publishing
+        run: npm publish --provenance --access public
