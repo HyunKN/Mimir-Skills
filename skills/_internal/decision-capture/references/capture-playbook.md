@@ -21,6 +21,7 @@
 9. Validate the completed JSON record.
 10. Save the JSON record.
 11. Render Markdown with `../scripts/render_summary.py <record-path>` only if another human or agent needs a summary.
+12. Render `../scripts/render_obsidian_note.py <record-path>` only if linked Markdown note navigation is useful for local human review.
 
 ## Draft Workflow
 
@@ -34,6 +35,7 @@
 - Treat JSON as the canonical source and Markdown as a derived view.
 - Do not introduce claims in Markdown that are missing from the JSON record.
 - Keep summaries short enough for handoff or reviewer context, not as a second canonical record.
+- Treat Obsidian-friendly companion notes as an optional review layer, not as a second source of truth.
 
 ## Scenario Notes
 

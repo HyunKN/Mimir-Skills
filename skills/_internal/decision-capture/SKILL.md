@@ -18,6 +18,7 @@ Use this skill to capture high-impact engineering decisions close to the moment 
 7. Validate the completed JSON with `../decision-core/scripts/validate_decision_record.py <path>`.
 8. Save the canonical record under `.ai/records/decisions/<id>.json`.
 9. Render a Markdown summary with `scripts/render_summary.py <record-path>` only if the workflow needs a handoff, PR summary, or report.
+10. Render an Obsidian-friendly companion note with `scripts/render_obsidian_note.py <record-path>` only when humans will browse linked artifacts as Markdown notes.
 
 ## Capture Rules
 
@@ -41,6 +42,7 @@ Use this skill to capture high-impact engineering decisions close to the moment 
 - Read [`references/capture-playbook.md`](references/capture-playbook.md) when choosing how to capture CI triage, refactors, or handoff decisions.
 - Run [`scripts/create_decision_record.py`](scripts/create_decision_record.py) to generate a bounded draft record before filling evidence and rationale.
 - Run [`scripts/render_summary.py`](scripts/render_summary.py) when a validated JSON record needs a derived Markdown summary.
+- Run [`scripts/render_obsidian_note.py`](scripts/render_obsidian_note.py) when the same record should also appear as a graph-friendly Markdown note for local review.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when checking shared guardrails or promotion limits.
 - Read [`../../../spec/decision-record-schema.md`](../../../spec/decision-record-schema.md) when filling or reviewing fields.
 - Read [`../../../spec/trigger-taxonomy.md`](../../../spec/trigger-taxonomy.md) when deciding whether a record is required and which optional governance fields are worth filling.
