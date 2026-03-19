@@ -17,6 +17,7 @@ Use this skill when reusable lessons should be evaluated for candidate or valida
 6. Run `scripts/validate_memory_artifact.py <path>` when a concrete candidate or validated memory JSON file needs contract validation.
 7. Re-check the lesson against the current repository or branch state before promotion.
 8. Keep promotion explicit and conservative; do not infer long-term memory by default.
+9. Render an Obsidian-friendly companion note with `scripts/render_obsidian_note.py <path>` only when local human review benefits from linked Markdown notes.
 
 ## Promotion Focus
 
@@ -37,6 +38,7 @@ Use this skill when reusable lessons should be evaluated for candidate or valida
 
 - Read [`references/promotion-playbook.md`](references/promotion-playbook.md) when deciding whether a lesson should stay a candidate, be promoted, or be demoted.
 - Run [`scripts/validate_memory_artifact.py`](scripts/validate_memory_artifact.py) when validating one or more candidate or validated memory JSON files.
+- Run [`scripts/render_obsidian_note.py`](scripts/render_obsidian_note.py) when a memory artifact should also appear as a graph-friendly Markdown note for local review.
 - Read [`../decision-core/SKILL.md`](../decision-core/SKILL.md) when checking shared validation, safety, and redaction constraints.
 - Read [`../decision-capture/SKILL.md`](../decision-capture/SKILL.md) when the source decision record is missing or incomplete.
 - Read [`../../../spec/memory-promotion-policy.md`](../../../spec/memory-promotion-policy.md) when checking candidate and validated memory requirements.
