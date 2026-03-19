@@ -21,6 +21,12 @@ MEMORY_VALIDATOR_PATH = (
     REPO_ROOT / "skills" / "_internal" / "memory-promote" / "scripts" / "validate_memory_artifact.py"
 )
 RENDERER_PATH = REPO_ROOT / "skills" / "_internal" / "decision-capture" / "scripts" / "render_summary.py"
+DECISION_NOTE_RENDERER_PATH = (
+    REPO_ROOT / "skills" / "_internal" / "decision-capture" / "scripts" / "render_obsidian_note.py"
+)
+MEMORY_NOTE_RENDERER_PATH = (
+    REPO_ROOT / "skills" / "_internal" / "memory-promote" / "scripts" / "render_obsidian_note.py"
+)
 
 
 def main() -> int:
@@ -46,6 +52,12 @@ def main() -> int:
         return 2
 
     if not check_rendered_summaries(records):
+        return 2
+
+    if not check_decision_obsidian_notes(records):
+        return 2
+
+    if not check_memory_obsidian_notes():
         return 2
 
     print(f"\nVerified {len(records)} example decision record(s) and their derived summaries.")
@@ -198,6 +210,146 @@ def check_rendered_summaries(records: list[Path]) -> bool:
                 success = False
             else:
                 print(f"PASS rendered summary matches: {checked_in_summary.relative_to(REPO_ROOT)}")
+
+    return success
+
+
+def check_decision_obsidian_notes(records: list[Path]) -> bool:
+    success = True
+
+    with tempfile.TemporaryDirectory(prefix="mimir-skills-obsidian-decision-") as temp_dir:
+        temp_root = Path(temp_dir)
+
+        for record_path in records:
+            example_dir = record_path.parents[3]
+            record_id = record_path.stem
+            checked_in_note = example_dir / ".ai" / "records" / "reports" / f"{record_id}.md"
+            rendered_note = temp_root / f"{record_id}.md"
+
+            if not checked_in_note.is_file():
+                print(
+                    f"FAIL missing checked-in Obsidian decision note: {checked_in_note.relative_to(REPO_ROOT)}",
+                    file=sys.stderr,
+                )
+                success = False
+                continue
+
+            command = [
+                sys.executable,
+                str(DECISION_NOTE_RENDERER_PATH),
+                str(record_path),
+                "--output",
+                str(rendered_note),
+            ]
+            result = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+
+            if result.stdout:
+                print(result.stdout, end="")
+            if result.stderr:
+                print(result.stderr, file=sys.stderr, end="")
+
+            if result.returncode != 0:
+                success = False
+                continue
+
+            expected = normalize_text(checked_in_note.read_text(encoding="utf-8"))
+            actual = normalize_text(rendered_note.read_text(encoding="utf-8"))
+
+            if expected != actual:
+                print(
+                    f"FAIL rendered Obsidian decision note drift: {checked_in_note.relative_to(REPO_ROOT)}",
+                    file=sys.stderr,
+                )
+                diff = difflib.unified_diff(
+                    expected.splitlines(),
+                    actual.splitlines(),
+                    fromfile=str(checked_in_note.relative_to(REPO_ROOT)),
+                    tofile=f"rendered:{checked_in_note.relative_to(REPO_ROOT)}",
+                    lineterm="",
+                )
+                for line in diff:
+                    print(line, file=sys.stderr)
+                success = False
+            else:
+                print(
+                    f"PASS rendered Obsidian decision note matches: {checked_in_note.relative_to(REPO_ROOT)}"
+                )
+
+    return success
+
+
+def check_memory_obsidian_notes() -> bool:
+    success = True
+    artifact_paths = sorted(EXAMPLES_ROOT.glob("* /.ai/records/memories/*/*.json".replace(" ", "")))
+
+    if not artifact_paths:
+        return True
+
+    with tempfile.TemporaryDirectory(prefix="mimir-skills-obsidian-memory-") as temp_dir:
+        temp_root = Path(temp_dir)
+
+        for artifact_path in artifact_paths:
+            example_dir = artifact_path.parents[4]
+            artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
+            status = artifact.get("status")
+            if not isinstance(status, str) or not status.strip():
+                print(
+                    f"FAIL missing memory status for Obsidian note check: {artifact_path.relative_to(REPO_ROOT)}",
+                    file=sys.stderr,
+                )
+                success = False
+                continue
+            checked_in_note = example_dir / ".ai" / "records" / "reports" / f"{artifact_path.stem}-{status}.md"
+            rendered_note = temp_root / f"{artifact_path.stem}-{status}.md"
+
+            if not checked_in_note.is_file():
+                print(
+                    f"FAIL missing checked-in Obsidian memory note: {checked_in_note.relative_to(REPO_ROOT)}",
+                    file=sys.stderr,
+                )
+                success = False
+                continue
+
+            command = [
+                sys.executable,
+                str(MEMORY_NOTE_RENDERER_PATH),
+                str(artifact_path),
+                "--output",
+                str(rendered_note),
+            ]
+            result = subprocess.run(command, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+
+            if result.stdout:
+                print(result.stdout, end="")
+            if result.stderr:
+                print(result.stderr, file=sys.stderr, end="")
+
+            if result.returncode != 0:
+                success = False
+                continue
+
+            expected = normalize_text(checked_in_note.read_text(encoding="utf-8"))
+            actual = normalize_text(rendered_note.read_text(encoding="utf-8"))
+
+            if expected != actual:
+                print(
+                    f"FAIL rendered Obsidian memory note drift: {checked_in_note.relative_to(REPO_ROOT)}",
+                    file=sys.stderr,
+                )
+                diff = difflib.unified_diff(
+                    expected.splitlines(),
+                    actual.splitlines(),
+                    fromfile=str(checked_in_note.relative_to(REPO_ROOT)),
+                    tofile=f"rendered:{checked_in_note.relative_to(REPO_ROOT)}",
+                    lineterm="",
+                )
+                for line in diff:
+                    print(line, file=sys.stderr)
+                success = False
+            else:
+                print(
+                    f"PASS rendered Obsidian memory note matches: {checked_in_note.relative_to(REPO_ROOT)}"
+                )
 
     return success
 
