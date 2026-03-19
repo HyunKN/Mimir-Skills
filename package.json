@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Skill-first workflow guidance, playbooks, and validators for AI coding agents",
   "bin": {
-    "mimir-skills": "./bin/cli.js"
+    "mimir-skills": "bin/cli.js"
   },
   "files": [
     "bin/",
@@ -17,7 +17,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HyunKN/Mimir-Skills.git"
+    "url": "git+https://github.com/HyunKN/Mimir-Skills.git"
   },
   "engines": {
     "node": ">=16"

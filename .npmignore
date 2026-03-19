@@ -2,8 +2,11 @@
 .github/
 .git/
 __pycache__/
+**/__pycache__/
 *.pyc
+**/*.pyc
 *.pyo
+**/*.pyo
 
 # docs and meta (not needed for install)
 docs/
