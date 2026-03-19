@@ -76,7 +76,7 @@ def render_summary(record: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append(f"# {title} Decision Summary" if title else "# Decision Summary")
     lines.append("")
-    lines.append(f"> Derived from canonical decision record `{record_id}`.")
+    lines.append(f"> Derived from canonical decision record [[{record_id}]].")
     lines.append("")
 
     add_text_section(lines, "Decision", record.get("decision"))
@@ -88,11 +88,11 @@ def render_summary(record: dict[str, Any]) -> str:
     add_ai_assistance_section(lines, record.get("ai_assistance"))
     add_approval_section(lines, record.get("approval"))
     add_change_scope_section(lines, record.get("change_scope"))
+    add_related_artifacts_section(lines, record_id, record.get("supersedes"))
     add_string_list_section(lines, "Affected Paths", record.get("affected_paths"), code=True)
     add_validation_section(lines, record.get("validation_run"))
     add_string_list_section(lines, "Remaining Risks", record.get("remaining_risks"))
     add_string_list_section(lines, "Follow-Up", record.get("follow_up"))
-    add_string_list_section(lines, "Supersedes", record.get("supersedes"), code=True)
     add_confidence_section(lines, record.get("confidence"))
 
     return "\n".join(lines).rstrip() + "\n"
@@ -310,6 +310,25 @@ def add_change_scope_section(lines: list[str], value: Any) -> None:
         return
 
     lines.append("## Change Governance")
+    lines.append("")
+    lines.extend(rendered)
+    lines.append("")
+
+
+def add_related_artifacts_section(lines: list[str], record_id: str, supersedes: Any) -> None:
+    rendered = [f"- Canonical decision note: [[{record_id}]]"]
+
+    if isinstance(supersedes, list):
+        superseded_ids = [item.strip() for item in supersedes if isinstance(item, str) and item.strip()]
+        if superseded_ids:
+            rendered.append(
+                "- Supersedes: " + ", ".join(f"[[{item}]]" for item in superseded_ids)
+            )
+
+    if not rendered:
+        return
+
+    lines.append("## Related Artifacts")
     lines.append("")
     lines.extend(rendered)
     lines.append("")

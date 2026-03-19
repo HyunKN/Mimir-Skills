@@ -1,6 +1,6 @@
 # Gate AI-assisted checkout cache rollout behind canary approval Decision Summary
 
-> Derived from canonical decision record `dec-20260318-ai-release-rollback-gate-001`.
+> Derived from canonical decision record [[dec-20260318-ai-release-rollback-gate-001]].
 
 ## Decision
 
@@ -56,6 +56,10 @@ The stale guidance made the original AI-assisted rollout plan unsafe to follow d
 - Rollback plan: Revert the rollout manifest to 0% and restore the previous cache invalidation behavior immediately if error rate, stale-read alerts, or checkout latency regress during the canary window.
 - Post-deploy status: monitoring
 - Post-deploy summary: The first 30 minutes of 5% canary telemetry stayed within error-budget thresholds, but wider promotion remains blocked until four hours of clean production signals are recorded.
+
+## Related Artifacts
+
+- Canonical decision note: [[dec-20260318-ai-release-rollback-gate-001]]
 
 ## Affected Paths
 

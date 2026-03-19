@@ -1,6 +1,6 @@
 # Fix failing Windows test job Decision Summary
 
-> Derived from canonical decision record `dec-20260311-ci-timeout-001`.
+> Derived from canonical decision record [[dec-20260311-ci-timeout-001]].
 
 ## Decision
 
@@ -28,6 +28,10 @@ The failures were caused by slower setup time rather than flakiness in the tests
 
 - [ci] `build-1824/windows-integration`: Three consecutive failures timed out during the setup stage. (captured 2026-03-11T10:08:00Z)
 - [file] `.github/workflows/test.yml`: Timeout was configured at 120 seconds for the integration step. (captured 2026-03-11T10:12:00Z)
+
+## Related Artifacts
+
+- Canonical decision note: [[dec-20260311-ci-timeout-001]]
 
 ## Affected Paths
 

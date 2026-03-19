@@ -1,6 +1,6 @@
 # Quarantine flaky macOS visual snapshot test Decision Summary
 
-> Derived from canonical decision record `dec-20260317-macos-flaky-quarantine-001`.
+> Derived from canonical decision record [[dec-20260317-macos-flaky-quarantine-001]].
 
 ## Decision
 
@@ -32,6 +32,10 @@ Repeated failures on the same macOS-only snapshot plus stable Linux and Windows 
 - [file] `.github/workflows/e2e-visual.yml`: The macOS visual lane is part of the required merge gate, so any quarantine changes affect a shared workflow path. (captured 2026-03-17T04:34:00Z)
 - [file] `tests/visual/account-avatar.spec.ts`: The failing assertion is isolated to the macOS avatar snapshot spec; adjacent visual specs in the same suite continued to pass. (captured 2026-03-17T04:39:00Z)
 - [command] `pnpm test:visual --project=macos --grep "account avatar"`: A targeted local macOS rerun reproduced the same snapshot diff while the Linux baseline remained unchanged. (captured 2026-03-17T04:47:00Z)
+
+## Related Artifacts
+
+- Canonical decision note: [[dec-20260317-macos-flaky-quarantine-001]]
 
 ## Affected Paths
 

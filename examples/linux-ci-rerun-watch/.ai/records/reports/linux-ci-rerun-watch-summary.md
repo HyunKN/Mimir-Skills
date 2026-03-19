@@ -1,6 +1,6 @@
 # Investigate intermittent Linux unit-test timeout Decision Summary
 
-> Derived from canonical decision record `dec-20260316-linux-ci-rerun-watch-001`.
+> Derived from canonical decision record [[dec-20260316-linux-ci-rerun-watch-001]].
 
 ## Decision
 
@@ -31,6 +31,10 @@ The current evidence is too weak to justify a shared workflow change. A rerun-on
 - [ci] `build-1846-rerun/linux-unit`: A single rerun passed without code or workflow changes, which lowered urgency but did not identify a cause. (captured 2026-03-16T07:18:00Z)
 - [diff] `origin/main...HEAD`: The branch diff does not include Linux workflow, dependency-install, or unit-test command changes related to this job. (captured 2026-03-16T07:24:00Z)
 - [file] `.github/workflows/test.yml`: The Linux unit-test job already uses a 15-minute timeout, so changing the limit would affect a shared workflow path rather than a branch-local fix. (captured 2026-03-16T07:29:00Z)
+
+## Related Artifacts
+
+- Canonical decision note: [[dec-20260316-linux-ci-rerun-watch-001]]
 
 ## Validation
 

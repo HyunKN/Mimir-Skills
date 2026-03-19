@@ -1,6 +1,6 @@
 # Stabilize cache client dependency before release cut Decision Summary
 
-> Derived from canonical decision record `dec-20260312-cache-client-pin-001`.
+> Derived from canonical decision record [[dec-20260312-cache-client-pin-001]].
 
 ## Decision
 
@@ -30,6 +30,10 @@ Pinning the dependency removes the immediate regression with the smallest bounde
 - [doc] `docs/upgrade-notes/acme-cache-client-v4.3.md`: Synthetic upgrade note states that verified TLS connections now require tls.ca_bundle. (captured 2026-03-12T08:40:00Z)
 - [file] `config/cache.yaml`: Current synthetic cache config defines tls.enabled and server_name but not ca_bundle. (captured 2026-03-12T08:44:00Z)
 - [test] `tests/cache/client-config.test.ts`: The compatibility test failed on v4.3 and passed again after pinning 4.2.7. (captured 2026-03-12T09:05:00Z)
+
+## Related Artifacts
+
+- Canonical decision note: [[dec-20260312-cache-client-pin-001]]
 
 ## Affected Paths
 

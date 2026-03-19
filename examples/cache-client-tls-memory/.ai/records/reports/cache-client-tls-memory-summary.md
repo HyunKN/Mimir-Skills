@@ -1,6 +1,6 @@
 # Complete synthetic cache client v4.3 migration Decision Summary
 
-> Derived from canonical decision record `dec-20260320-cache-client-v43-migration-003`.
+> Derived from canonical decision record [[dec-20260320-cache-client-v43-migration-003]].
 
 ## Decision
 
@@ -31,6 +31,11 @@ The earlier pin isolated the missing config contract clearly, and the follow-up 
 - [file] `config/cache.yaml`: Synthetic cache config now includes tls.ca_bundle alongside the existing verified TLS settings. (captured 2026-03-20T07:24:00Z)
 - [test] `tests/cache/client-config.test.ts`: Synthetic compatibility test passed on acme-cache-client 4.3.0 after the TLS config update. (captured 2026-03-20T07:35:00Z)
 
+## Related Artifacts
+
+- Canonical decision note: [[dec-20260320-cache-client-v43-migration-003]]
+- Supersedes: [[dec-20260312-cache-client-pin-001]]
+
 ## Affected Paths
 
 - `config/cache.yaml`
@@ -49,10 +54,6 @@ The earlier pin isolated the missing config contract clearly, and the follow-up 
 ## Follow-Up
 
 - Promote the repeated TLS contract lesson into validated memory for future cache client upgrades.
-
-## Supersedes
-
-- `dec-20260312-cache-client-pin-001`
 
 ## Confidence
 
