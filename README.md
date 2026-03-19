@@ -63,16 +63,15 @@ This is the primary path for local-file agents that can open repository files di
 Install skills into your project with a single command. No repo clone needed:
 
 ```bash
-npx mimir-skills install --target claude
-npx mimir-skills install --target codex
-npx mimir-skills install --target generic
+npx mimir-skills install --target <claude|codex|generic>
 ```
+
+Use `claude`, `codex`, or `generic` for the target.
 
 Or from the repository:
 
 ```bash
-python -m mimir_skills install --target claude
-python -m mimir_skills install --target codex
+python -m mimir_skills install --target <claude|codex|generic>
 ```
 
 The installer auto-detects the target when `.claude/` or `.codex/` exists in the project directory. Use `--target` to be explicit.
