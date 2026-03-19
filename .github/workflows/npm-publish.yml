@@ -40,6 +40,15 @@ jobs:
             exit 1
           fi
 
+      - name: Fail early if npm version already exists
+        run: |
+          PKG_NAME=$(node -p "require('./package.json').name")
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          if npm view "${PKG_NAME}@${PKG_VERSION}" version >/dev/null 2>&1; then
+            echo "::error::${PKG_NAME}@${PKG_VERSION} is already published. Bump package.json version and push a new matching tag."
+            exit 1
+          fi
+
       - name: Publish to npm
         run: npm publish --access public
         env:
