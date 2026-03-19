@@ -7,6 +7,8 @@ Skill-first workflow guidance, playbooks, and validators for AI coding agents wo
 `Mimir-Skills` now operates on a skill-first baseline for local-file AI coding agents.
 The core idea is simple: put workflow judgment rules, safety constraints, and output patterns into `SKILL.md` and companion references so agents can read them directly, while keeping only deterministic validation and thin local collection helpers in Python.
 
+Current npm and `npx` release baseline: `v0.1.1` / package version `0.1.1`.
+
 ## Why Mimir-Skills?
 
 AI coding agents can already edit code, run tests, inspect CI, and prepare pull requests.
@@ -104,6 +106,16 @@ Use repository-root helpers when you want discovery or structured context collec
 
 The old `prepare-handoff` and `write-pr-rationale` generate commands now exist as compatibility or deprecation stubs rather than the primary workflow path.
 
+### Optional: Obsidian Workspace
+
+If you already use Obsidian, you can treat the linked Markdown artifacts under `.ai/records/reports/` as a local review workspace.
+This is optional and not required for the core workflows.
+
+- without Obsidian: keep reading JSON and Markdown directly in your editor or review flow
+- with Obsidian: use backlinks and graph view to follow relationships among decision, report, and memory notes more easily
+
+See [Obsidian Workspace](docs/obsidian-workspace.md) for the simple setup, expected benefits, and boundaries.
+
 ## Documentation
 
 Start here:
@@ -111,6 +123,7 @@ Start here:
 - [Project One-Pager](docs/project-one-pager.md)
 - [Quick Start](docs/quick-start.md)
 - [Prompt Macros](docs/prompt-macros.md)
+- [Obsidian Workspace](docs/obsidian-workspace.md)
 - [Workflow Trigger Table](docs/workflow-trigger-table.md)
 - [Workflow Surface](docs/workflow-surface.md)
 - [Agent Support Levels](docs/agent-support-levels.md)
