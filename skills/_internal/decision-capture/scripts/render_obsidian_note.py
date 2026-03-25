@@ -9,6 +9,18 @@ import sys
 from pathlib import Path
 from typing import Any
 
+try:
+    from mimir_skills import obsidian_output
+except ModuleNotFoundError:
+    script_path = Path(__file__).resolve()
+    support_root = script_path.parents[2] / "mimir-skills-support"
+    repo_root = script_path.parents[4]
+    if support_root.is_dir():
+        sys.path.insert(0, str(support_root))
+    if (repo_root / "mimir_skills").is_dir():
+        sys.path.insert(0, str(repo_root))
+    from mimir_skills import obsidian_output
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -48,7 +60,11 @@ def main() -> int:
         print("Decision record must include a non-empty string id.", file=sys.stderr)
         return 1
 
-    output_path = Path(args.output) if args.output else default_output_path(record_path, record_id)
+    try:
+        output_path = Path(args.output) if args.output else default_output_path(record_path, record_id)
+    except ValueError as exc:
+        print(f"Invalid Obsidian output preference: {exc}", file=sys.stderr)
+        return 1
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(render_note(record, record_path), encoding="utf-8")
 
@@ -58,7 +74,7 @@ def main() -> int:
 
 def default_output_path(record_path: Path, record_id: str) -> Path:
     if record_path.parent.name == "decisions" and record_path.parent.parent.name == "records":
-        return record_path.parent.parent / "reports" / f"{record_id}.md"
+        return obsidian_output.preferred_output_path(record_path, f"{record_id}.md")
     return record_path.with_name(f"{record_id}.md")
 
 

@@ -169,6 +169,76 @@ Use the capture-ci-investigation workflow. Summarize this CI failure as a bounde
 
 Use the portable prompt pack in [Prompt Macros](prompt-macros.md) when you want copy-paste prompts that work across agent families.
 
+## Optional Validation and Derived Artifacts
+
+Use these commands only when you want explicit validation or derived Markdown artifacts.
+They are optional support tools, not the primary skill-first path.
+
+### Validate Canonical Decision Records
+
+```bash
+python skills/_internal/decision-core/scripts/validate_decision_record.py .ai/records/decisions/<id>.json
+```
+
+Use this when a decision record should be checked against the public contract before review or commit.
+
+### Validate Memory Artifacts
+
+```bash
+python skills/_internal/memory-promote/scripts/validate_memory_artifact.py .ai/records/memories/<candidate|validated>/<id>.json
+```
+
+Use this when candidate or validated memory JSON should be checked before promotion, review, or publication.
+
+### Verify the Published Example Set
+
+```bash
+python scripts/verify_examples.py
+```
+
+Use this when you want the repository-level safety check that validates schemas, examples, summaries, and Obsidian companion notes together.
+
+### Render a Markdown Summary from a Decision Record
+
+```bash
+python skills/_internal/decision-capture/scripts/render_summary.py .ai/records/decisions/<id>.json --output .ai/records/reports/<slug>-summary.md
+```
+
+Use this when a canonical decision record already exists and you want a human-readable Markdown summary.
+
+### Render Obsidian-Friendly Companion Notes
+
+On the first Obsidian export request in a project, decide where these notes should go:
+
+- keep them under `.ai/records/reports/`
+- or send them to the user's Obsidian vault path
+
+After that, keep using the same project default until the user asks to change it.
+
+Persist or inspect that project-local preference with:
+
+```bash
+python -m mimir_skills obsidian-config show
+python -m mimir_skills obsidian-config set-reports
+python -m mimir_skills obsidian-config set-vault "C:\\path\\to\\your\\Obsidian Vault\\Mimir-Skills"
+python -m mimir_skills obsidian-config clear
+```
+
+Decision record:
+
+```bash
+python skills/_internal/decision-capture/scripts/render_obsidian_note.py .ai/records/decisions/<id>.json
+```
+
+Memory artifact:
+
+```bash
+python skills/_internal/memory-promote/scripts/render_obsidian_note.py .ai/records/memories/<candidate|validated>/<id>.json
+```
+
+Use these only when you want graph-friendly Markdown notes for local human review.
+If you do not use Obsidian, skip this path entirely.
+
 ## Choosing Between the Paths
 
 Choose `skill-first reading` when:

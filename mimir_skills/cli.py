@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from . import install
+from . import obsidian_output
 from .workflows import prepare_handoff, write_pr_rationale
 
 
@@ -74,6 +75,58 @@ def build_parser() -> argparse.ArgumentParser:
         help="Replace existing installed folders for the selected workflows and support assets.",
     )
 
+    obsidian_parser = subparsers.add_parser(
+        "obsidian-config",
+        help="View or change the project-local Obsidian output preference.",
+    )
+    obsidian_parser.set_defaults(obsidian_action=None)
+    obsidian_subparsers = obsidian_parser.add_subparsers(dest="obsidian_action")
+
+    obsidian_show = obsidian_subparsers.add_parser(
+        "show",
+        help="Show the current project-local Obsidian output preference.",
+    )
+    obsidian_show.add_argument(
+        "--project-dir",
+        type=Path,
+        default=None,
+        help="Project directory. Defaults to current working directory.",
+    )
+
+    obsidian_set_reports = obsidian_subparsers.add_parser(
+        "set-reports",
+        help="Save `.ai/records/reports/` as the project-local default Obsidian output location.",
+    )
+    obsidian_set_reports.add_argument(
+        "--project-dir",
+        type=Path,
+        default=None,
+        help="Project directory. Defaults to current working directory.",
+    )
+
+    obsidian_set_vault = obsidian_subparsers.add_parser(
+        "set-vault",
+        help="Save a vault folder as the project-local default Obsidian output location.",
+    )
+    obsidian_set_vault.add_argument("vault_path", type=Path, help="Vault folder path to use by default.")
+    obsidian_set_vault.add_argument(
+        "--project-dir",
+        type=Path,
+        default=None,
+        help="Project directory. Defaults to current working directory.",
+    )
+
+    obsidian_clear = obsidian_subparsers.add_parser(
+        "clear",
+        help="Clear the saved project-local Obsidian output preference.",
+    )
+    obsidian_clear.add_argument(
+        "--project-dir",
+        type=Path,
+        default=None,
+        help="Project directory. Defaults to current working directory.",
+    )
+
     subparsers.add_parser(
         "prepare-handoff",
         add_help=False,
@@ -141,6 +194,39 @@ def main(argv: list[str] | None = None) -> int:
             workflows=args.workflows,
             force=args.force,
         )
+
+    if args.command == "obsidian-config":
+        if args.obsidian_action == "show":
+            print(obsidian_output.describe_preference(args.project_dir))
+            return 0
+        if args.obsidian_action == "set-reports":
+            config_path = obsidian_output.save_reports_preference(args.project_dir)
+            print(
+                "Saved project-local Obsidian output preference: `.ai/records/reports/`\n"
+                f"Config path: {config_path}"
+            )
+            return 0
+        if args.obsidian_action == "set-vault":
+            config_path = obsidian_output.save_vault_preference(args.vault_path, args.project_dir)
+            print(
+                "Saved project-local Obsidian output preference: vault\n"
+                f"Vault path: {args.vault_path.expanduser().resolve()}\n"
+                f"Config path: {config_path}"
+            )
+            return 0
+        if args.obsidian_action == "clear":
+            config_path = obsidian_output.clear_preference(args.project_dir)
+            print(
+                "Cleared project-local Obsidian output preference.\n"
+                f"Config path: {config_path}"
+            )
+            return 0
+        obsidian_parser = next(
+            action for action in parser._actions if isinstance(action, argparse._SubParsersAction)
+        )
+        obsidian_subparser = obsidian_parser.choices["obsidian-config"]
+        obsidian_subparser.print_help()
+        return 0
 
     parser.print_help()
     return 0

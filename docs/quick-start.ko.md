@@ -169,6 +169,76 @@ Use the capture-ci-investigation workflow. Summarize this CI failure as a bounde
 
 agent family를 가리지 않고 복사해서 쓰려면 [Prompt Macros (English)](prompt-macros.md)를 참고한다.
 
+## 선택 기능: 검증과 파생 산출물
+
+아래 명령은 명시적 검증이나 파생 Markdown 산출물이 필요할 때만 쓴다.
+이들은 기본 skill-first 경로가 아니라 선택적인 support 도구다.
+
+### Canonical Decision Record 검증
+
+```bash
+python skills/_internal/decision-core/scripts/validate_decision_record.py .ai/records/decisions/<id>.json
+```
+
+decision record를 리뷰하거나 커밋하기 전에 public contract에 맞는지 확인할 때 쓴다.
+
+### Memory Artifact 검증
+
+```bash
+python skills/_internal/memory-promote/scripts/validate_memory_artifact.py .ai/records/memories/<candidate|validated>/<id>.json
+```
+
+candidate 또는 validated memory JSON을 promotion, review, publication 전에 점검할 때 쓴다.
+
+### 공개 Example 세트 전체 검증
+
+```bash
+python scripts/verify_examples.py
+```
+
+schema, examples, summaries, Obsidian companion note를 한 번에 검증하는 저장소 전체 safety check다.
+
+### Decision Record에서 Markdown Summary 생성
+
+```bash
+python skills/_internal/decision-capture/scripts/render_summary.py .ai/records/decisions/<id>.json --output .ai/records/reports/<slug>-summary.md
+```
+
+canonical decision record는 이미 있고, 사람이 읽기 쉬운 Markdown summary가 필요할 때 쓴다.
+
+### Obsidian 친화 companion note 생성
+
+프로젝트에서 처음 Obsidian export를 요청할 때는, 이 note들을 어디에 둘지 먼저 정한다.
+
+- `.ai/records/reports/` 아래에 둘지
+- 사용자의 Obsidian vault 경로로 보낼지
+
+한 번 정한 뒤에는, 사용자가 바꿔 달라고 할 때까지 같은 프로젝트 기본값을 계속 쓴다.
+
+이 프로젝트 로컬 설정을 확인하거나 저장하려면:
+
+```bash
+python -m mimir_skills obsidian-config show
+python -m mimir_skills obsidian-config set-reports
+python -m mimir_skills obsidian-config set-vault "C:\\path\\to\\your\\Obsidian Vault\\Mimir-Skills"
+python -m mimir_skills obsidian-config clear
+```
+
+Decision record:
+
+```bash
+python skills/_internal/decision-capture/scripts/render_obsidian_note.py .ai/records/decisions/<id>.json
+```
+
+Memory artifact:
+
+```bash
+python skills/_internal/memory-promote/scripts/render_obsidian_note.py .ai/records/memories/<candidate|validated>/<id>.json
+```
+
+이 경로는 로컬 human review에서 graph-friendly Markdown note가 필요할 때만 쓴다.
+Obsidian을 쓰지 않으면 이 단계는 완전히 건너뛰면 된다.
+
 ## 어떤 경로를 고를까
 
 다음과 같다면 `skill-first reading`을 고른다:

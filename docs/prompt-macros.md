@@ -93,3 +93,91 @@ Use the capture-ci-investigation workflow. Draft a bounded CI investigation summ
 - Other agent families may still need more explicit workflow wording because install, discovery, and routing quality can differ.
 
 See [`agent-support-levels.md`](agent-support-levels.md) for the current support matrix.
+
+## Collector-Assisted Prompts
+
+Use these when you already collected structured context JSON and want the agent to draft from that material explicitly.
+
+### `prepare-handoff` with Collected Context
+
+```text
+Use the prepare-handoff workflow. Use the collected git context in `handoff-context.json` and draft a handoff covering what changed, what is done, what remains, what was validated, and any blockers or risks.
+```
+
+### `write-pr-rationale` with Collected Context
+
+```text
+Use the write-pr-rationale workflow. Use the collected PR context in `pr-context.json` and draft reviewer-facing rationale that explains what changed, why it changed, what was validated, and what reviewers should watch.
+```
+
+## Optional Validation Prompts
+
+These are useful for repo maintainers or users who want explicit contract checks.
+
+### Validate a Decision Record
+
+```text
+Validate this decision record against the repository contract and tell me what fields fail: `.ai/records/decisions/<id>.json`
+```
+
+### Validate a Memory Artifact
+
+```text
+Validate this memory artifact against the repository contract and tell me what fields fail: `.ai/records/memories/<candidate|validated>/<id>.json`
+```
+
+### Run the Full Example Verification Stack
+
+```text
+Run the repository example verification stack and summarize any failures.
+```
+
+## Optional Obsidian Prompts
+
+Use these only when you want graph-friendly Markdown notes for local human browsing.
+
+### First Obsidian Export in a Project
+
+```text
+If this is the first Obsidian export in this project, first ask whether to keep notes under `.ai/records/reports/` or send them to my Obsidian vault path, explain the difference briefly, then render the requested note.
+```
+
+### Render a Decision Record as an Obsidian Note
+
+```text
+Render this decision record as an Obsidian-friendly note using the current project default output location: `.ai/records/decisions/<id>.json`
+```
+
+### Render a Memory Artifact as an Obsidian Note
+
+```text
+Render this memory artifact as an Obsidian-friendly note using the current project default output location: `.ai/records/memories/<candidate|validated>/<id>.json`
+```
+
+### Render Existing Records for Obsidian Review
+
+```text
+Render the existing decision and memory records in this project as Obsidian-friendly notes using the current project default output location so I can browse them in Obsidian.
+```
+
+### Change the Obsidian Output Location
+
+```text
+Change the default Obsidian output location for this project to my Obsidian vault path.
+```
+
+```text
+Switch the default Obsidian output location for this project back to `.ai/records/reports/`.
+```
+
+If you prefer direct local commands instead of an agent request:
+
+```bash
+python -m mimir_skills obsidian-config show
+python -m mimir_skills obsidian-config set-vault "C:\\path\\to\\your\\Obsidian Vault\\Mimir-Skills"
+python -m mimir_skills obsidian-config set-reports
+python -m mimir_skills obsidian-config clear
+```
+
+Obsidian note rendering is manual opt-in.
+If you do not use Obsidian, skip these prompts entirely.

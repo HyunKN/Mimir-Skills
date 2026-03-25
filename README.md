@@ -119,7 +119,27 @@ This is optional and not required for the core workflows.
 - without Obsidian: keep reading JSON and Markdown directly in your editor or review flow
 - with Obsidian: use backlinks and graph view to follow relationships among decision, report, and memory notes more easily
 
+On the first Obsidian export request in a project, the agent should first ask whether to:
+
+- keep notes under `.ai/records/reports/`
+- or send them to your Obsidian vault path
+
+After that, the same project should keep using that default until you ask to change it.
+
 See [Obsidian Workspace](docs/obsidian-workspace.md) for the simple setup, expected benefits, and boundaries.
+
+## Example Requests
+
+You can ask your agent directly with short requests like these:
+
+- `Prepare a handoff from my current changes.`
+- `Write PR rationale for this branch.`
+- `Summarize this CI failure as a bounded investigation note.`
+- `Validate this decision record: .ai/records/decisions/<id>.json`
+- `If this is the first Obsidian export in this project, first ask whether to keep notes under .ai/records/reports/ or send them to my Obsidian vault path, explain the difference briefly, then render this decision record as an Obsidian-friendly note.`
+- `Change the default Obsidian output location for this project to my vault path.`
+
+For more copy-paste prompts, including collector-assisted and Obsidian-specific variants, see [Prompt Macros](docs/prompt-macros.md).
 
 ## Documentation
 

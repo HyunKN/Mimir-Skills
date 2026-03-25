@@ -119,7 +119,27 @@ draft를 쓰기 전에 discovery나 structured context collection이 필요할 �
 - Obsidian을 쓰지 않는 경우: 지금처럼 editor나 review flow에서 JSON과 Markdown을 직접 읽으면 됩니다
 - Obsidian을 쓰는 경우: backlinks와 graph view로 decision, report, memory note 사이 관계를 더 쉽게 따라갈 수 있습니다
 
+프로젝트에서 처음 Obsidian export를 요청할 때는, 에이전트가 먼저 아래 둘 중 어디에 둘지 물어보는 것이 좋습니다.
+
+- `.ai/records/reports/` 아래에 둘지
+- 사용 중인 Obsidian vault 경로로 바로 보낼지
+
+한 번 정한 뒤에는, 사용자가 바꿔 달라고 할 때까지 그 프로젝트 기본값을 계속 쓰는 흐름이 자연스럽습니다.
+
 간단한 사용법, 예상 이득, 주의점은 [Obsidian Workspace (English)](docs/obsidian-workspace.md)를 참고합니다.
+
+## 예시 요청
+
+에이전트에게는 아래처럼 짧게 바로 요청할 수 있습니다.
+
+- `Prepare a handoff from my current changes.`
+- `Write PR rationale for this branch.`
+- `Summarize this CI failure as a bounded investigation note.`
+- `Validate this decision record: .ai/records/decisions/<id>.json`
+- `If this is the first Obsidian export in this project, first ask whether to keep notes under .ai/records/reports/ or send them to my Obsidian vault path, explain the difference briefly, then render this decision record as an Obsidian-friendly note.`
+- `Change the default Obsidian output location for this project to my vault path.`
+
+collector-assisted 경로나 Obsidian 전용 요청까지 포함한 더 많은 복사형 예시는 [Prompt Macros (English)](docs/prompt-macros.md)를 참고합니다.
 
 ## 문서 안내
 
