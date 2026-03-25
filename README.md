@@ -7,12 +7,18 @@ Skill-first workflow guidance, playbooks, and validators for AI coding agents wo
 `Mimir-Skills` now operates on a skill-first baseline for local-file AI coding agents.
 The core idea is simple: put workflow judgment rules, safety constraints, and output patterns into `SKILL.md` and companion references so agents can read them directly, while keeping only deterministic validation and thin local collection helpers in Python.
 
-Current npm and `npx` release baseline: `v0.1.1` / package version `0.1.1`.
+Current npm and `npx` release baseline: `v0.1.2` / package version `0.1.2`.
 
 ## Why Mimir-Skills?
 
 AI coding agents can already edit code, run tests, inspect CI, and prepare pull requests.
 What teams still lose is the context and governance around that work:
+
+If you already use Claude Code, Codex, or another harness-driven agent workflow, `Mimir-Skills` is not a replacement for that harness.
+It adds a missing layer around the work: reusable handoff patterns, reviewer-facing rationale, and bounded CI investigation summaries that preserve intent, evidence, and next-step context.
+
+Harnesses help agents execute more.
+`Mimir-Skills` helps teams understand, review, and continue that work safely.
 
 - why a path was chosen
 - what actually changed
@@ -145,16 +151,18 @@ Reference:
 
 ```text
 Mimir-Skills/
+  package.json
+  bin/
   README.md
   README.ko.md
   docs/
   skills/
   spec/
-   examples/
-   evaluations/
-   scripts/
-   template/
-   mimir_skills/
+  examples/
+  evaluations/
+  scripts/
+  template/
+  mimir_skills/
 ```
 
 Primary public surface:

@@ -7,12 +7,18 @@
 `Mimir-Skills`는 현재 skill-first baseline 위에서 운영됩니다.
 핵심 방향은 단순합니다. workflow 판단 규칙, safety constraint, output pattern을 `SKILL.md`와 companion reference에 담아 에이전트가 직접 읽게 하고, Python 코드는 결정론적 검증과 얇은 로컬 수집 helper에만 남기는 것입니다.
 
-현재 npm 및 `npx` 배포 기준선은 `v0.1.1`, package version은 `0.1.1`입니다.
+현재 npm 및 `npx` 배포 기준선은 `v0.1.2`, package version은 `0.1.2`입니다.
 
 ## 왜 Mimir-Skills를 써야 하나
 
 AI coding agent는 이미 코드를 수정하고, 테스트를 실행하고, CI를 확인하고, pull request를 준비할 수 있습니다.
 그런데 팀이 여전히 잃어버리는 것은 그 작업을 둘러싼 맥락과 거버넌스입니다.
+
+이미 Claude Code, Codex, 또는 다른 harness 기반 agent workflow를 쓰고 있다면, `Mimir-Skills`는 그 harness를 대체하는 도구가 아닙니다.
+대신 그 위에 빠져 있는 한 층을 더합니다. 재사용 가능한 handoff pattern, reviewer-facing rationale, bounded CI investigation summary를 통해 의도, 근거, 다음 단계 문맥이 사라지지 않게 합니다.
+
+Harness가 에이전트의 실행을 더 멀리 밀어준다면,
+`Mimir-Skills`는 그 결과를 더 이해 가능하고 이어가기 쉽게 만들어줍니다.
 
 - 왜 이 경로를 선택했는가
 - 실제로 무엇이 바뀌었는가
@@ -145,16 +151,18 @@ draft를 쓰기 전에 discovery나 structured context collection이 필요할 �
 
 ```text
 Mimir-Skills/
+  package.json
+  bin/
   README.md
   README.ko.md
   docs/
   skills/
   spec/
-   examples/
-   evaluations/
-   scripts/
-   template/
-   mimir_skills/
+  examples/
+  evaluations/
+  scripts/
+  template/
+  mimir_skills/
 ```
 
 기본 public surface:
