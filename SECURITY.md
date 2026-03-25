@@ -2,11 +2,13 @@
 
 ## Scope
 
-`Mimir-Skills` is a decision-recording tool first.
+`Mimir-Skills` is a skill-first workflow toolkit for AI coding agents.
 
-This repository may include limited automation such as scripts or hooks, but only when that automation:
+This repository includes reusable workflow skills, deterministic validators, bounded renderers, and limited install surfaces.
 
-- supports decision recording, validation, rendering, or bounded memory workflows
+Automation and executable surfaces are acceptable only when they:
+
+- support decision recording, validation, rendering, or bounded memory workflows
 - stays reviewable and narrowly scoped
 - does not replace evidence-based judgment with unattended execution
 
@@ -17,7 +19,7 @@ The project should be understood with these boundaries in mind:
 - public skills can influence real agent behavior
 - repository content, logs, issues, PR text, and external documents may contain untrusted instructions
 - decision records, summaries, and memory artifacts must not persist secrets or unnecessary sensitive data
-- automation is allowed only when it remains bounded, testable, and aligned with the project's decision-recording purpose
+- automation is allowed only when it remains bounded, testable, and aligned with the project's workflow-guidance purpose
 
 ## Default Safety Rules
 
@@ -28,9 +30,9 @@ The project should be understood with these boundaries in mind:
 - Prefer local-first behavior.
 - Deny network access, secret access, and raw log persistence by default.
 
-## Scripts and Hooks
+## Scripts, Installers, and Package Surfaces
 
-Scripts and hooks are not banned, but they require stricter review than ordinary documentation changes.
+Scripts, installers, and package surfaces are not banned, but they require stricter review than ordinary documentation changes.
 
 They are acceptable only when they are:
 
@@ -38,15 +40,17 @@ They are acceptable only when they are:
 - clearly bounded in input and output
 - safe to fail
 - easy to inspect and test
-- justified as support for decision recording rather than general automation
+- justified as support for workflow guidance, validation, rendering, or tightly scoped installation rather than broad unattended automation
 
 The project should avoid:
 
-- remote installers
 - automatic external fetch behavior
 - broad unattended execution
 - silent large-scale mutation
 - memory promotion without explicit review
+
+Remote or package-based install surfaces are allowed only when they remain minimal, reviewable, and explicitly scoped.
+Current examples include the npm package entry point and trusted publishing workflow; these should stay thin and should not grow into broad remote execution behavior.
 
 ## Reporting a Vulnerability
 
@@ -56,14 +60,17 @@ Instead:
 
 1. Describe the issue, affected files, and potential impact.
 2. Include reproduction steps only as needed to understand the risk.
-3. Send the report privately to the project maintainer through the repository contact path or a private disclosure channel if one is available.
+3. Prefer a private disclosure channel if one is available in the repository settings or maintainer contact path.
 
-If no private channel is available yet, open a minimal public issue without exploit details and request a private follow-up.
+At the moment, this repository may not always expose a dedicated private disclosure form. If no private channel is available yet, open a minimal public issue without exploit details and request a private follow-up.
 
 ## Current Status
 
-As of the current public v0.1 direction:
+As of the current public v0.1.x direction:
 
-- the project is documentation-first
-- automation is expected to remain limited and explicitly justified
+- the project is skill-first rather than docs-only
+- deterministic validators and renderers are part of the supported surface
+- one-line local install and npm package distribution are part of the public surface
+- trusted publishing is preferred over long-lived publish tokens
+- automation is still expected to remain limited and explicitly justified
 - future executable additions should receive a dedicated security review before publication
