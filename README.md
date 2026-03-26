@@ -7,7 +7,7 @@ Skill-first workflow guidance, playbooks, and validators for AI coding agents wo
 `Mimir-Skills` now operates on a skill-first baseline for local-file AI coding agents.
 The core idea is simple: put workflow judgment rules, safety constraints, and output patterns into `SKILL.md` and companion references so agents can read them directly, while keeping only deterministic validation and thin local collection helpers in Python.
 
-Current npm and `npx` release baseline: `v0.1.2` / package version `0.1.2`.
+Current npm and `npx` release baseline: `v0.1.3` / package version `0.1.3`.
 
 ## Why Mimir-Skills?
 
@@ -119,12 +119,9 @@ This is optional and not required for the core workflows.
 - without Obsidian: keep reading JSON and Markdown directly in your editor or review flow
 - with Obsidian: use backlinks and graph view to follow relationships among decision, report, and memory notes more easily
 
-On the first Obsidian export request in a project, the agent should first ask whether to:
-
-- keep notes under `.ai/records/reports/`
-- or send them to your Obsidian vault path
-
-After that, the same project should keep using that default until you ask to change it.
+By default, Obsidian-friendly notes render under `.ai/records/reports/`.
+If you want to browse them in Obsidian, open that folder as a vault.
+If you later prefer a different output location, you can change it explicitly.
 
 See [Obsidian Workspace](docs/obsidian-workspace.md) for the simple setup, expected benefits, and boundaries.
 
@@ -136,7 +133,7 @@ You can ask your agent directly with short requests like these:
 - `Write PR rationale for this branch.`
 - `Summarize this CI failure as a bounded investigation note.`
 - `Validate this decision record: .ai/records/decisions/<id>.json`
-- `If this is the first Obsidian export in this project, first ask whether to keep notes under .ai/records/reports/ or send them to my Obsidian vault path, explain the difference briefly, then render this decision record as an Obsidian-friendly note.`
+- `Render this decision record as an Obsidian-friendly note under the default project output location.`
 - `Change the default Obsidian output location for this project to my vault path.`
 
 For more copy-paste prompts, including collector-assisted and Obsidian-specific variants, see [Prompt Macros](docs/prompt-macros.md).

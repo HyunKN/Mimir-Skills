@@ -208,14 +208,14 @@ Use this when a canonical decision record already exists and you want a human-re
 
 ### Render Obsidian-Friendly Companion Notes
 
-On the first Obsidian export request in a project, decide where these notes should go:
+By default, these notes render under:
 
-- keep them under `.ai/records/reports/`
-- or send them to the user's Obsidian vault path
+```text
+.ai/records/reports/
+```
 
-After that, keep using the same project default until the user asks to change it.
-
-Persist or inspect that project-local preference with:
+If you want to browse them in Obsidian, open that folder as a vault.
+If you later want a different location, change the saved project-local preference:
 
 ```bash
 python -m mimir_skills obsidian-config show

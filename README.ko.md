@@ -7,7 +7,7 @@
 `Mimir-Skills`는 현재 skill-first baseline 위에서 운영됩니다.
 핵심 방향은 단순합니다. workflow 판단 규칙, safety constraint, output pattern을 `SKILL.md`와 companion reference에 담아 에이전트가 직접 읽게 하고, Python 코드는 결정론적 검증과 얇은 로컬 수집 helper에만 남기는 것입니다.
 
-현재 npm 및 `npx` 배포 기준선은 `v0.1.2`, package version은 `0.1.2`입니다.
+현재 npm 및 `npx` 배포 기준선은 `v0.1.3`, package version은 `0.1.3`입니다.
 
 ## 왜 Mimir-Skills를 써야 하나
 
@@ -119,12 +119,9 @@ draft를 쓰기 전에 discovery나 structured context collection이 필요할 �
 - Obsidian을 쓰지 않는 경우: 지금처럼 editor나 review flow에서 JSON과 Markdown을 직접 읽으면 됩니다
 - Obsidian을 쓰는 경우: backlinks와 graph view로 decision, report, memory note 사이 관계를 더 쉽게 따라갈 수 있습니다
 
-프로젝트에서 처음 Obsidian export를 요청할 때는, 에이전트가 먼저 아래 둘 중 어디에 둘지 물어보는 것이 좋습니다.
-
-- `.ai/records/reports/` 아래에 둘지
-- 사용 중인 Obsidian vault 경로로 바로 보낼지
-
-한 번 정한 뒤에는, 사용자가 바꿔 달라고 할 때까지 그 프로젝트 기본값을 계속 쓰는 흐름이 자연스럽습니다.
+기본적으로 Obsidian 친화 note는 `.ai/records/reports/` 아래에 생성됩니다.
+Obsidian에서 보고 싶다면 그 폴더를 vault로 열면 됩니다.
+나중에 다른 출력 위치를 원하면 그때 명시적으로 바꾸면 됩니다.
 
 간단한 사용법, 예상 이득, 주의점은 [Obsidian Workspace (English)](docs/obsidian-workspace.md)를 참고합니다.
 
@@ -136,7 +133,7 @@ draft를 쓰기 전에 discovery나 structured context collection이 필요할 �
 - `Write PR rationale for this branch.`
 - `Summarize this CI failure as a bounded investigation note.`
 - `Validate this decision record: .ai/records/decisions/<id>.json`
-- `If this is the first Obsidian export in this project, first ask whether to keep notes under .ai/records/reports/ or send them to my Obsidian vault path, explain the difference briefly, then render this decision record as an Obsidian-friendly note.`
+- `Render this decision record as an Obsidian-friendly note under the default project output location.`
 - `Change the default Obsidian output location for this project to my vault path.`
 
 collector-assisted 경로나 Obsidian 전용 요청까지 포함한 더 많은 복사형 예시는 [Prompt Macros (English)](docs/prompt-macros.md)를 참고합니다.

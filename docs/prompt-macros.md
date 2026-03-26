@@ -136,28 +136,22 @@ Run the repository example verification stack and summarize any failures.
 
 Use these only when you want graph-friendly Markdown notes for local human browsing.
 
-### First Obsidian Export in a Project
-
-```text
-If this is the first Obsidian export in this project, first ask whether to keep notes under `.ai/records/reports/` or send them to my Obsidian vault path, explain the difference briefly, then render the requested note.
-```
-
 ### Render a Decision Record as an Obsidian Note
 
 ```text
-Render this decision record as an Obsidian-friendly note using the current project default output location: `.ai/records/decisions/<id>.json`
+Render this decision record as an Obsidian-friendly note under the default project output location: `.ai/records/decisions/<id>.json`
 ```
 
 ### Render a Memory Artifact as an Obsidian Note
 
 ```text
-Render this memory artifact as an Obsidian-friendly note using the current project default output location: `.ai/records/memories/<candidate|validated>/<id>.json`
+Render this memory artifact as an Obsidian-friendly note under the default project output location: `.ai/records/memories/<candidate|validated>/<id>.json`
 ```
 
 ### Render Existing Records for Obsidian Review
 
 ```text
-Render the existing decision and memory records in this project as Obsidian-friendly notes using the current project default output location so I can browse them in Obsidian.
+Render the existing decision and memory records in this project as Obsidian-friendly notes under the default project output location so I can browse them in Obsidian.
 ```
 
 ### Change the Obsidian Output Location

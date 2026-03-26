@@ -17,42 +17,22 @@ This remains the default path.
 
 Use Obsidian as a local browsing layer over the derived Markdown artifacts.
 
-- open the project as a local vault
+- open `.ai/records/reports/` as a local vault when you want a clean, artifact-only view
 - browse linked notes under `.ai/records/reports/`
 - use backlinks and graph view to see how decision, report, and memory notes connect
 
 The graph becomes useful because the derived notes include Obsidian-style wikilinks such as `[[dec-...]]` and `[[mem-...]]`.
 
-## First Use Preference
+## Default Output Location
 
-On the first Obsidian export request in a project, ask the user where Obsidian-friendly notes should go.
-
-Recommended choices:
-
-1. `.ai/records/reports/`
-   - keeps the notes next to the other derived Markdown artifacts
-   - makes project review and verification simpler
-
-2. the user's Obsidian vault path
-   - opens more naturally inside an existing personal vault
-   - depends on a user-specific local path
-
-After that first choice, keep using the same project-level default until the user asks to change it.
-
-The saved project-local preference lives at:
+By default, Obsidian-friendly notes render into:
 
 ```text
-.ai/local/obsidian-output.json
+.ai/records/reports/
 ```
 
-You can manage it explicitly with:
-
-```bash
-python -m mimir_skills obsidian-config show
-python -m mimir_skills obsidian-config set-reports
-python -m mimir_skills obsidian-config set-vault "C:\\path\\to\\your\\Obsidian Vault\\Mimir-Skills"
-python -m mimir_skills obsidian-config clear
-```
+This is the recommended default because it keeps the Obsidian-friendly notes next to the other derived Markdown artifacts.
+If you want to inspect them in Obsidian, open that folder as a vault.
 
 ## How To Turn It On
 
@@ -62,8 +42,7 @@ Obsidian support is a manual opt-in review path:
 
 - keep using the workflows normally
 - render Obsidian-friendly notes only when you want graph-friendly Markdown
-- open the project or artifact folder as a vault only when you want that browsing experience
-- on the first Obsidian export request in a project, ask which output location to use before rendering
+- open `.ai/records/reports/` as a vault when you want that browsing experience
 
 Decision record:
 
@@ -80,34 +59,18 @@ python skills/_internal/memory-promote/scripts/render_obsidian_note.py .ai/recor
 If you prefer to ask an agent instead of running the scripts yourself, a practical first-use request is:
 
 ```text
-If this is the first Obsidian export in this project, first ask whether to keep notes under `.ai/records/reports/` or send them to my Obsidian vault path, explain the difference briefly, then render this decision record as an Obsidian-friendly note.
+Render this decision record as an Obsidian-friendly note under the default project output location.
 ```
 
-Later, once the preference is known, a shorter request is:
+For existing project records:
 
 ```text
-Render this memory artifact as an Obsidian-friendly note using the current project default output location.
+Render the existing decision and memory records in this project as Obsidian-friendly notes under the default project output location so I can browse them in Obsidian.
 ```
-
-## Current Output Location
-
-By default, Obsidian-friendly notes render into `.ai/records/reports/`.
-
-That means they sit next to the other derived human-readable artifacts such as summaries.
-
-Current rationale:
-
-- `reports/` is already the home for derived Markdown artifacts
-- non-Obsidian users can ignore the extra notes without changing their normal workflow
-- the canonical JSON remains under `.ai/records/decisions/` and `.ai/records/memories/`
-- keeping one review-oriented folder is simpler than requiring a separate vault export path
-
-For now this is the recommended default.
-If the reports folder becomes too noisy later, the repository can revisit whether a separate `reports/obsidian/` layer is justified.
 
 ## Changing the Preference Later
 
-The output location should be changeable later.
+If you later want a different output location, change it explicitly.
 
 Examples:
 
@@ -124,6 +87,12 @@ Or persist the change directly:
 ```bash
 python -m mimir_skills obsidian-config set-vault "C:\\path\\to\\your\\Obsidian Vault\\Mimir-Skills"
 python -m mimir_skills obsidian-config set-reports
+```
+
+The saved project-local preference lives at:
+
+```text
+.ai/local/obsidian-output.json
 ```
 
 ## Expected Benefits

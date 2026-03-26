@@ -208,14 +208,14 @@ canonical decision record는 이미 있고, 사람이 읽기 쉬운 Markdown sum
 
 ### Obsidian 친화 companion note 생성
 
-프로젝트에서 처음 Obsidian export를 요청할 때는, 이 note들을 어디에 둘지 먼저 정한다.
+기본적으로 이 note들은 아래에 생성된다:
 
-- `.ai/records/reports/` 아래에 둘지
-- 사용자의 Obsidian vault 경로로 보낼지
+```text
+.ai/records/reports/
+```
 
-한 번 정한 뒤에는, 사용자가 바꿔 달라고 할 때까지 같은 프로젝트 기본값을 계속 쓴다.
-
-이 프로젝트 로컬 설정을 확인하거나 저장하려면:
+Obsidian에서 보고 싶다면 그 폴더를 vault로 열면 된다.
+나중에 다른 위치를 원하면 그때 프로젝트 로컬 설정을 바꾸면 된다:
 
 ```bash
 python -m mimir_skills obsidian-config show
