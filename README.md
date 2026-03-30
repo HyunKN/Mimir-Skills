@@ -7,7 +7,7 @@ Skill-first workflow guidance, playbooks, and validators for AI coding agents wo
 `Mimir-Skills` now operates on a skill-first baseline for local-file AI coding agents.
 The core idea is simple: put workflow judgment rules, safety constraints, and output patterns into `SKILL.md` and companion references so agents can read them directly, while keeping only deterministic validation and thin local collection helpers in Python.
 
-Current npm and `npx` release baseline: `v0.1.3` / package version `0.1.3`.
+Current npm and `npx` release baseline: `v0.1.4` / package version `0.1.4`.
 
 ## Why Mimir-Skills?
 

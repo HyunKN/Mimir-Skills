@@ -7,7 +7,7 @@
 `Mimir-Skills`는 현재 skill-first baseline 위에서 운영됩니다.
 핵심 방향은 단순합니다. workflow 판단 규칙, safety constraint, output pattern을 `SKILL.md`와 companion reference에 담아 에이전트가 직접 읽게 하고, Python 코드는 결정론적 검증과 얇은 로컬 수집 helper에만 남기는 것입니다.
 
-현재 npm 및 `npx` 배포 기준선은 `v0.1.3`, package version은 `0.1.3`입니다.
+현재 npm 및 `npx` 배포 기준선은 `v0.1.4`, package version은 `0.1.4`입니다.
 
 ## 왜 Mimir-Skills를 써야 하나
 
