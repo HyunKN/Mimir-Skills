@@ -1,4 +1,4 @@
-# Complete synthetic cache client v4.3 migration Decision Summary
+# [2026-03-20] Decision Summary - Complete synthetic cache client v4.3 migration
 
 > Derived from canonical decision record [[dec-20260320-cache-client-v43-migration-003]].
 

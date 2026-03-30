@@ -1,4 +1,4 @@
-# Gate AI-assisted checkout cache rollout behind canary approval Decision Summary
+# [2026-03-18] Decision Summary - Gate AI-assisted checkout cache rollout behind canary approval
 
 > Derived from canonical decision record [[dec-20260318-ai-release-rollback-gate-001]].
 

@@ -1,4 +1,4 @@
-# Quarantine flaky macOS visual snapshot test Decision Summary
+# [2026-03-17] Decision Summary - Quarantine flaky macOS visual snapshot test
 
 > Derived from canonical decision record [[dec-20260317-macos-flaky-quarantine-001]].
 

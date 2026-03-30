@@ -1,4 +1,4 @@
-# Fix failing Windows test job Decision Summary
+# [2026-03-11] Decision Summary - Fix failing Windows test job
 
 > Derived from canonical decision record [[dec-20260311-ci-timeout-001]].
 

@@ -1,4 +1,4 @@
-# Fix failing Windows test job
+# [2026-03-11] Decision - Fix failing Windows test job
 
 - Decision ID: `dec-20260311-ci-timeout-001`
 

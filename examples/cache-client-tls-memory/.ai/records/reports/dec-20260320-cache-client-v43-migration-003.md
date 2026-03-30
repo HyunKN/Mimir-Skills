@@ -1,4 +1,4 @@
-# Complete synthetic cache client v4.3 migration
+# [2026-03-20] Decision - Complete synthetic cache client v4.3 migration
 
 - Decision ID: `dec-20260320-cache-client-v43-migration-003`
 

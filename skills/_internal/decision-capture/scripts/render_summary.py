@@ -9,6 +9,18 @@ import sys
 from pathlib import Path
 from typing import Any
 
+try:
+    from mimir_skills import artifact_titles
+except ModuleNotFoundError:
+    script_path = Path(__file__).resolve()
+    support_root = script_path.parents[2] / "mimir-skills-support"
+    repo_root = script_path.parents[4]
+    if support_root.is_dir():
+        sys.path.insert(0, str(support_root))
+    if (repo_root / "mimir_skills").is_dir():
+        sys.path.insert(0, str(repo_root))
+    from mimir_skills import artifact_titles
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -65,16 +77,9 @@ def default_output_path(record_path: Path, record_id: str) -> Path:
 
 
 def render_summary(record: dict[str, Any]) -> str:
-    task_ref = record.get("task_ref")
-    title = ""
-    if isinstance(task_ref, dict):
-        raw_title = task_ref.get("title")
-        if isinstance(raw_title, str):
-            title = raw_title.strip()
-
     record_id = record["id"]
     lines: list[str] = []
-    lines.append(f"# {title} Decision Summary" if title else "# Decision Summary")
+    lines.append(f"# {artifact_titles.decision_summary_title(record)}")
     lines.append("")
     lines.append(f"> Derived from canonical decision record [[{record_id}]].")
     lines.append("")

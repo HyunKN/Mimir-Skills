@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from mimir_skills import obsidian_output
+    from mimir_skills import artifact_titles, obsidian_output
 except ModuleNotFoundError:
     script_path = Path(__file__).resolve()
     support_root = script_path.parents[2] / "mimir-skills-support"
@@ -19,7 +19,7 @@ except ModuleNotFoundError:
         sys.path.insert(0, str(support_root))
     if (repo_root / "mimir_skills").is_dir():
         sys.path.insert(0, str(repo_root))
-    from mimir_skills import obsidian_output
+    from mimir_skills import artifact_titles, obsidian_output
 
 
 def parse_args() -> argparse.Namespace:
@@ -80,14 +80,7 @@ def default_output_path(record_path: Path, record_id: str) -> Path:
 
 def render_note(record: dict[str, Any], record_path: Path) -> str:
     record_id = str(record["id"]).strip()
-    title = record_id
-    task_ref = record.get("task_ref")
-    if isinstance(task_ref, dict):
-        raw_title = task_ref.get("title")
-        if isinstance(raw_title, str) and raw_title.strip():
-            title = raw_title.strip()
-
-    lines = [f"# {title}", "", f"- Decision ID: `{record_id}`", ""]
+    lines = [f"# {artifact_titles.decision_note_title(record)}", "", f"- Decision ID: `{record_id}`", ""]
 
     lines.append("## Source of Truth")
     lines.append("")

@@ -1,4 +1,4 @@
-# Investigate intermittent Linux unit-test timeout Decision Summary
+# [2026-03-16] Decision Summary - Investigate intermittent Linux unit-test timeout
 
 > Derived from canonical decision record [[dec-20260316-linux-ci-rerun-watch-001]].
 

@@ -1,4 +1,4 @@
-# Investigate intermittent Linux unit-test timeout
+# [2026-03-16] Decision - Investigate intermittent Linux unit-test timeout
 
 - Decision ID: `dec-20260316-linux-ci-rerun-watch-001`
 

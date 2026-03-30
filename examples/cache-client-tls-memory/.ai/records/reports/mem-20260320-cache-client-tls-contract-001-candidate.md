@@ -1,4 +1,4 @@
-# mem-20260320-cache-client-tls-contract-001 (candidate)
+# [2026-03-20] Candidate Memory - Cache Client TLS Contract
 
 - Memory ID: `mem-20260320-cache-client-tls-contract-001`
 - Status: `candidate`

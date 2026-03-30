@@ -1,4 +1,4 @@
-# Stabilize cache client dependency before release cut
+# [2026-03-12] Decision - Stabilize cache client dependency before release cut
 
 - Decision ID: `dec-20260312-cache-client-pin-001`
 

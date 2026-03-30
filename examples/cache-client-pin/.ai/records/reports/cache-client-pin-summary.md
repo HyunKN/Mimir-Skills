@@ -1,4 +1,4 @@
-# Stabilize cache client dependency before release cut Decision Summary
+# [2026-03-12] Decision Summary - Stabilize cache client dependency before release cut
 
 > Derived from canonical decision record [[dec-20260312-cache-client-pin-001]].
 

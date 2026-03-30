@@ -1,4 +1,4 @@
-# Quarantine flaky macOS visual snapshot test
+# [2026-03-17] Decision - Quarantine flaky macOS visual snapshot test
 
 - Decision ID: `dec-20260317-macos-flaky-quarantine-001`
 
